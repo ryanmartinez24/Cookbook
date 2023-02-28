@@ -1,0 +1,76 @@
+"{
+  "Recipes": {
+    "recipe1": {
+      "Name": "poopy pudding",
+      "Description": "This recipe is absolutely to die for",
+      "Ingredients": {
+        "Salt": [
+          "1",
+          "tbsp"
+        ],
+        "Pepper": [
+          "20",
+          "oz"
+        ]
+      },
+      "Directions": {
+        "1": "pour salt on the floor",
+        "2": "lick the salt on the floor"
+      }
+    },
+    "recipe2": {
+      "Name": "yahoo",
+      "Description": "This recipe is absolutely to die for",
+      "Ingredients": {
+        "Salt": [
+          "1",
+          "tbsp"
+        ],
+        "Pepper": [
+          "20",
+          "oz"
+        ]
+      },
+      "Directions": {
+        "1": "pour salt on the floor",
+        "2": "lick the salt on the floor"
+      }
+    },
+    "recipe3": {
+      "Name": "oopsie",
+      "Description": "This recipe is absolutely to die for",
+      "Ingredients": {
+        "Salt": [
+          "1",
+          "tbsp"
+        ],
+        "Pepper": [
+          "20",
+          "oz"
+        ]
+      },
+      "Directions": {
+        "1": "pour salt on the floor",
+        "2": "lick the salt on the floor"
+      }
+    },
+    "recipe4": {
+      "Name": "yuh yuh",
+      "Description": "This recipe is absolutely to die for",
+      "Ingredients": {
+        "Salt": [
+          "1",
+          "tbsp"
+        ],
+        "Pepper": [
+          "20",
+          "oz"
+        ]
+      },
+      "Directions": {
+        "1": "pour salt on the floor",
+        "2": "lick the salt on the floor"
+      }
+    }
+  }
+}"
