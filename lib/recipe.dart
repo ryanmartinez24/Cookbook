@@ -4,6 +4,7 @@
 //decode method
 //encode method
 import 'dart:convert';
+import 'package:fp_recipe_book/ingredient.dart';
 
 class Recipe {
   late final jsonData;
@@ -16,5 +17,9 @@ class Recipe {
   String jsonDecoder() {
     string = jsonData.decode();
     return string;
+  }
+
+  Ingredient indredientRetriever() {
+    final int numOfIngredients =
   }
 }
