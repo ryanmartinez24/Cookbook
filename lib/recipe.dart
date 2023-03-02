@@ -7,7 +7,7 @@ import 'dart:convert';
 
 class Recipe {
   late final jsonData;
-  String string;
+  late String string;
 
   Recipe(this.jsonData) {
     jsonDecoder();
