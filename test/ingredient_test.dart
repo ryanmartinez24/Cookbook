@@ -15,13 +15,10 @@ void main() {
       String name = decodedJsonObject["Recipes"]["recipe1"]["Ingredients"]
           .keys
           .elementAt(i);
-      int amount = decodedJsonObject["Recipes"]["recipe1"]["Ingredients"][name]
-          .keys
-          .elementAt(0);
-      String measurementUnit = decodedJsonObject["Recipes"]["recipe1"]
-              ["Ingredients"]["$name"]["$amount"]
-          .keys
-          .elementAt(0);
+      int amount = int.parse(
+          (decodedJsonObject["Recipes"]["recipe1"]["Ingredients"][name][0]));
+      String measurementUnit =
+          decodedJsonObject["Recipes"]["recipe1"]["Ingredients"]["$name"][1];
 
       Ingredient test = Ingredient(name, measurementUnit, amount);
       ingredients.add(test);
@@ -34,6 +31,6 @@ void main() {
       theIngredients = '$theIngredients$ingredientName, ';
     }
 
-    expect(theIngredients, "Salt, Pepper");
+    expect(theIngredients, "Salt, Pepper, ");
   });
 }
