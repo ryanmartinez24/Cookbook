@@ -54,11 +54,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>> strings = [
-      DropdownMenuItem(
+    List<DropdownMenuItem<String>> dropdownItems = [
+      const DropdownMenuItem(
         value: "Orange Chicken",
         child: Text("Orange Chicken"),
-        onTap: onTapOrangeChicken,
       ),
       const DropdownMenuItem(
           value: "Oreo Dirt Pie", child: Text("Oreo Dirt Pie")),
@@ -69,12 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     return Scaffold(
         body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-          const Text("Cookbook!"),
-          DropdownButton(items: strings, onChanged: onChanged)
-        ])));
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const Text("Cookbook!"),
+      DropdownButton(items: dropdownItems, onChanged: onChanged)
+    ])));
   }
 
   void onTapOrangeChicken() {
@@ -85,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onChanged(String? s) {
-    //To-Do
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => recipeWidget()));
   }
 }
