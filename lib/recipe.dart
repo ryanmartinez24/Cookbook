@@ -30,7 +30,7 @@ class Recipe {
       int amount = int.parse(
           (decodedJsonObject["Recipes"]["recipe1"]["Ingredients"][name][0]));
       String measurementUnit =
-          decodedJsonObject["Recipes"]["recipe1"]["Ingredients"]["$name"][1];
+          decodedJsonObject["Recipes"]["recipe1"]["Ingredients"][name][1];
 
       Ingredient test = Ingredient(name, measurementUnit, amount);
       ingredients.add(test);
