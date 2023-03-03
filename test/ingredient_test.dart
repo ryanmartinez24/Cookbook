@@ -7,7 +7,9 @@ void main() {
   String jsonObject = File('lib/Recipes.json').readAsStringSync();
   var decodedJsonObject = jsonDecode(jsonObject);
 
-  test('I can get the ingredients required to make a recipe', () {
+  test(
+      'I can get the ingredients required to make the first recipe in '
+      'the json file', () {
     int numOfIngredients = decodedJsonObject["recipe1"]["Ingredients"].length;
 
     List<Ingredient> ingredients = [];
@@ -16,9 +18,9 @@ void main() {
       String name =
           decodedJsonObject["recipe1"]["Ingredients"].keys.elementAt(i);
       int amount = int.parse(
-          decodedJsonObject["recipe1"]["Ingredients"]["$name"]["Amount"]);
+          decodedJsonObject["recipe1"]["Ingredients"][name]["Amount"]);
       String measurementUnit =
-          decodedJsonObject["recipe1"]["Ingredients"]["$name"]["Unit"];
+          decodedJsonObject["recipe1"]["Ingredients"][name]["Unit"];
 
       Ingredient test = Ingredient(name, measurementUnit, amount);
       ingredients.add(test);
