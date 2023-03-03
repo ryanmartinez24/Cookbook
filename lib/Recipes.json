@@ -12,10 +12,8 @@
         "Unit": "ounces"
       }
     },
-    "Directions": {
-      "1": "pour salt on the floor",
-      "2": "lick the salt on the floor"
-    }
+    "Directions":
+      "1: pour salt on the floor \n2: lick the salt on the floor"
   },
   "recipe2": {
     "Name": "yahoo",
@@ -30,10 +28,8 @@
         "Unit": "ounces"
       }
     },
-    "Directions": {
-      "1": "pour salt on the floor",
-      "2": "lick the salt on the floor"
-    }
+    "Directions" :
+      "1: pour salt on the floor \n 2: lick the salt on the floor"
   },
   "recipe3": {
     "Name": "oopsie",
@@ -48,10 +44,8 @@
         "Unit": "ounces"
       }
     },
-    "Directions": {
-      "1": "pour salt on the floor",
-      "2": "lick the salt on the floor"
-    }
+    "Directions" :
+    "1: pour salt on the floor \n 2: lick the salt on the floor"
   },
   "recipe4": {
     "Name": "yuh yuh",
@@ -66,9 +60,7 @@
         "Unit": "ounces"
       }
     },
-    "Directions": {
-      "1": "pour salt on the floor",
-      "2": "lick the salt on the floor"
-    }
+    "Directions" :
+    "1: pour salt on the floor \n 2: lick the salt on the floor"
   }
 }
