@@ -9,14 +9,13 @@ void main() {
   test('I can get the correct number of keys that the JSON contains', () {
     int numOfKeys = decodedJsonObject.length;
 
-    expect(numOfKeys, 1);
+    expect(numOfKeys, 4);
   });
 
   test(
       'I can get the correct number of ingredients required to make a specific recipe',
       () {
-    int numOfIngredients =
-        decodedJsonObject["Recipes"]["recipe1"]["Ingredients"].length;
+    int numOfIngredients = decodedJsonObject["recipe1"]["Ingredients"].length;
 
     expect(numOfIngredients, 2);
   });

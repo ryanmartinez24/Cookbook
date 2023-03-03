@@ -8,18 +8,34 @@ import 'package:fp_recipe_book/ingredient.dart';
 
 class Recipe {
   late final jsonData;
-  late String string;
+  late final decodedJsonObject;
 
   Recipe(this.jsonData) {
     jsonDecoder();
   }
 
   String jsonDecoder() {
-    string = jsonData.decode();
-    return string;
+    decodedJsonObject = jsonData.decode();
+    return decodedJsonObject;
   }
 
-  Ingredient indredientRetriever() {
-    final int numOfIngredients =
+  List<Ingredient> ingredientRetriever() {
+    int numOfIngredients =
+        decodedJsonObject["Recipes"]["recipe1"]["Ingredients"].length;
+    List<Ingredient> ingredients = [];
+    for (int i = 0; i < numOfIngredients; i++) {
+      String name = decodedJsonObject["Recipes"]["recipe1"]["Ingredients"]
+          .keys
+          .elementAt(i);
+      int amount = int.parse(
+          (decodedJsonObject["Recipes"]["recipe1"]["Ingredients"][name][0]));
+      String measurementUnit =
+          decodedJsonObject["Recipes"]["recipe1"]["Ingredients"]["$name"][1];
+
+      Ingredient test = Ingredient(name, measurementUnit, amount);
+      ingredients.add(test);
+    }
+
+    return ingredients;
   }
 }
