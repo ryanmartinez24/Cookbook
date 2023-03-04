@@ -6,13 +6,14 @@
 import 'package:fp_recipe_book/ingredient.dart';
 
 class Recipe {
+  final String recipeName;
   final String directions;
   final String description;
   final List<Ingredient> ingredients;
 
   late final decodedJsonObject;
 
-  Recipe(this.directions, this.description, this.ingredients);
+  Recipe(this.recipeName, this.directions, this.description, this.ingredients);
 
   List<Ingredient> ingredientRetriever() {
     int numOfIngredients = decodedJsonObject["recipe1"]["Ingredients"].length;

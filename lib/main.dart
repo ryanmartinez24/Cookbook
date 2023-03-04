@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fp_recipe_book/recipe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
 }
 
 class recipeWidget extends StatefulWidget {
-  const recipeWidget({super.key});
+  recipeWidget({super.key, required this.currentRecipe});
+  Recipe currentRecipe;
 
   @override
   State<recipeWidget> createState() => _recipeWidgetState();
@@ -32,7 +34,13 @@ class _recipeWidgetState extends State<recipeWidget> {
     return Scaffold(
       body: Center(
         child: Column(
-          children: [ElevatedButton(onPressed: goHome, child: Text("Go Back"))],
+          children: [
+            Text("Recipe Name:${widget.currentRecipe.recipeName}"),
+            Text("Description:${widget.currentRecipe.description}"),
+            // Ingredients goes here
+            Text("Directions:${widget.currentRecipe.directions}"),
+            ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
+          ],
         ),
       ),
     );
@@ -52,8 +60,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Map recipeMap = {};
+  Recipe orangeChickenRecipe =
+      Recipe("Orange Chicken", "Cook it well", "Yummy orange chicken", []);
+  Recipe oreoDirtPie =
+      Recipe("Oreo Dirt Pie", "Use lots of dirt", "Yummy oreo dirt pie", []);
+  Recipe caesarSalad =
+      Recipe("Caesar Salad", "Don't forget lettuce", "Yummy Caesar salad", []);
+
   @override
   Widget build(BuildContext context) {
+    recipeMap["Orange Chicken"] = orangeChickenRecipe;
+    recipeMap["Oreo Dirt Pie"] = oreoDirtPie;
+    recipeMap["Caesar Salad"] = caesarSalad;
     List<DropdownMenuItem<String>> dropdownItems = [
       const DropdownMenuItem(
         value: "Orange Chicken",
@@ -75,15 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
     ])));
   }
 
-  void onTapOrangeChicken() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => recipeWidget()),
-    );
-  }
-
   void onChanged(String? s) {
+    Recipe currentRecipe = recipeMap[s];
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => recipeWidget()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => recipeWidget(
+                  currentRecipe: currentRecipe,
+                )));
   }
 }
