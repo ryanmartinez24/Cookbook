@@ -73,24 +73,21 @@ class _MyHomePageState extends State<MyHomePage> {
     recipeMap["Orange Chicken"] = orangeChickenRecipe;
     recipeMap["Oreo Dirt Pie"] = oreoDirtPie;
     recipeMap["Caesar Salad"] = caesarSalad;
-    List<DropdownMenuItem<String>> dropdownItems = [
-      const DropdownMenuItem(
-        value: "Orange Chicken",
-        child: Text("Orange Chicken"),
-      ),
-      const DropdownMenuItem(
-          value: "Oreo Dirt Pie", child: Text("Oreo Dirt Pie")),
-      const DropdownMenuItem(
-        value: "Caesar Salad",
-        child: Text("Caesar Salad,"),
-      ),
-    ];
+    List recipeList = recipeMap.keys.toList();
+
     return Scaffold(
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text("Cookbook!"),
-      DropdownButton(items: dropdownItems, onChanged: onChanged)
+      DropdownButton(
+          items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
+            return DropdownMenuItem<String>(
+              value: recipeName,
+              child: Text(recipeName),
+            );
+          }).toList(),
+          onChanged: onChanged)
     ])));
   }
 
