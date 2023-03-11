@@ -30,6 +30,13 @@ void main() {
     String directions = tester.directionRetriever();
 
     expect(directions,
-        "1: pour salt on the floor \n2: lick the salt on the floor");
+        "1: pour salt on the floor \n 2: lick the salt on the floor");
+  });
+
+  test('I can find the runtime of decodedJsonObject in the recipeParser class',
+      () {
+    final decodedJsonObject = tester.decodedJsonObject;
+    String runtimeType = '${decodedJsonObject.runtimeType}';
+    expect(runtimeType, '_InternalLinkedHashMap<String, dynamic>');
   });
 }

@@ -23,8 +23,7 @@ class RecipeParser {
   }
 
   String descriptionRetriever() {
-    String description =
-        decodedJsonObject["$recipe"]["Description"].keys.elementAt(0);
+    String description = decodedJsonObject["$recipe"]["Description"];
     return description;
   }
 
@@ -33,10 +32,10 @@ class RecipeParser {
     List<Ingredient> ingredients = [];
     for (int i = 0; i < numOfIngredients; i++) {
       String name = decodedJsonObject[recipe]["Ingredients"].keys.elementAt(i);
-      int amount =
-          int.parse((decodedJsonObject[recipe]["Ingredients"][name][0]));
+      int amount = int.parse(
+          (decodedJsonObject[recipe]["Ingredients"][name].values.first));
       String measurementUnit =
-          decodedJsonObject[recipe]["Ingredients"][name][1];
+          decodedJsonObject[recipe]["Ingredients"][name].values.last;
 
       Ingredient test = Ingredient(name, measurementUnit, amount);
       ingredients.add(test);
@@ -46,7 +45,7 @@ class RecipeParser {
   }
 
   String directionRetriever() {
-    String directions = decodedJsonObject[recipe]["Directions"].value;
+    String directions = decodedJsonObject[recipe]["Directions"];
     return directions;
   }
 }
