@@ -5,6 +5,12 @@ import 'package:fp_recipe_book/recipeParser.dart';
 void main() {
   RecipeParser tester = RecipeParser(2);
 
+  test('I can get the name of the recipe of my choice', () {
+    String name = tester.nameRetriever();
+
+    expect(name, 'yahoo');
+  });
+
   test('I can access the description of the recipe of my choice', () {
     String description = tester.descriptionRetriever();
 

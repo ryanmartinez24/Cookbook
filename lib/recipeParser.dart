@@ -22,6 +22,11 @@ class RecipeParser {
     }
   }
 
+  String nameRetriever() {
+    String name = decodedJsonObject[recipe]["Name"];
+    return name;
+  }
+
   String descriptionRetriever() {
     String description = decodedJsonObject["$recipe"]["Description"];
     return description;

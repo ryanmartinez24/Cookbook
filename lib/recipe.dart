@@ -6,5 +6,5 @@ class Recipe {
   final List<Ingredient> ingredients;
   final String directions;
 
-  Recipe(this.recipeName, this.directions, this.description, this.ingredients);
+  Recipe(this.recipeName, this.description, this.ingredients, this.directions);
 }
