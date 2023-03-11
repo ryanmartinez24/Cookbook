@@ -5,7 +5,7 @@ class Ingredient {
 
   Ingredient(this.name, this.measurementUnit, this.amount);
 
-  void amountScalar(int scale) {
-    amount = amount * scale;
+  void setAmount(int newAmount) {
+    amount = newAmount;
   }
 }
