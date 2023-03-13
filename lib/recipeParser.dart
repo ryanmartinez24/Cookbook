@@ -28,7 +28,7 @@ class RecipeParser {
   }
 
   String descriptionRetriever() {
-    String description = decodedJsonObject["$recipe"]["Description"];
+    String description = decodedJsonObject[recipe]["Description"];
     return description;
   }
 
