@@ -17,6 +17,6 @@ void main() {
       () {
     int numOfIngredients = decodedJsonObject["recipe1"]["Ingredients"].length;
 
-    expect(numOfIngredients, 2);
+    expect(numOfIngredients, 11);
   });
 }

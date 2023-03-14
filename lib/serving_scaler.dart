@@ -7,7 +7,7 @@ class ServingScaler {
 
   List<Ingredient> amountScaler(int servings) {
     for (int i = 0; i < ingredients.length; i++) {
-      int amount = ingredients[i].amount;
+      double amount = ingredients[i].amount;
       amount = amount * servings;
       ingredients[i].setAmount(amount);
     }

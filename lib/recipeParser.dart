@@ -37,7 +37,7 @@ class RecipeParser {
     List<Ingredient> ingredients = [];
     for (int i = 0; i < numOfIngredients; i++) {
       String name = decodedJsonObject[recipe]["Ingredients"].keys.elementAt(i);
-      int amount = int.parse(
+      double amount = double.parse(
           (decodedJsonObject[recipe]["Ingredients"][name].values.first));
       String measurementUnit =
           decodedJsonObject[recipe]["Ingredients"][name].values.last;

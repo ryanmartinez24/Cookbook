@@ -17,7 +17,7 @@ void main() {
     for (int i = 0; i < numOfIngredients; i++) {
       String name =
           decodedJsonObject["recipe1"]["Ingredients"].keys.elementAt(i);
-      int amount = int.parse(
+      double amount = double.parse(
           decodedJsonObject["recipe1"]["Ingredients"][name]["Amount"]);
       String measurementUnit =
           decodedJsonObject["recipe1"]["Ingredients"][name]["Unit"];
@@ -33,6 +33,7 @@ void main() {
       theIngredients = '$theIngredients$ingredientName, ';
     }
 
-    expect(theIngredients, "Salt, Pepper, ");
+    expect(theIngredients,
+        "Ground Beef, Medium onion, chopped, Cloves garlic, minced, Small green bell pepper, diced, Canned diced tomatoes, Tomato sauce, Tomato paste, Dried oregano, Dried basil, Salt, Pepper, ");
   });
 }
