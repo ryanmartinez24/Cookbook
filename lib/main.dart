@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
+import 'package:fp_recipe_book/recipeParser.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,18 +66,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map recipeMap = {};
-  Recipe orangeChickenRecipe =
-      Recipe("Orange Chicken", "Cook it well", [], "Yummy orange chicken");
-  Recipe oreoDirtPie =
-      Recipe("Oreo Dirt Pie", "Use lots of dirt", [], "Yummy oreo dirt pie");
-  Recipe caesarSalad =
-      Recipe("Caesar Salad", "Don't forget lettuce", [], "Yummy Caesar salad");
+  RecipeParser meatSauceParser = RecipeParser(1);
+  RecipeParser mashedPotatoesParser = RecipeParser(2);
+  RecipeParser chickenSoupParser = RecipeParser(3);
+  RecipeParser cookieParser = RecipeParser(4);
 
   @override
   Widget build(BuildContext context) {
-    recipeMap["Orange Chicken"] = orangeChickenRecipe;
-    recipeMap["Oreo Dirt Pie"] = oreoDirtPie;
-    recipeMap["Caesar Salad"] = caesarSalad;
+    recipeMap["Meat Sauce"] = createRecipe(meatSauceParser);
+    recipeMap["Mashed Potatoes"] = createRecipe(mashedPotatoesParser);
+    recipeMap["Chicken Noodle Soup"] = createRecipe(chickenSoupParser);
+    recipeMap["Chocolate Chip Cookies"] = createRecipe(cookieParser);
     List recipeList = recipeMap.keys.toList();
 
     return Scaffold(
@@ -102,5 +103,16 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context) => recipeWidget(
                   currentRecipe: currentRecipe,
                 )));
+  }
+
+  Recipe createRecipe(RecipeParser parser) {
+    String name = parser.nameRetriever();
+    String description = parser.descriptionRetriever();
+    List<Ingredient> ingredients = parser.ingredientRetriever();
+    String directions = parser.directionRetriever();
+
+    Recipe recipe = Recipe(name, description, ingredients, directions);
+
+    return recipe;
   }
 }
