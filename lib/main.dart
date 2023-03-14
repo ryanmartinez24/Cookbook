@@ -35,12 +35,12 @@ class _recipeWidgetState extends State<recipeWidget> {
       body: Center(
         child: Column(
           children: [
-            Text("Recipe Name:${widget.currentRecipe.recipeName}"),
+            Text("Recipe Name:  ${widget.currentRecipe.recipeName}"),
             const SizedBox(height: 20),
-            Text("Description:${widget.currentRecipe.description}"),
+            Text("Description:  ${widget.currentRecipe.description}"),
             const SizedBox(height: 20),
             // Ingredients goes here
-            Text("Directions:${widget.currentRecipe.directions}"),
+            Text("Directions:  ${widget.currentRecipe.directions}"),
             const SizedBox(height: 20),
             ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
           ],
