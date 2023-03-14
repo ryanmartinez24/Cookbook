@@ -1,76 +1,174 @@
 {
-  "Recipes": {
-    "recipe1": {
-      "Name": "poopy pudding",
-      "Description": "This recipe is absolutely to die for",
-      "Ingredients": {
-        "Salt": [
-          "1",
-          "tbsp"
-        ],
-        "Pepper": [
-          "20",
-          "oz"
-        ]
+  "recipe1": {
+    "Name": "Meat Sauce",
+    "Description": "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)",
+    "Ingredients": {
+      "Ground Beef": {
+        "Amount": "0.125",
+        "Unit": "lbs"
       },
-      "Directions": {
-        "1": "pour salt on the floor",
-        "2": "lick the salt on the floor"
+      "Medium onion, chopped": {
+        "Amount": "0.125",
+        "Unit": ""
+      },
+      "Cloves garlic, minced": {
+        "Amount": "0.5",
+        "Unit": ""
+      },
+      "Small green bell pepper, diced": {
+        "Amount": "0.125",
+        "Unit": ""
+      },
+      "Canned diced tomatoes": {
+        "Amount": "3.5",
+        "Unit": "oz"
+      },
+      "Tomato sauce": {
+        "Amount": "2",
+        "Unit": "oz"
+      },
+      "Tomato paste": {
+        "Amount": "0.75",
+        "Unit": "oz"
+      },
+      "Dried oregano": {
+        "Amount": "0.25",
+        "Unit": "tsp"
+      },
+      "Dried basil": {
+        "Amount": "0.25",
+        "Unit": "tsp"
+      },
+      "Salt": {
+        "Amount": "0.125",
+        "Unit": "tsp"
+      },
+      "Pepper": {
+        "Amount": "1",
+        "Unit": "pinch"
       }
     },
-    "recipe2": {
-      "Name": "yahoo",
-      "Description": "This recipe is absolutely to die for",
-      "Ingredients": {
-        "Salt": [
-          "1",
-          "tbsp"
-        ],
-        "Pepper": [
-          "20",
-          "oz"
-        ]
+    "Directions":
+      "1: Combine ground beef, onion, garlic, and green pepper in a large saucepan over medium-high heat. Cook and stir until meat is browned and crumbly and vegetables are tender, 5 to 7 minutes. Drain grease.\n2: Stir diced tomatoes, tomato sauce, and tomato paste into the pan. Season with oregano, basil, salt, and pepper. Simmer spaghetti sauce for 1 hour, stirring occasionally."
+  },
+  "recipe2": {
+    "Name": "Mashed Potatoes",
+    "Description": "Simple and easy homemade mashed potatoes (recipe designed for 10 servings)",
+    "Ingredients": {
+      "Russet potatoes, peeled, cut into quarters": {
+        "Amount": "1",
+        "Unit": ""
       },
-      "Directions": {
-        "1": "pour salt on the floor",
-        "2": "lick the salt on the floor"
+      "Salt": {
+        "Amount": "0.1",
+        "Unit": "tsp"
+      },
+      "Butter (optional)": {
+        "Amount": "0.2",
+        "Unit": "tbsp"
+      },
+      "Pepper": {
+        "Amount": "1",
+        "Unit": "pinch"
+      },
+      "Hot milk": {
+        "Amount": "1.2",
+        "Unit": "tsp"
       }
     },
-    "recipe3": {
-      "Name": "oopsie",
-      "Description": "This recipe is absolutely to die for",
-      "Ingredients": {
-        "Salt": [
-          "1",
-          "tbsp"
-        ],
-        "Pepper": [
-          "20",
-          "oz"
-        ]
+    "Directions" :
+      "1: Place potatoes in large saucepan; add enough water to cover. Add ¾ of the salt. Bring to a boil. Reduce heat to medium-low; cover loosely and boil gently for 15 to 20 minutes or until potatoes break apart easily when pierced with fork. Drain well. \n2: Return potatoes to saucepan; shake saucepan gently over low heat for 1 to 2 minutes to evaporate any excess moisture. \n 3: Mash potatoes with potato masher until no lumps remain. Add butter, pepper and remaining salt; continue mashing, gradually adding enough milk to make potatoes smooth and creamy"
+  },
+  "recipe3": {
+    "Name": "Chicken noodle soup",
+    "Description": "Quick and easy chicken noodle soup (recipe designed for 6 servings)",
+    "Ingredients": {
+      "Butter": {
+        "Amount": "0.1667",
+        "Unit": "tbsp"
       },
-      "Directions": {
-        "1": "pour salt on the floor",
-        "2": "lick the salt on the floor"
+      "Chopped onion": {
+        "Amount": "4",
+        "Unit": "tsp"
+      },
+      "Chopped celery": {
+        "Amount": "4",
+        "Unit": "tsp"
+      },
+      "Chicken broth": {
+        "Amount": "9.6667",
+        "Unit": "oz"
+      },
+      "Vegetable broth": {
+        "Amount": "2.4167",
+        "Unit": "oz"
+      },
+      "Chopped cooked chicken breast": {
+        "Amount": "0.0833",
+        "Unit": "lbs"
+      },
+      "Egg noodles": {
+        "Amount": "0.25",
+        "Unit": "cups"
+      },
+      "Sliced carrots": {
+        "Amount": "8",
+        "Unit": "tsp"
+      },
+      "Dried basil": {
+        "Amount": "0.0833",
+        "Unit": "tsp"
+      },
+      "Dried oregano": {
+        "Amount": "0.0833",
+        "Unit": "tsp"
       }
     },
-    "recipe4": {
-      "Name": "yuh yuh",
-      "Description": "This recipe is absolutely to die for",
-      "Ingredients": {
-        "Salt": [
-          "1",
-          "tbsp"
-        ],
-        "Pepper": [
-          "20",
-          "oz"
-        ]
+    "Directions" :
+    "1: Melt butter in a large pot over medium heat. Add onion and celery and cook until just tender, about 5 minutes. \n2: Add chicken broth, vegetable broth, chicken, egg noodles, carrots, basil, oregano, and salt/pepper (to your taste). Stir to combine and bring to a boil. \n3: Reduce heat and simmer for 20 minutes"
+  },
+  "recipe4": {
+    "Name": "Nestle Chocolate Chip Cookies",
+    "Description": "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)",
+    "Ingredients": {
+      "All purpose flour": {
+        "Amount": "2.25",
+        "Unit": "cups"
       },
-      "Directions": {
-        "1": "pour salt on the floor",
-        "2": "lick the salt on the floor"
+      "Baking soda": {
+        "Amount": "1",
+        "Unit": "tsp"
+      },
+      "Salt": {
+        "Amount": "1",
+        "Unit": "tsp"
+      },
+      "Butter, softened": {
+        "Amount": "1",
+        "Unit": "cups"
+      },
+      "Granulated sugar": {
+        "Amount": "0.75",
+        "Unit": "cups"
+      },
+      "Packed brown sugar": {
+        "Amount": "0.75",
+        "Unit": "cups"
+      },
+      "Vanilla extract": {
+        "Amount": "1",
+        "Unit": "tsp"
+      },
+      "Eggs": {
+        "Amount": "2",
+        "Unit": ""
+      },
+      "Chocolate chips": {
+        "Amount": "2",
+        "Unit": "cups"
       }
-    }
+    },
+    "Directions" :
+    "1: Preheat oven to 375 degrees F. \n2: Combine flour, baking soda, and salt in small bowl. Beat butter, granulated sugar, brown sugar, and vanilla extract in large mixer bowl until creamy. Add eggs, one at a time, beating well after each addition. Gradually beat in flour mixture. Stir in morsels and nuts (if desired). Drop by rounded tablespoons onto ungreased baking sheets. \n3: Bake for 9 to 11 minutes or until golden brown. Cool on baking sheets for 2 minutes; remove to wire racks to cool completely"
   }
 }
