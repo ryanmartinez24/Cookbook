@@ -49,7 +49,7 @@
       }
     },
     "Directions":
-      "1: Combine ground beef, onion, garlic, and green pepper in a large saucepan over medium-high heat. Cook and stir until meat is browned and crumbly and vegetables are tender, 5 to 7 minutes. Drain grease.\n2: Stir diced tomatoes, tomato sauce, and tomato paste into the pan. Season with oregano, basil, salt, and pepper. Simmer spaghetti sauce for 1 hour, stirring occasionally."
+      "\n\t1: Combine ground beef, onion, garlic, and green pepper in a large saucepan over medium-high heat. Cook and stir until meat is browned and crumbly and vegetables are tender, 5 to 7 minutes. Drain grease.\n2: Stir diced tomatoes, tomato sauce, and tomato paste into the pan. Season with oregano, basil, salt, and pepper. Simmer spaghetti sauce for 1 hour, stirring occasionally."
   },
   "recipe2": {
     "Name": "Mashed Potatoes",
@@ -77,7 +77,7 @@
       }
     },
     "Directions" :
-      "1: Place potatoes in large saucepan; add enough water to cover. Add ¾ of the salt. Bring to a boil. Reduce heat to medium-low; cover loosely and boil gently for 15 to 20 minutes or until potatoes break apart easily when pierced with fork. Drain well. \n2: Return potatoes to saucepan; shake saucepan gently over low heat for 1 to 2 minutes to evaporate any excess moisture. \n 3: Mash potatoes with potato masher until no lumps remain. Add butter, pepper and remaining salt; continue mashing, gradually adding enough milk to make potatoes smooth and creamy"
+      "\n\t1: Place potatoes in large saucepan; add enough water to cover. Add ¾ of the salt. Bring to a boil. Reduce heat to medium-low; cover loosely and boil gently for 15 to 20 minutes or until potatoes break apart easily when pierced with fork. Drain well. \n2: Return potatoes to saucepan; shake saucepan gently over low heat for 1 to 2 minutes to evaporate any excess moisture. \n 3: Mash potatoes with potato masher until no lumps remain. Add butter, pepper and remaining salt; continue mashing, gradually adding enough milk to make potatoes smooth and creamy"
   },
   "recipe3": {
     "Name": "Chicken noodle soup",
@@ -125,7 +125,7 @@
       }
     },
     "Directions" :
-    "1: Melt butter in a large pot over medium heat. Add onion and celery and cook until just tender, about 5 minutes. \n2: Add chicken broth, vegetable broth, chicken, egg noodles, carrots, basil, oregano, and salt/pepper (to your taste). Stir to combine and bring to a boil. \n3: Reduce heat and simmer for 20 minutes"
+    "\n\t1: Melt butter in a large pot over medium heat. Add onion and celery and cook until just tender, about 5 minutes. \n2: Add chicken broth, vegetable broth, chicken, egg noodles, carrots, basil, oregano, and salt/pepper (to your taste). Stir to combine and bring to a boil. \n3: Reduce heat and simmer for 20 minutes"
   },
   "recipe4": {
     "Name": "Nestle Chocolate Chip Cookies",
@@ -169,6 +169,6 @@
       }
     },
     "Directions" :
-    "1: Preheat oven to 375 degrees F. \n2: Combine flour, baking soda, and salt in small bowl. Beat butter, granulated sugar, brown sugar, and vanilla extract in large mixer bowl until creamy. Add eggs, one at a time, beating well after each addition. Gradually beat in flour mixture. Stir in morsels and nuts (if desired). Drop by rounded tablespoons onto ungreased baking sheets. \n3: Bake for 9 to 11 minutes or until golden brown. Cool on baking sheets for 2 minutes; remove to wire racks to cool completely"
+    "\n\t1: Preheat oven to 375 degrees F. \n2: Combine flour, baking soda, and salt in small bowl. Beat butter, granulated sugar, brown sugar, and vanilla extract in large mixer bowl until creamy. Add eggs, one at a time, beating well after each addition. Gradually beat in flour mixture. Stir in morsels and nuts (if desired). Drop by rounded tablespoons onto ungreased baking sheets. \n3: Bake for 9 to 11 minutes or until golden brown. Cool on baking sheets for 2 minutes; remove to wire racks to cool completely"
   }
 }
