@@ -66,24 +66,38 @@ class _RecipeWidgetState extends State<RecipeWidget> {
           children: [
             Align(
               alignment: Alignment.topCenter,
-              child: Text("Recipe Name:\n  ${widget.currentRecipe.recipeName}"),
-            ),
-            const SizedBox(
-              height: 20,
-              width: 20,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child:
-                  Text("Description:\n  ${widget.currentRecipe.description}"),
+              child: Text(
+                widget.currentRecipe.recipeName,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+              ),
             ),
             const SizedBox(
               height: 20,
               width: 20,
             ),
             const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Description:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("\n ${widget.currentRecipe.description}"),
+            ),
+            const SizedBox(
+              height: 20,
+              width: 20,
+            ),
+
+            const Align(
                 alignment: Alignment.topLeft,
-                child: Text("Desired Servings:\n")),
+                child: Text(
+                  "Desired Servings:\n",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                )),
             Align(
                 alignment: Alignment.centerLeft,
                 child: DropdownButton(
@@ -95,12 +109,22 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                       );
                     }).toList(),
                     onChanged: onChangedNumber)),
-            // Ingredients goes here
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text("Directions:\n  ${widget.currentRecipe.directions}"),
-            ),
             const SizedBox(height: 20, width: 20),
+
+            // Ingredients goes here
+
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Directions:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text("\n ${widget.currentRecipe.directions}")),
+            const SizedBox(height: 20, width: 20),
+
             ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
           ],
         ),
