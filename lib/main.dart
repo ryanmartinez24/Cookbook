@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/ingredient_display.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,33 +23,136 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class recipeWidget extends StatefulWidget {
-  recipeWidget({super.key, required this.currentRecipe});
+class RecipeWidget extends StatefulWidget {
+  RecipeWidget(
+      {super.key, required this.currentRecipe, required this.servingSize});
   Recipe currentRecipe;
+  int servingSize;
 
   @override
-  State<recipeWidget> createState() => _recipeWidgetState();
+  State<RecipeWidget> createState() => _RecipeWidgetState();
 }
 
-class _recipeWidgetState extends State<recipeWidget> {
+class _RecipeWidgetState extends State<RecipeWidget> {
+  late IngredientDisplay ingredientDisplay =
+      IngredientDisplay(widget.currentRecipe.ingredients);
   @override
   Widget build(BuildContext context) {
+    const List<String> dropDownNumbers = <String>[
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      '20',
+      '21',
+      '22',
+      '23',
+      '24'
+    ];
+
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            Text("Recipe Name:  ${widget.currentRecipe.recipeName}"),
-            const SizedBox(height: 20),
-            Text("Description:  ${widget.currentRecipe.description}"),
-            const SizedBox(height: 20),
-            // Ingredients goes here
-            Text("Directions:  ${widget.currentRecipe.directions}"),
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                widget.currentRecipe.recipeName,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+              width: 20,
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Description:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("\n ${widget.currentRecipe.description}"),
+            ),
+            const SizedBox(
+              height: 20,
+              width: 20,
+            ),
+            const Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Desired Servings:\n",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                )),
+            Row(
+              children: [
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: DropdownButton(
+                        items: dropDownNumbers
+                            .map<DropdownMenuItem<String>>((number) {
+                          return DropdownMenuItem<String>(
+                            value: number,
+                            child: Text(number),
+                          );
+                        }).toList(),
+                        onChanged: onChangedNumber)),
+              ],
+            ),
+            const SizedBox(height: 20, width: 20),
+            const Align(
+              child: Text(
+                "Ingredients:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("\n${ingredientDisplay.display()}"),
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Directions:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+                alignment: Alignment.topLeft,
+                child: Text("\n ${widget.currentRecipe.directions}")),
+            const SizedBox(height: 20, width: 20),
             ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
           ],
         ),
       ),
     );
+  }
+
+  void onChangedNumber(String? number) {
+    int servingNumber = int.parse(number!);
+    setState(() {});
   }
 
   void goHome() {
@@ -95,13 +199,14 @@ class _MyHomePageState extends State<MyHomePage> {
     ])));
   }
 
-  void onChanged(String? s) {
-    Recipe currentRecipe = recipeMap[s];
+  void onChanged(String? recipe) {
+    Recipe currentRecipe = recipeMap[recipe];
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => recipeWidget(
+            builder: (context) => RecipeWidget(
                   currentRecipe: currentRecipe,
+                  servingSize: 1,
                 )));
   }
 

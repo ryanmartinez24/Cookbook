@@ -1,4 +1,5 @@
 import 'package:fp_recipe_book/ingredient.dart';
+import 'package:fp_recipe_book/recipeParser.dart';
 
 class Recipe {
   final String recipeName;
