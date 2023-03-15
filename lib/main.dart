@@ -22,15 +22,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class recipeWidget extends StatefulWidget {
-  recipeWidget({super.key, required this.currentRecipe});
+class RecipeWidget extends StatefulWidget {
+  RecipeWidget({super.key, required this.currentRecipe});
   Recipe currentRecipe;
 
   @override
-  State<recipeWidget> createState() => _recipeWidgetState();
+  State<RecipeWidget> createState() => _RecipeWidgetState();
 }
 
-class _recipeWidgetState extends State<recipeWidget> {
+class _RecipeWidgetState extends State<RecipeWidget> {
   @override
   Widget build(BuildContext context) {
     const List<String> dropDownNumbers = <String>[
@@ -43,7 +43,21 @@ class _recipeWidgetState extends State<recipeWidget> {
       '7',
       '8',
       '9',
-      '10'
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      '20',
+      '21',
+      '22',
+      '23',
+      '24'
     ];
 
     return Scaffold(
@@ -147,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => recipeWidget(
+            builder: (context) => RecipeWidget(
                   currentRecipe: currentRecipe,
                 )));
   }
