@@ -8,4 +8,8 @@ class Ingredient {
   void setAmount(newAmount) {
     amount = newAmount;
   }
+
+  void setMeasurementUnit(newUnit) {
+    measurementUnit = newUnit;
+  }
 }
