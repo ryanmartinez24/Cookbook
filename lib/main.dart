@@ -33,22 +33,69 @@ class recipeWidget extends StatefulWidget {
 class _recipeWidgetState extends State<recipeWidget> {
   @override
   Widget build(BuildContext context) {
+    const List<String> dropDownNumbers = <String>[
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10'
+    ];
+
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            Text("Recipe Name:  ${widget.currentRecipe.recipeName}"),
-            const SizedBox(height: 20),
-            Text("Description:  ${widget.currentRecipe.description}"),
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text("Recipe Name:\n  ${widget.currentRecipe.recipeName}"),
+            ),
+            const SizedBox(
+              height: 20,
+              width: 20,
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child:
+                  Text("Description:\n  ${widget.currentRecipe.description}"),
+            ),
+            const SizedBox(
+              height: 20,
+              width: 20,
+            ),
+            const Align(
+                alignment: Alignment.topLeft,
+                child: Text("Desired Servings:\n")),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: DropdownButton(
+                    items:
+                        dropDownNumbers.map<DropdownMenuItem<String>>((number) {
+                      return DropdownMenuItem<String>(
+                        value: number,
+                        child: Text(number),
+                      );
+                    }).toList(),
+                    onChanged: onChangedNumber)),
             // Ingredients goes here
-            Text("Directions:  ${widget.currentRecipe.directions}"),
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("Directions:\n  ${widget.currentRecipe.directions}"),
+            ),
+            const SizedBox(height: 20, width: 20),
             ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
           ],
         ),
       ),
     );
+  }
+
+  void onChangedNumber(String? number) {
+    int servingNumber = int.parse(number!);
   }
 
   void goHome() {
@@ -95,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ])));
   }
 
-  void onChanged(String? s) {
-    Recipe currentRecipe = recipeMap[s];
+  void onChanged(String? recipe) {
+    Recipe currentRecipe = recipeMap[recipe];
     Navigator.push(
         context,
         MaterialPageRoute(
