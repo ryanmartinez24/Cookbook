@@ -3,6 +3,7 @@ import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipeParser.dart';
 import 'package:fp_recipe_book/ingredient_display.dart';
+import 'package:fp_recipe_book/serving_scaler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,10 +25,8 @@ class MyApp extends StatelessWidget {
 }
 
 class RecipeWidget extends StatefulWidget {
-  RecipeWidget(
-      {super.key, required this.currentRecipe, required this.servingSize});
+  RecipeWidget({super.key, required this.currentRecipe});
   Recipe currentRecipe;
-  int servingSize;
 
   @override
   State<RecipeWidget> createState() => _RecipeWidgetState();
@@ -105,8 +104,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
             Row(
               children: [
                 const SizedBox(
-                  height: 100,
-                  width: 100,
+                  height: 0,
+                  width: 120,
                 ),
                 Align(
                     alignment: Alignment.centerLeft,
@@ -123,6 +122,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
             ),
             const SizedBox(height: 20, width: 20),
             const Align(
+              alignment: Alignment.topLeft,
               child: Text(
                 "Ingredients:",
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
@@ -152,7 +152,12 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
   void onChangedNumber(String? number) {
     int servingNumber = int.parse(number!);
-    setState(() {});
+    setState(() {
+      List<Ingredient> ingredients = widget.currentRecipe.ingredients;
+      ServingScaler scaler = ServingScaler(ingredients);
+      List<Ingredient> ingredientsScaled = scaler.amountScaler(servingNumber);
+      widget.currentRecipe.ingredients = ingredientsScaled;
+    });
   }
 
   void goHome() {
@@ -206,7 +211,6 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(
             builder: (context) => RecipeWidget(
                   currentRecipe: currentRecipe,
-                  servingSize: 1,
                 )));
   }
 
