@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/ingredient_display.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,14 +24,18 @@ class MyApp extends StatelessWidget {
 }
 
 class RecipeWidget extends StatefulWidget {
-  RecipeWidget({super.key, required this.currentRecipe});
+  RecipeWidget(
+      {super.key, required this.currentRecipe, required this.servingSize});
   Recipe currentRecipe;
+  int servingSize;
 
   @override
   State<RecipeWidget> createState() => _RecipeWidgetState();
 }
 
 class _RecipeWidgetState extends State<RecipeWidget> {
+  late IngredientDisplay ingredientDisplay =
+      IngredientDisplay(widget.currentRecipe.ingredients);
   @override
   Widget build(BuildContext context) {
     const List<String> dropDownNumbers = <String>[
@@ -91,28 +96,42 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               height: 20,
               width: 20,
             ),
-
             const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Desired Servings:\n",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 )),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: DropdownButton(
-                    items:
-                        dropDownNumbers.map<DropdownMenuItem<String>>((number) {
-                      return DropdownMenuItem<String>(
-                        value: number,
-                        child: Text(number),
-                      );
-                    }).toList(),
-                    onChanged: onChangedNumber)),
+            Row(
+              children: [
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: DropdownButton(
+                        items: dropDownNumbers
+                            .map<DropdownMenuItem<String>>((number) {
+                          return DropdownMenuItem<String>(
+                            value: number,
+                            child: Text(number),
+                          );
+                        }).toList(),
+                        onChanged: onChangedNumber)),
+              ],
+            ),
             const SizedBox(height: 20, width: 20),
-
-            // Ingredients goes here
-
+            const Align(
+              child: Text(
+                "Ingredients:",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text("\n${ingredientDisplay.display()}"),
+            ),
             const Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -124,7 +143,6 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                 alignment: Alignment.topLeft,
                 child: Text("\n ${widget.currentRecipe.directions}")),
             const SizedBox(height: 20, width: 20),
-
             ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
           ],
         ),
@@ -134,6 +152,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
   void onChangedNumber(String? number) {
     int servingNumber = int.parse(number!);
+    setState(() {});
   }
 
   void goHome() {
@@ -187,6 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(
             builder: (context) => RecipeWidget(
                   currentRecipe: currentRecipe,
+                  servingSize: 1,
                 )));
   }
 
