@@ -98,17 +98,25 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                   "Desired Servings:\n",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 )),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: DropdownButton(
-                    items:
-                        dropDownNumbers.map<DropdownMenuItem<String>>((number) {
-                      return DropdownMenuItem<String>(
-                        value: number,
-                        child: Text(number),
-                      );
-                    }).toList(),
-                    onChanged: onChangedNumber)),
+            Row(
+              children: [
+                const SizedBox(
+                  height: 100,
+                  width: 100,
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: DropdownButton(
+                        items: dropDownNumbers
+                            .map<DropdownMenuItem<String>>((number) {
+                          return DropdownMenuItem<String>(
+                            value: number,
+                            child: Text(number),
+                          );
+                        }).toList(),
+                        onChanged: onChangedNumber)),
+              ],
+            ),
             const SizedBox(height: 20, width: 20),
 
             // Ingredients goes here
