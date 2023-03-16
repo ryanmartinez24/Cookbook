@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:fp_recipe_book/ingredient.dart';
 
 class RecipeParser {
-  String jsonObject = File('assets/Recipes.json').readAsStringSync();
+  String jsonObject = File('assets/recipes.json').readAsStringSync();
   late final decodedJsonObject;
   final int recipeNumber;
   late final String recipe;

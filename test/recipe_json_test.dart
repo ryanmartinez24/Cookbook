@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  String jsonObject = File('lib/Recipes.json').readAsStringSync();
+  String jsonObject = File('lib/recipes.json').readAsStringSync();
   var decodedJsonObject = jsonDecode(jsonObject);
 
   test('I can get the correct number of keys that the JSON contains', () {
