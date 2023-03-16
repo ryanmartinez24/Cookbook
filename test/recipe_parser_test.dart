@@ -15,7 +15,7 @@ void main() {
     String description = tester.descriptionRetriever();
 
     expect(description,
-        "Simple and easy homemade mashed potatoes (recipe designed for 10 servings)");
+        "Simple and easy homemade mashed potatoes (recipe designed for 10 servings)\nOriginal Serving size before chosen servings size: 1");
   });
 
   test(
@@ -39,7 +39,7 @@ void main() {
 
     expect(
         directions,
-        "1: Place potatoes in large saucepan; add enough water to cover. Add ¾ of the salt. Bring to a boil. Reduce heat to medium-low; cover loosely and boil gently for 15 to 20 minutes or until potatoes break apart easily when pierced with fork. Drain well. \n"
+        "\n\t1: Place potatoes in large saucepan; add enough water to cover. Add ¾ of the salt. Bring to a boil. Reduce heat to medium-low; cover loosely and boil gently for 15 to 20 minutes or until potatoes break apart easily when pierced with fork. Drain well. \n"
         '2: Return potatoes to saucepan; shake saucepan gently over low heat for 1 to 2 minutes to evaporate any excess moisture. \n'
         ' 3: Mash potatoes with potato masher until no lumps remain. Add butter, pepper and remaining salt; continue mashing, gradually adding enough milk to make potatoes smooth and creamy');
   });

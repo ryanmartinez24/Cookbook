@@ -1,7 +1,7 @@
 {
   "recipe1": {
     "Name": "Meat Sauce",
-    "Description": "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)",
+    "Description": "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)\nOriginal Serving size before chosen servings size: 1",
     "Ingredients": {
       "Ground Beef": {
         "Amount": "0.125",
@@ -53,7 +53,7 @@
   },
   "recipe2": {
     "Name": "Mashed Potatoes",
-    "Description": "Simple and easy homemade mashed potatoes (recipe designed for 10 servings)",
+    "Description": "Simple and easy homemade mashed potatoes (recipe designed for 10 servings)\nOriginal Serving size before chosen servings size: 1",
     "Ingredients": {
       "Russet potatoes, peeled, cut into quarters": {
         "Amount": "1",
@@ -81,7 +81,7 @@
   },
   "recipe3": {
     "Name": "Chicken noodle soup",
-    "Description": "Quick and easy chicken noodle soup (recipe designed for 6 servings)",
+    "Description": "Quick and easy chicken noodle soup (recipe designed for 6 servings)\nOriginal Serving size before chosen servings size: 1",
     "Ingredients": {
       "Butter": {
         "Amount": "0.1667",
@@ -129,7 +129,7 @@
   },
   "recipe4": {
     "Name": "Nestle Chocolate Chip Cookies",
-    "Description": "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)",
+    "Description": "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)\nOriginal Serving size before chosen servings size: 1",
     "Ingredients": {
       "All purpose flour": {
         "Amount": "2.25",

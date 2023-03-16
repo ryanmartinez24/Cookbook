@@ -9,8 +9,10 @@ class IngredientDisplay {
   String display() {
     ingredientDisplay = '';
     for (int i = 0; i < ingredients.length; i++) {
-      ingredientDisplay =
-          '$display \n${ingredients[i].amount} ${ingredients[i].measurementUnit} ${ingredients[i].name}';
+      double amount = ingredients[i].amount;
+      String measurementUnit = ingredients[i].measurementUnit;
+      String name = ingredients[i].name;
+      ingredientDisplay = '$ingredientDisplay \n$amount $measurementUnit $name';
     }
 
     return ingredientDisplay;

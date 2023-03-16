@@ -192,7 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      const Text("Cookbook!"),
+      const Text(
+        "Cookbook!",
+        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 50),
+      ),
       DropdownButton(
           items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
             return DropdownMenuItem<String>(
