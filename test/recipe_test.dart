@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
-import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/recipe_parser.dart';
 
 void main() {
   RecipeParser parser = RecipeParser(1);
@@ -10,7 +10,7 @@ void main() {
   List<Ingredient> ingredients = parser.ingredientRetriever();
   String directions = parser.directionRetriever();
 
-  Recipe testRecipe = Recipe(name, description, ingredients, directions);
+  Recipe testRecipe = Recipe(name, description, ingredients, directions, 1);
 
   test('I can retrieve the name of recipe1 based off of the Json information',
       () {

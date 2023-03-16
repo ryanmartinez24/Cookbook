@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
-import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/recipe_parser.dart';
 import 'package:fp_recipe_book/ingredient_display.dart';
 import 'package:fp_recipe_book/serving_scaler.dart';
 
@@ -151,12 +151,14 @@ class _RecipeWidgetState extends State<RecipeWidget> {
   }
 
   void onChangedNumber(String? number) {
-    int servingNumber = int.parse(number!);
+    double servingNumber = double.parse(number!);
     setState(() {
       List<Ingredient> ingredients = widget.currentRecipe.ingredients;
       ServingScaler scaler = ServingScaler(ingredients);
-      List<Ingredient> ingredientsScaled = scaler.amountScaler(servingNumber);
+      double scaleFactor = servingNumber / widget.currentRecipe.scale;
+      List<Ingredient> ingredientsScaled = scaler.amountScaler(scaleFactor);
       widget.currentRecipe.ingredients = ingredientsScaled;
+      widget.currentRecipe.scale = servingNumber;
     });
   }
 
@@ -223,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Ingredient> ingredients = parser.ingredientRetriever();
     String directions = parser.directionRetriever();
 
-    Recipe recipe = Recipe(name, description, ingredients, directions);
+    Recipe recipe = Recipe(name, description, ingredients, directions, 1);
 
     return recipe;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_display.dart';
-import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/recipe_parser.dart';
 
 void main() {
   RecipeParser parser = RecipeParser(1);

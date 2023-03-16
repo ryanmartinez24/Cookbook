@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement_converter.dart';
-import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/recipe_parser.dart';
 import 'package:fp_recipe_book/serving_scaler.dart';
 
 void main() {
   RecipeParser parser = RecipeParser(1);
   MeasurementConverter converter = MeasurementConverter();
 
-  int servings = 8;
+  double servings = 8;
   List<Ingredient> ingredientsTester = parser.ingredientRetriever();
   ServingScaler scaler = ServingScaler(ingredientsTester);
   ingredientsTester = scaler.amountScaler(servings);

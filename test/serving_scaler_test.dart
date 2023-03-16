@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
-import 'package:fp_recipe_book/recipeParser.dart';
+import 'package:fp_recipe_book/recipe_parser.dart';
 import 'package:fp_recipe_book/serving_scaler.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
     RecipeParser parser = RecipeParser(1);
     List<Ingredient> ingredients = parser.ingredientRetriever();
     ServingScaler scaler = ServingScaler(ingredients);
-    int servings = 10;
+    double servings = 10;
     List<Ingredient> newIngredients = scaler.amountScaler(servings);
 
     for (int i = 0; i < ingredients.length; i++) {
