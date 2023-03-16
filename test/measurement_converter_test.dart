@@ -41,7 +41,7 @@ amountConverter(double n, String unit) {
     if (n > 1 && n < 16) {
       amount = n / 16;
     }
-  } else if (unit == "teaspoon") {
+  } else if (unit == "tsp") {
     if (n >= 3 && n < 6) {
       amount = (n / 3);
     }
@@ -62,7 +62,7 @@ amountConverter(double n, String unit) {
     }
     return amount;
   }
-  if (unit == "tablespoon") {
+  if (unit == "tbsp") {
     if (n >= 2 && n < 16) {
       amount = (n / 6);
     }
@@ -130,11 +130,11 @@ unitConverter(double n, String unit) {
 
   if (unit == "pinch") {
     if (n > 1 && n < 16) {
-      newUnit = "teaspoon";
+      newUnit = "tsp";
     }
-  } else if (newUnit == "teaspoon") {
+  } else if (newUnit == "tsp") {
     if (n >= 3 && n < 6) {
-      newUnit = "tablespoon";
+      newUnit = "tbsp";
     }
     if (n >= 6 && n < 48) {
       newUnit = "oz";
@@ -153,7 +153,7 @@ unitConverter(double n, String unit) {
     }
     return newUnit;
   }
-  if (unit == "tablespoon") {
+  if (unit == "tbsp") {
     if (n >= 2 && n < 16) {
       newUnit = "oz";
     }

@@ -20,9 +20,9 @@ class MeasurementConverter {
   }
 
   unitConverter(double n, String unit) {
-    if (unit == "teaspoon") {
+    if (unit == "tsp") {
       if (n >= 3 && n < 6) {
-        unit = "tablespoon";
+        unit = "tbsp";
         n = (n / 3);
       }
       if (n >= 6 && n < 48) {
@@ -47,7 +47,7 @@ class MeasurementConverter {
       }
       amount = n;
     }
-    if (unit == "tablespoon") {
+    if (unit == "tbsp") {
       if (n >= 2 && n < 16) {
         unit = "oz";
         n = (n / 6);
@@ -121,6 +121,6 @@ class MeasurementConverter {
     }
 
     amount = n;
-    unit = unit;
+    this.unit = unit;
   }
 }

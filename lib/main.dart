@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
+import 'package:fp_recipe_book/measurement_converter.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipe_parser.dart';
 import 'package:fp_recipe_book/ingredient_display.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
 }
 
 class RecipeWidget extends StatefulWidget {
-  RecipeWidget({super.key, required this.currentRecipe});
-  Recipe currentRecipe;
+  const RecipeWidget({super.key, required this.currentRecipe});
+  final Recipe currentRecipe;
 
   @override
   State<RecipeWidget> createState() => _RecipeWidgetState();
@@ -155,8 +156,10 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     setState(() {
       List<Ingredient> ingredients = widget.currentRecipe.ingredients;
       ServingScaler scaler = ServingScaler(ingredients);
+      MeasurementConverter converter = MeasurementConverter();
       double scaleFactor = servingNumber / widget.currentRecipe.scale;
       List<Ingredient> ingredientsScaled = scaler.amountScaler(scaleFactor);
+      ingredientsScaled = converter.convertIngredients(ingredientsScaled);
       widget.currentRecipe.ingredients = ingredientsScaled;
       widget.currentRecipe.scale = servingNumber;
     });
