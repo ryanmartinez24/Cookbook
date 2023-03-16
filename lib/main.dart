@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -199,7 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       const Text(
         "Cookbook!",
-        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 50),
+        style: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 50,
+        ),
       ),
       DropdownButton(
           items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
