@@ -9,7 +9,7 @@ class ServingScaler {
     for (int i = 0; i < ingredients.length; i++) {
       double amount = ingredients[i].amount;
       amount = amount * servings;
-      ingredients[i].setAmount(amount);
+      ingredients[i].amount = amount;
     }
     return ingredients;
   }

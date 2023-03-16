@@ -4,12 +4,4 @@ class Ingredient {
   double amount;
 
   Ingredient(this.name, this.measurementUnit, this.amount);
-
-  void setAmount(newAmount) {
-    amount = newAmount;
-  }
-
-  void setMeasurementUnit(newUnit) {
-    measurementUnit = newUnit;
-  }
 }

@@ -12,8 +12,8 @@ class MeasurementConverter {
 
       unitConverter(ingredientAmount, ingredientUnit);
 
-      ingredient.setAmount(ingredientAmount);
-      ingredient.setMeasurementUnit(ingredientUnit);
+      ingredient.measurementUnit = unit;
+      ingredient.amount = amount;
     }
 
     return ingredients;

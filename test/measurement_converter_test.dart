@@ -26,8 +26,8 @@ void main() {
       ingredientAmount = amountConverter(ingredientAmount, ingredientUnit);
       ingredientUnit = unitConverter(ingredientAmount, ingredientUnit);
 
-      ingredient.setAmount(ingredientAmount);
-      ingredient.setMeasurementUnit(ingredientUnit);
+      ingredient.amount = ingredientAmount;
+      ingredient.measurementUnit = ingredientUnit;
     }
 
     expect(ingredientsTester, ingredients);
