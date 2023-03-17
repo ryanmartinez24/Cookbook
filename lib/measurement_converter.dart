@@ -45,7 +45,7 @@ class MeasurementConverter {
         unit = "gallon";
         n = (n / 768);
       }
-      amount = (n * 100).round().toDouble() / 100;
+      amount = (n * 1000).round().toDouble() / 1000;
     }
     if (unit == "tbsp") {
       if (n >= 2 && n < 16) {
@@ -68,7 +68,7 @@ class MeasurementConverter {
         unit = "gallon";
         n = (n / 256);
       }
-      amount = (n * 100).round().toDouble() / 100;
+      amount = (n * 1000).round().toDouble() / 1000;
     }
     if (unit == "oz") {
       if (n >= 8 && n < 16) {
@@ -87,7 +87,7 @@ class MeasurementConverter {
         unit = "gallon";
         n = (n / 128);
       }
-      amount = (n * 100).round().toDouble() / 100;
+      amount = (n * 1000).round().toDouble() / 1000;
     }
     if (unit == "cup") {
       if (n >= 2 && n < 4) {
@@ -102,7 +102,7 @@ class MeasurementConverter {
         unit = "gallon";
         n = (n / 16);
       }
-      amount = (n * 100).round().toDouble() / 100;
+      amount = (n * 1000).round().toDouble() / 1000;
     }
     if (unit == "pint") {
       if (n >= 2 && n < 8) {
@@ -113,14 +113,14 @@ class MeasurementConverter {
         unit = "gallon";
         n = (n / 8);
       }
-      amount = (n * 100).round().toDouble() / 100;
+      amount = (n * 1000).round().toDouble() / 1000;
     }
     if (unit == "quart") {
       unit = "gallon";
       n = (n / 4);
     }
 
-    amount = (n * 100).round().toDouble() / 100;
+    amount = (n * 1000).round().toDouble() / 1000;
     this.unit = unit;
   }
 }
