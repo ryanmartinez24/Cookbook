@@ -60,87 +60,91 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text(
-                widget.currentRecipe.recipeName,
-                style:
-                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
+          child: Column(
+        children: [
+          Expanded(
+              child: ListView(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  widget.currentRecipe.recipeName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 30),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-              width: 20,
-            ),
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Description:",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              const SizedBox(
+                height: 20,
+                width: 20,
               ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text("\n ${widget.currentRecipe.description}"),
-            ),
-            const SizedBox(
-              height: 20,
-              width: 20,
-            ),
-            const Align(
+              const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  "Desired Servings:\n",
+                  "Description:",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-                )),
-            Row(
-              children: [
-                const SizedBox(
-                  height: 0,
-                  width: 120,
                 ),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: DropdownButton(
-                        items: dropDownNumbers
-                            .map<DropdownMenuItem<String>>((number) {
-                          return DropdownMenuItem<String>(
-                            value: number,
-                            child: Text(number),
-                          );
-                        }).toList(),
-                        onChanged: onChangedNumber)),
-              ],
-            ),
-            const SizedBox(height: 20, width: 20),
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Ingredients:",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
               ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text("\n${ingredientDisplay.display()}"),
-            ),
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Directions:",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-              ),
-            ),
-            Align(
+              Align(
                 alignment: Alignment.topLeft,
-                child: Text("\n ${widget.currentRecipe.directions}")),
-            const SizedBox(height: 20, width: 20),
-            ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
-          ],
-        ),
-      ),
+                child: Text("\n ${widget.currentRecipe.description}"),
+              ),
+              const SizedBox(
+                height: 20,
+                width: 20,
+              ),
+              const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Desired Servings:\n",
+                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                  )),
+              Row(
+                children: [
+                  const SizedBox(
+                    height: 0,
+                    width: 120,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: DropdownButton(
+                          items: dropDownNumbers
+                              .map<DropdownMenuItem<String>>((number) {
+                            return DropdownMenuItem<String>(
+                              value: number,
+                              child: Text(number),
+                            );
+                          }).toList(),
+                          onChanged: onChangedNumber)),
+                ],
+              ),
+              const SizedBox(height: 20, width: 20),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Ingredients:",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("\n${ingredientDisplay.display()}"),
+              ),
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Directions:",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                ),
+              ),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text("\n ${widget.currentRecipe.directions}")),
+              const SizedBox(height: 20, width: 20),
+            ],
+          )),
+          ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
+        ],
+      )),
     );
   }
 
