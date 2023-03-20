@@ -114,7 +114,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                               child: Text(number),
                             );
                           }).toList(),
-                          onChanged: onChangedNumber)),
+                          onChanged: _onChangedNumber)),
                 ],
               ),
               const SizedBox(height: 20, width: 20),
@@ -142,13 +142,13 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               const SizedBox(height: 20, width: 20),
             ],
           )),
-          ElevatedButton(onPressed: goHome, child: const Text("Go Back"))
+          ElevatedButton(onPressed: _goHome, child: const Text("Go Back"))
         ],
       )),
     );
   }
 
-  void onChangedNumber(String? number) {
+  void _onChangedNumber(String? number) {
     double servingNumber = double.parse(number!);
     setState(() {
       List<Ingredient> ingredients = widget.currentRecipe.ingredients;
@@ -162,7 +162,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     });
   }
 
-  void goHome() {
+  void _goHome() {
     Navigator.pop(context);
   }
 }
@@ -184,10 +184,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    recipeMap["Meat Sauce"] = createRecipe(meatSauceParser);
-    recipeMap["Mashed Potatoes"] = createRecipe(mashedPotatoesParser);
-    recipeMap["Chicken Noodle Soup"] = createRecipe(chickenSoupParser);
-    recipeMap["Chocolate Chip Cookies"] = createRecipe(cookieParser);
+    recipeMap["Meat Sauce"] = _createRecipe(meatSauceParser);
+    recipeMap["Mashed Potatoes"] = _createRecipe(mashedPotatoesParser);
+    recipeMap["Chicken Noodle Soup"] = _createRecipe(chickenSoupParser);
+    recipeMap["Chocolate Chip Cookies"] = _createRecipe(cookieParser);
     List recipeList = recipeMap.keys.toList();
 
     return Scaffold(
@@ -208,11 +208,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(recipeName),
             );
           }).toList(),
-          onChanged: onChanged)
+          onChanged: _onChanged)
     ])));
   }
 
-  void onChanged(String? recipe) {
+  void _onChanged(String? recipe) {
     Recipe currentRecipe = recipeMap[recipe];
     Navigator.push(
         context,
@@ -222,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )));
   }
 
-  Recipe createRecipe(RecipeParser parser) {
+  Recipe _createRecipe(RecipeParser parser) {
     String name = parser.nameRetriever();
     String description = parser.descriptionRetriever();
     List<Ingredient> ingredients = parser.ingredientRetriever();

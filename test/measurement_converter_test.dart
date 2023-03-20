@@ -34,7 +34,7 @@ void main() {
   });
 }
 
-amountConverter(double n, String unit) {
+double amountConverter(double n, String unit) {
   double amount = n;
 
   if (unit == "pinch") {
@@ -125,7 +125,7 @@ amountConverter(double n, String unit) {
   return amount;
 }
 
-unitConverter(double n, String unit) {
+String unitConverter(double n, String unit) {
   String newUnit = unit;
 
   if (unit == "pinch") {
