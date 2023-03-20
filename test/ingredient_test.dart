@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 
 void main() {
-  String jsonObject = File('lib/recipes.json').readAsStringSync();
+  String jsonObject = File('assets/recipes.json').readAsStringSync();
   var decodedJsonObject = jsonDecode(jsonObject);
 
   test(
