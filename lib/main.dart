@@ -114,7 +114,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                               child: Text(number),
                             );
                           }).toList(),
-                          onChanged: _onChangedNumber)),
+                          onChanged: _onServingChosen)),
                 ],
               ),
               const SizedBox(height: 20, width: 20),
@@ -148,7 +148,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     );
   }
 
-  void _onChangedNumber(String? number) {
+  void _onServingChosen(String? number) {
     double servingNumber = double.parse(number!);
     setState(() {
       List<Ingredient> ingredients = widget.currentRecipe.ingredients;
@@ -208,11 +208,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(recipeName),
             );
           }).toList(),
-          onChanged: _onChanged)
+          onChanged: _onRecipeSelected)
     ])));
   }
 
-  void _onChanged(String? recipe) {
+  void _onRecipeSelected(String? recipe) {
     Recipe currentRecipe = recipeMap[recipe];
     Navigator.push(
         context,
