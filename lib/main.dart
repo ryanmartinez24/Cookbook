@@ -177,10 +177,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map recipeMap = {};
-  RecipeParser meatSauceParser = RecipeParser(1);
-  RecipeParser mashedPotatoesParser = RecipeParser(2);
-  RecipeParser chickenSoupParser = RecipeParser(3);
-  RecipeParser cookieParser = RecipeParser(4);
 
   @override
   Widget build(BuildContext context) {
@@ -223,13 +219,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Recipe _createRecipe(RecipeParser parser) {
-    String name = parser.nameRetriever();
-    String description = parser.descriptionRetriever();
-    List<Ingredient> ingredients = parser.ingredientRetriever();
-    String directions = parser.directionRetriever();
-
-    Recipe recipe = Recipe(name, description, ingredients, directions, 1);
-
-    return recipe;
+    return;
   }
 }
