@@ -3,7 +3,6 @@ import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement_converter.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipe_parser.dart';
-import 'package:fp_recipe_book/ingredient_display.dart';
 import 'package:fp_recipe_book/serving_scaler.dart';
 
 void main() {
@@ -34,8 +33,6 @@ class RecipeWidget extends StatefulWidget {
 }
 
 class _RecipeWidgetState extends State<RecipeWidget> {
-  late IngredientDisplay ingredientDisplay =
-      IngredientDisplay(widget.currentRecipe.ingredients);
   @override
   Widget build(BuildContext context) {
     const List<String> dropDownNumbers = <String>[
@@ -127,7 +124,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("\n${ingredientDisplay.display()}"),
+                child: Text(
+                    "\n${_displayIngredients(widget.currentRecipe.ingredients)}"),
               ),
               const Align(
                 alignment: Alignment.topLeft,
@@ -164,6 +162,19 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
   void _goHome() {
     Navigator.pop(context);
+  }
+
+  String _displayIngredients(List<Ingredient> ingredients) {
+    String ingredientDisplay = '';
+
+    for (int i = 0; i < ingredients.length; i++) {
+      double amount = ingredients[i].amount;
+      String measurementUnit = ingredients[i].measurementUnit;
+      String name = ingredients[i].name;
+      ingredientDisplay = '$ingredientDisplay \n$amount $measurementUnit $name';
+    }
+
+    return ingredientDisplay;
   }
 }
 
