@@ -1,7 +1,8 @@
+import 'package:fp_recipe_book/measurement.dart';
+
 class Ingredient {
   String name;
-  String measurementUnit;
-  double amount;
+  Measurement measurement;
 
-  Ingredient(this.name, this.measurementUnit, this.amount);
+  Ingredient(this.name, this.measurement);
 }

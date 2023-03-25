@@ -9,4 +9,10 @@ class Recipe {
 
   Recipe(this.recipeName, this.description, this.ingredients, this.directions,
       this.scale);
+
+  void simplifyIngredients(int servings) {
+    for (Ingredient ingredient in ingredients) {
+      ingredient.measurement.scale(servings);
+    }
+  }
 }
