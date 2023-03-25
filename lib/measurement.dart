@@ -7,15 +7,21 @@ class Measurement {
   }
 
   void scale(int scale) {
-    amount = amount * scale;
+    this.amount = amount * scale;
+    print(amount);
+    print(unit);
     _simplify();
   }
 
   void _simplify() {
     double n = amount;
-
+    if (unit == "pinches") {
+      if (n > 16) {
+        unit = "tsp";
+        n = n / 16;
+      }
+    }
     if (unit == "tsp") {
-      if (n < 3) {}
       if (n >= 3 && n < 6) {
         unit = "tbsp";
         n = (n / 3);
@@ -48,10 +54,10 @@ class Measurement {
         n = (n * 3);
       }
       if (n >= 1 && n < 2) {}
-      if (n >= 2 && n < 16) {
-        unit = "oz";
-        n = (n / 6);
-      }
+      //if (n >= 2 && n < 16) {
+      //  unit = "oz";
+      //   n = (n / 6);
+      // }
       if (n >= 16 && n < 32) {
         unit = "cup";
         n = (n / 16);
