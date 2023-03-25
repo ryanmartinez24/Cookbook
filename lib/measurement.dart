@@ -6,10 +6,8 @@ class Measurement {
     _simplify();
   }
 
-  void scale(int scale) {
+  void scale(double scale) {
     this.amount = amount * scale;
-    print(amount);
-    print(unit);
     _simplify();
   }
 
