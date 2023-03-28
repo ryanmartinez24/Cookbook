@@ -1,45 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
+import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/recipe.dart';
-import 'package:fp_recipe_book/recipe_parser.dart';
 
 void main() {
-  RecipeParser parser = RecipeParser(1);
-  String name = parser.nameRetriever();
-  String description = parser.descriptionRetriever();
-  List<Ingredient> ingredients = parser.ingredientRetriever();
-  String directions = parser.directionRetriever();
+  Ingredient i1 = Ingredient("Pepper", Measurement("whole", 3.0));
+  Ingredient i2 = Ingredient("Ground Beef", Measurement("lbs", .5));
+  Ingredient i3 = Ingredient("Olive Oil", Measurement("tsp", 3.0));
 
-  Recipe testRecipe = Recipe(name, description, ingredients, directions, 1);
+  List<Ingredient> ingredientList = [i1, i2, i3];
 
-  test('I can retrieve the name of recipe1 based off of the Json information',
-      () {
-    String testName = testRecipe.recipeName;
+  test('testing that recipe scale ingredient function works', () {
+    Recipe testRecipe =
+        Recipe("Chef's Special", "Da best", ingredientList, "Cook it", 1);
 
-    expect(testName, name);
-  });
-
-  test(
-      'I can retrieve the description of recipe1 based on the Json informations',
-      () {
-    String testDescription = testRecipe.description;
-
-    expect(testDescription, description);
-  });
-
-  test(
-      'I can retrieve the entire list of Ingredient Objects for recipe1 based off of the Json information',
-      () {
-    List<Ingredient> testIngredients = testRecipe.ingredients;
-
-    expect(testIngredients, ingredients);
-  });
-
-  test(
-      'I can retrieve the directions for recipe1 based on the Json information',
-      () {
-    String testDirections = testRecipe.directions;
-
-    expect(testDirections, directions);
+    testRecipe.scaleIngredients(5);
+    List<Ingredient> newIngredients = testRecipe.ingredients;
+    double i1ScaledAmount = newIngredients[0].measurement.amount;
+    String i3Unit = newIngredients[2].measurement.unit;
+    expect(i1ScaledAmount, 15);
+    expect(i3Unit, "tbsp");
   });
 }
