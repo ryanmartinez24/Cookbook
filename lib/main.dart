@@ -17,8 +17,34 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page', recipeMap: {}),
     );
+  }
+}
+
+class AddRecipeWidget extends StatelessWidget {
+  String recipeName = "";
+  String directions = "";
+  String description = "";
+
+  AddRecipeWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(children: [
+      const Text("Add a new Recipe!"),
+      const Text("Enter recipe name"),
+      TextField(onChanged: (text) {
+        recipeName = text;
+      }),
+      const Text("Enter the description"),
+      TextField(onChanged: (text) {
+        description = text;
+      }),
+      TextField(onChanged: (text) {
+        directions = text;
+      }),
+    ]));
   }
 }
 
@@ -172,18 +198,19 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.recipeMap});
   final String title;
+  final Map recipeMap;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Map recipeMap = {};
-
   @override
   Widget build(BuildContext context) {
+    Map recipeMap = widget.recipeMap;
+
     Recipe meatSauceRecipe = Recipe(
         "Meat Sauce",
         "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)\nOriginal Serving size before chosen servings size: 1",
@@ -241,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onRecipeSelected(String? recipe) {
-    Recipe currentRecipe = recipeMap[recipe];
+    Recipe currentRecipe = widget.recipeMap[recipe];
     Navigator.push(
         context,
         MaterialPageRoute(
