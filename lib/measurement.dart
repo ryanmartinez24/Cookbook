@@ -7,7 +7,7 @@ class Measurement {
   }
 
   void scale(double scale) {
-    this.amount = amount * scale;
+    amount = amount * scale;
     _simplify();
   }
 
