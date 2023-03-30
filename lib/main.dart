@@ -22,13 +22,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AddRecipeWidget extends StatelessWidget {
+class AddRecipeWidget extends StatefulWidget {
+  AddRecipeWidget({super.key});
+
+  @override
+  State<AddRecipeWidget> createState() => _AddRecipeWidgetState();
+}
+
+class _AddRecipeWidgetState extends State<AddRecipeWidget> {
   String recipeName = "";
+
   String directions = "";
+
   String description = "";
+
   List<Ingredient> ingredientList = [];
 
-  AddRecipeWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +52,20 @@ class AddRecipeWidget extends StatelessWidget {
           TextField(onChanged: (text) {
             description = text;
           }),
+          const Text("Enter the directions"),
           TextField(onChanged: (text) {
             directions = text;
           }),
           const Text("Enter the ingredients"),
           const AddIngredientWidget(),
+          ElevatedButton(onPressed: _goHome, child: Text("Homepage")),
         ],
       ),
     );
+  }
+
+  void _goHome() {
+    Navigator.pop(context);
   }
 }
 
@@ -119,54 +134,52 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
 }
 
 class FieldEntryWidget extends StatelessWidget {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController unitController = TextEditingController();
-  TextEditingController amountController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController unitController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
 
   FieldEntryWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: "Ingredient Name",
-                    border: OutlineInputBorder(),
-                  ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: 200,
+              child: TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: "Ingredient Name",
+                  border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  controller: unitController,
-                  decoration: const InputDecoration(
-                    labelText: "Unit Name",
-                    border: OutlineInputBorder(),
-                  ),
+            ),
+            SizedBox(
+              width: 200,
+              child: TextFormField(
+                controller: unitController,
+                decoration: const InputDecoration(
+                  labelText: "Unit Name",
+                  border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  controller: amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: "Amount of Ingredient",
-                    border: OutlineInputBorder(),
-                  ),
+            ),
+            SizedBox(
+              width: 200,
+              child: TextFormField(
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: "Amount of Ingredient",
+                  border: OutlineInputBorder(),
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
