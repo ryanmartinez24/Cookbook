@@ -22,66 +22,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AddIngredientWidget extends StatefulWidget {
-  const AddIngredientWidget({super.key});
-
-  @override
-  State<AddIngredientWidget> createState() => AddIngredientWidgetState();
-}
-
-class AddIngredientWidgetState extends State<AddIngredientWidget> {
-  List<FieldEntryWidget> fieldWidgetList = [];
-  List<String> enteredUnits = [];
-  List<String> enteredIngredientNames = [];
-  List<int> enteredAmount = [];
-  @override
-  Widget build(BuildContext context) {
-    Widget dynamicTextField = Flexible(
-      flex: 2,
-      child: ListView.builder(
-        itemCount: fieldWidgetList.length,
-        itemBuilder: (_, index) => fieldWidgetList[index],
-      ),
-    );
-
-    return SizedBox(
-      height: 250,
-      width: 1000,
-      child: Column(
-        children: [
-          dynamicTextField,
-          ElevatedButton(
-            onPressed: addFieldEntryWidget,
-            child: const Text("Add another ingredient"),
-          ),
-          ElevatedButton(
-            onPressed: removeFieldEntryWidget,
-            child: const Text("Remove an ingredient"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void addFieldEntryWidget() {
-    if (enteredUnits.isNotEmpty) {
-      enteredUnits = [];
-      enteredIngredientNames = [];
-      enteredAmount = [];
-      fieldWidgetList = [];
-    }
-    setState(() {});
-    fieldWidgetList.add(FieldEntryWidget());
-  }
-
-  void removeFieldEntryWidget() {
-    if (fieldWidgetList.isNotEmpty) {
-      fieldWidgetList.removeLast();
-    }
-    setState(() {});
-  }
-}
-
 class AddRecipeWidget extends StatelessWidget {
   String recipeName = "";
   String directions = "";
@@ -111,6 +51,70 @@ class AddRecipeWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class AddIngredientWidget extends StatefulWidget {
+  const AddIngredientWidget({super.key});
+
+  @override
+  State<AddIngredientWidget> createState() => AddIngredientWidgetState();
+}
+
+class AddIngredientWidgetState extends State<AddIngredientWidget> {
+  List<FieldEntryWidget> fieldWidgetList = [];
+  List<String> enteredUnits = [];
+  List<String> enteredIngredientNames = [];
+  List<int> enteredAmount = [];
+  @override
+  Widget build(BuildContext context) {
+    Widget dynamicTextField = Flexible(
+      flex: 2,
+      child: ListView.builder(
+        itemCount: fieldWidgetList.length,
+        itemBuilder: (_, index) => fieldWidgetList[index],
+      ),
+    );
+
+    return SizedBox(
+      height: 250,
+      width: 1000,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: addFieldEntryWidget,
+                child: const Text("Add another ingredient"),
+              ),
+              ElevatedButton(
+                onPressed: removeFieldEntryWidget,
+                child: const Text("Remove an ingredient"),
+              ),
+            ],
+          ),
+          dynamicTextField
+        ],
+      ),
+    );
+  }
+
+  void addFieldEntryWidget() {
+    if (enteredUnits.isNotEmpty) {
+      enteredUnits = [];
+      enteredIngredientNames = [];
+      enteredAmount = [];
+      fieldWidgetList = [];
+    }
+    setState(() {});
+    fieldWidgetList.add(FieldEntryWidget());
+  }
+
+  void removeFieldEntryWidget() {
+    if (fieldWidgetList.isNotEmpty) {
+      fieldWidgetList.removeLast();
+    }
+    setState(() {});
   }
 }
 
