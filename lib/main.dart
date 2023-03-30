@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
 }
 
 class AddRecipeWidget extends StatefulWidget {
-  AddRecipeWidget({super.key});
+  AddRecipeWidget({super.key, required this.recipeMap, required this.update});
+  Map recipeMap;
+  final ValueChanged update;
 
   @override
   State<AddRecipeWidget> createState() => _AddRecipeWidgetState();
@@ -36,7 +38,11 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
 
   String description = "";
 
-  List<Ingredient> ingredientList = [];
+  List<Ingredient> ingredients = [];
+
+  AddIngredientWidget ingredientWidget = AddIngredientWidget(
+    ingredients: [],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -57,20 +63,30 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
             directions = text;
           }),
           const Text("Enter the ingredients"),
-          const AddIngredientWidget(),
-          ElevatedButton(onPressed: _goHome, child: Text("Homepage")),
+          ingredientWidget,
+          ElevatedButton(
+              onPressed: _submitRecipe, child: const Text("Submit Recipe")),
+          ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
         ],
       ),
     );
   }
 
+  void _submitRecipe() {
+    Recipe newRecipe =
+        Recipe(recipeName, description, ingredients, directions, 1);
+    widget.recipeMap[recipeName] = newRecipe;
+  }
+
   void _goHome() {
     Navigator.pop(context);
+    widget.update(widget.recipeMap);
   }
 }
 
 class AddIngredientWidget extends StatefulWidget {
-  const AddIngredientWidget({super.key});
+  AddIngredientWidget({super.key, required this.ingredients});
+  List<Ingredient> ingredients;
 
   @override
   State<AddIngredientWidget> createState() => AddIngredientWidgetState();
@@ -81,6 +97,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   List<String> enteredUnits = [];
   List<String> enteredIngredientNames = [];
   List<int> enteredAmount = [];
+  List<Ingredient> enteredIngredients = [];
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
@@ -114,6 +131,8 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     );
   }
 
+  void submitIngredients() {}
+
   void addFieldEntryWidget() {
     if (enteredUnits.isNotEmpty) {
       enteredUnits = [];
@@ -129,7 +148,14 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     if (fieldWidgetList.isNotEmpty) {
       fieldWidgetList.removeLast();
     }
-    setState(() {});
+    setState(() {
+      for (FieldEntryWidget currWidget in fieldWidgetList) {
+        enteredIngredients.add(Ingredient(
+            currWidget.nameController.text,
+            Measurement(currWidget.unitController.text,
+                double.parse(currWidget.amountController.text))));
+      }
+    });
   }
 }
 
@@ -185,7 +211,10 @@ class FieldEntryWidget extends StatelessWidget {
 }
 
 class RecipeWidget extends StatefulWidget {
-  const RecipeWidget({super.key, required this.currentRecipe});
+  const RecipeWidget({
+    super.key,
+    required this.currentRecipe,
+  });
   final Recipe currentRecipe;
 
   @override
@@ -420,9 +449,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 )));
   }
 
+  void _update(Map recipeMap) {
+    setState(() {});
+  }
+
   void _onCreateRecipeSelected() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => AddRecipeWidget()));
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddRecipeWidget(
+            recipeMap: widget.recipeMap,
+            update: (recipeMap) => _update(widget.recipeMap)),
+      ),
+    );
   }
 
   List<Ingredient> _createMeatSauceIngredientList() {
