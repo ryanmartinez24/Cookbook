@@ -40,12 +40,17 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
 
   List<Ingredient> ingredients = [];
 
-  AddIngredientWidget ingredientWidget = AddIngredientWidget(
-    ingredients: [],
-  );
+  _update(List<Ingredient> newIngredients) {
+    ingredients = newIngredients;
+  }
 
   @override
   Widget build(BuildContext context) {
+    AddIngredientWidget ingredientWidget = AddIngredientWidget(
+      ingredients: ingredients,
+      update: (ingredients) => _update(ingredients),
+    );
+
     return Scaffold(
       body: Column(
         children: [
@@ -85,8 +90,10 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
 }
 
 class AddIngredientWidget extends StatefulWidget {
-  AddIngredientWidget({super.key, required this.ingredients});
+  AddIngredientWidget(
+      {super.key, required this.ingredients, required this.update});
   List<Ingredient> ingredients;
+  final ValueChanged update;
 
   @override
   State<AddIngredientWidget> createState() => AddIngredientWidgetState();
@@ -97,7 +104,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   List<String> enteredUnits = [];
   List<String> enteredIngredientNames = [];
   List<int> enteredAmount = [];
-  List<Ingredient> enteredIngredients = [];
+  List<Ingredient> ingredients = [];
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
@@ -123,6 +130,9 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
                 onPressed: removeFieldEntryWidget,
                 child: const Text("Remove an ingredient"),
               ),
+              ElevatedButton(
+                  onPressed: submitIngredients,
+                  child: const Text("Submit Ingredients")),
             ],
           ),
           dynamicTextField
@@ -131,7 +141,16 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     );
   }
 
-  void submitIngredients() {}
+  void submitIngredients() {
+    ingredients = [];
+    for (FieldEntryWidget currWidget in fieldWidgetList) {
+      ingredients.add(Ingredient(
+          currWidget.nameController.text,
+          Measurement(currWidget.unitController.text,
+              double.parse(currWidget.amountController.text))));
+    }
+    widget.update(ingredients);
+  }
 
   void addFieldEntryWidget() {
     if (enteredUnits.isNotEmpty) {
@@ -148,14 +167,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     if (fieldWidgetList.isNotEmpty) {
       fieldWidgetList.removeLast();
     }
-    setState(() {
-      for (FieldEntryWidget currWidget in fieldWidgetList) {
-        enteredIngredients.add(Ingredient(
-            currWidget.nameController.text,
-            Measurement(currWidget.unitController.text,
-                double.parse(currWidget.amountController.text))));
-      }
-    });
+    setState(() {});
   }
 }
 
