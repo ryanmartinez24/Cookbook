@@ -17,8 +17,57 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page', recipeMap: {}),
+      home: MyHomePage(title: 'Flutter Demo Home Page', recipeMap: {}),
     );
+  }
+}
+
+class AddIngredientWidget extends StatefulWidget {
+  const AddIngredientWidget({super.key});
+
+  @override
+  State<AddIngredientWidget> createState() => AddIngredientWidgetState();
+}
+
+class AddIngredientWidgetState extends State<AddIngredientWidget> {
+  List<FieldEntryWidget> fieldWidgetList = [];
+  List<String> enteredUnits = [];
+  List<String> enteredIngredientNames = [];
+  List<int> enteredAmount = [];
+  @override
+  Widget build(BuildContext context) {
+    Widget dynamicTextField = Flexible(
+      flex: 2,
+      child: ListView.builder(
+        itemCount: fieldWidgetList.length,
+        itemBuilder: (_, index) => fieldWidgetList[index],
+      ),
+    );
+
+    return Container(
+      height: 250,
+      width: 1000,
+      child: Column(
+        children: [
+          dynamicTextField,
+          ElevatedButton(
+            onPressed: addFieldEntryWidget,
+            child: const Text("Add another ingredient"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  addFieldEntryWidget() {
+    if (enteredUnits.isNotEmpty) {
+      enteredUnits = [];
+      enteredIngredientNames = [];
+      enteredAmount = [];
+      fieldWidgetList = [];
+    }
+    setState(() {});
+    fieldWidgetList.add(FieldEntryWidget());
   }
 }
 
@@ -26,25 +75,82 @@ class AddRecipeWidget extends StatelessWidget {
   String recipeName = "";
   String directions = "";
   String description = "";
+  List<Ingredient> ingredientList = [];
 
   AddRecipeWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      const Text("Add a new Recipe!"),
-      const Text("Enter recipe name"),
-      TextField(onChanged: (text) {
-        recipeName = text;
-      }),
-      const Text("Enter the description"),
-      TextField(onChanged: (text) {
-        description = text;
-      }),
-      TextField(onChanged: (text) {
-        directions = text;
-      }),
-    ]));
+      body: Column(
+        children: [
+          const Text("Add a new Recipe!"),
+          const Text("Enter recipe name"),
+          TextField(onChanged: (text) {
+            recipeName = text;
+          }),
+          const Text("Enter the description"),
+          TextField(onChanged: (text) {
+            description = text;
+          }),
+          TextField(onChanged: (text) {
+            directions = text;
+          }),
+          const Text("Enter the ingredients"),
+          const AddIngredientWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class FieldEntryWidget extends StatelessWidget {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController unitController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: "Ingredient Name",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: unitController,
+                  decoration: const InputDecoration(
+                    labelText: "Unit Name",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Amount of Ingredient",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -198,9 +304,9 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.recipeMap});
+  MyHomePage({super.key, required this.title, required this.recipeMap});
   final String title;
-  final Map recipeMap;
+  Map recipeMap;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -246,25 +352,32 @@ class _MyHomePageState extends State<MyHomePage> {
     List recipeList = recipeMap.keys.toList();
 
     return Scaffold(
-        body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      const Text(
-        "Cookbook!",
-        style: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: 50,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Cookbook!",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 50,
+              ),
+            ),
+            DropdownButton(
+                items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
+                  return DropdownMenuItem<String>(
+                    value: recipeName,
+                    child: Text(recipeName),
+                  );
+                }).toList(),
+                onChanged: _onRecipeSelected),
+            ElevatedButton(
+                onPressed: _onCreateRecipeSelected,
+                child: const Text("Create new recipe")),
+          ],
         ),
       ),
-      DropdownButton(
-          items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
-            return DropdownMenuItem<String>(
-              value: recipeName,
-              child: Text(recipeName),
-            );
-          }).toList(),
-          onChanged: _onRecipeSelected)
-    ])));
+    );
   }
 
   void _onRecipeSelected(String? recipe) {
@@ -275,6 +388,11 @@ class _MyHomePageState extends State<MyHomePage> {
             builder: (context) => RecipeWidget(
                   currentRecipe: currentRecipe,
                 )));
+  }
+
+  void _onCreateRecipeSelected() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddRecipeWidget()));
   }
 
   List<Ingredient> _createMeatSauceIngredientList() {
