@@ -44,7 +44,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
       ),
     );
 
-    return Container(
+    return SizedBox(
       height: 250,
       width: 1000,
       child: Column(
@@ -54,12 +54,16 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
             onPressed: addFieldEntryWidget,
             child: const Text("Add another ingredient"),
           ),
+          ElevatedButton(
+            onPressed: removeFieldEntryWidget,
+            child: const Text("Remove an ingredient"),
+          ),
         ],
       ),
     );
   }
 
-  addFieldEntryWidget() {
+  void addFieldEntryWidget() {
     if (enteredUnits.isNotEmpty) {
       enteredUnits = [];
       enteredIngredientNames = [];
@@ -68,6 +72,13 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     }
     setState(() {});
     fieldWidgetList.add(FieldEntryWidget());
+  }
+
+  void removeFieldEntryWidget() {
+    if (fieldWidgetList.isNotEmpty) {
+      fieldWidgetList.removeLast();
+    }
+    setState(() {});
   }
 }
 
@@ -107,6 +118,8 @@ class FieldEntryWidget extends StatelessWidget {
   TextEditingController nameController = TextEditingController();
   TextEditingController unitController = TextEditingController();
   TextEditingController amountController = TextEditingController();
+
+  FieldEntryWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
