@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'measurement.dart';
 
 void main() {
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
       title: 'Recipe Book',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        textTheme:
+            GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page', recipeMap: {}),
     );
@@ -55,22 +58,27 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
       body: Column(
         children: [
           const Text("Add a new Recipe!"),
+          const Spacer(),
           const Text("Enter recipe name"),
           TextField(onChanged: (text) {
             recipeName = text;
           }),
+          const Spacer(),
           const Text("Enter the description"),
           TextField(onChanged: (text) {
             description = text;
           }),
+          const Spacer(),
           const Text("Enter the directions"),
           TextField(onChanged: (text) {
             directions = text;
           }),
+          const Spacer(),
           const Text("Enter the ingredients"),
           ingredientWidget,
           ElevatedButton(
               onPressed: _submitRecipe, child: const Text("Submit Recipe")),
+          const Spacer(),
           ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
         ],
       ),
@@ -126,10 +134,12 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
                 onPressed: addFieldEntryWidget,
                 child: const Text("Add another ingredient"),
               ),
+              const Spacer(),
               ElevatedButton(
                 onPressed: removeFieldEntryWidget,
                 child: const Text("Remove an ingredient"),
               ),
+              const Spacer(),
               ElevatedButton(
                   onPressed: submitIngredients,
                   child: const Text("Submit Ingredients")),
@@ -180,44 +190,46 @@ class FieldEntryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: "Ingredient Name",
-                  border: OutlineInputBorder(),
+    return Center(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: "Ingredient Name",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                controller: unitController,
-                decoration: const InputDecoration(
-                  labelText: "Unit Name",
-                  border: OutlineInputBorder(),
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: unitController,
+                  decoration: const InputDecoration(
+                    labelText: "Unit Name",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 200,
-              child: TextFormField(
-                controller: amountController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: "Amount of Ingredient",
-                  border: OutlineInputBorder(),
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Amount of Ingredient",
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
