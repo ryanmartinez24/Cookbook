@@ -2,8 +2,33 @@ class Measurement {
   String unit;
   double amount;
 
+  List<List> unitTable = [
+    ['pinch', 2],
+    ['tsp', 3],
+    ['tbsp', 3],
+    ['1/4 cup', 2],
+    ['1/2 cup', 2],
+    ['cups', 4],
+    ['quarts', 4],
+    ['gallons']
+  ];
+
   Measurement(this.unit, this.amount) {
     _simplify();
+  }
+
+  void _simplify() {
+    for (int i = 0; i < unitTable.length; i++) {
+      if (unit == unitTable[i][0]) {
+        if (amount >= unitTable[i][1]) {
+          unit = unitTable[i + 1][0];
+          amount = amount / unitTable[i][1];
+          _simplify();
+        } else {
+          break;
+        }
+      }
+    }
   }
 
   void scale(double scale) {
@@ -11,6 +36,7 @@ class Measurement {
     _simplify();
   }
 
+  /*
   void _simplify() {
     double n = amount;
     if (unit == "pinches") {
@@ -210,4 +236,6 @@ class Measurement {
     }
     amount = (n * 1000).round().toDouble() / 1000;
   }
+
+   */
 }
