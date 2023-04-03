@@ -22,22 +22,15 @@ Summary of Iteration 1:
 # Iteration 2
 
 Summary of Iteration 2:
+    
+    In our app, users will be able to veiw a specific recipe from a provided list of recipes. When
+    users select the recipe of their choice, our app should display the recipe's name, a description,
+    a list of ingredients at their default serving size, and lastly a specific list of directions.
 
-    In our app it will be very simple and easy to add or remove recipes. When adding a recipe you
-    will have the ability to specify how many servings it makes and the ingredients in imperial
-    volumetric units. Once my recipe is added, it will automatically scale down to one serving. 
-
-# Iteration 3
-
-Summary of Iteration 3:
-
-    Our app will also have a "search" function that breaks recipes down into smaller categories or
-    tags. Each recipe can be added to 5 tags chosen from a list that is provided when adding the
-    recipe. I can also easily add or remove tags when editing the recipe.
 
 
 # Specific Rules
-1. The desired number of servings must be a positive integer below 24.
+1. The desired number of servings must be a positive integer.
 2. All measurements must be in imperial volumetric units.
 
 
