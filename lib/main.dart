@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'measurement.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
+import "package:fp_recipe_book/recipes_model.dart";
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => RecipesModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +28,9 @@ class MyApp extends StatelessWidget {
         textTheme:
             GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page', recipeMap: {}),
+      home: const MyHomePage(
+        title: 'Flutter Demo Home Page',
+      ),
     );
   }
 }
@@ -179,9 +188,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({super.key, required this.title, required this.recipeMap});
+  const MyHomePage({super.key, required this.title});
   final String title;
-  Map recipeMap;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -190,8 +198,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    Map recipeMap = widget.recipeMap;
-
     Recipe meatSauceRecipe = Recipe(
         "Meat Sauce",
         "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)\nOriginal Serving size before chosen servings size: 1",
@@ -220,11 +226,16 @@ class _MyHomePageState extends State<MyHomePage> {
         "1: Preheat oven to 375 degrees F. \n2: Combine flour, baking soda, and salt in small bowl. Beat butter, granulated sugar, brown sugar, and vanilla extract in large mixer bowl until creamy. Add eggs, one at a time, beating well after each addition. Gradually beat in flour mixture. Stir in morsels and nuts (if desired). Drop by rounded tablespoons onto ungreased baking sheets. \n3: Bake for 9 to 11 minutes or until golden brown. Cool on baking sheets for 2 minutes; remove to wire racks to cool completely",
         1);
 
-    recipeMap["Meat Sauce"] = meatSauceRecipe;
-    recipeMap["Mashed Potatoes"] = mashedPotatoesRecipe;
-    recipeMap["Chicken Noodle Soup"] = chickenNoodleSoupRecipe;
-    recipeMap["Chocolate Chip Cookies"] = cookieRecipe;
-    List recipeList = recipeMap.keys.toList();
+    Provider.of<RecipesModel>(context, listen: false)
+        .addRecipe("Meat Sauce", meatSauceRecipe);
+    Provider.of<RecipesModel>(context, listen: false)
+        .addRecipe("Mashed Potatoes", mashedPotatoesRecipe);
+    Provider.of<RecipesModel>(context, listen: false)
+        .addRecipe("Chicken Noodle Soup", chickenNoodleSoupRecipe);
+    Provider.of<RecipesModel>(context, listen: false)
+        .addRecipe("Chocolate Chip Cookies", cookieRecipe);
+
+    List recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
 
     return Scaffold(
       body: Center(
@@ -256,7 +267,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onRecipeSelected(String? recipe) {
-    Recipe currentRecipe = widget.recipeMap[recipe];
+    Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
+        .getRecipeFromName(recipe!);
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -265,17 +277,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 )));
   }
 
-  void _update(Map recipeMap) {
-    setState(() {});
-  }
-
   void _onCreateRecipeSelected() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddRecipeWidget(
-            recipeMap: widget.recipeMap,
-            update: (recipeMap) => _update(widget.recipeMap)),
+        builder: (context) => const AddRecipeWidget(),
       ),
     );
   }
