@@ -24,7 +24,6 @@ class Recipe {
     'directions' : directions,
     'scale' : scale
   };
-
   void scaleIngredients(double servings) {
     for (Ingredient ingredient in ingredients) {
       ingredient.measurement.scale(servings);
