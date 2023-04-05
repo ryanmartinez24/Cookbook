@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
+import 'package:fp_recipe_book/new_recipe_model.dart';
+import "package:provider/provider.dart";
 
 class AddIngredientWidget extends StatefulWidget {
-  AddIngredientWidget(
-      {super.key, required this.ingredients, required this.update});
-  List<Ingredient> ingredients;
-  final ValueChanged update;
+  const AddIngredientWidget({super.key});
 
   @override
   State<AddIngredientWidget> createState() => AddIngredientWidgetState();
@@ -64,7 +63,8 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
           Measurement(currWidget.unitController.text,
               double.parse(currWidget.amountController.text))));
     }
-    widget.update(ingredients);
+    Provider.of<NewRecipeModel>(context, listen: false)
+        .setIngredients(ingredients);
   }
 
   void addFieldEntryWidget() {
