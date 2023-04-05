@@ -49,26 +49,6 @@ class RecipeWidget extends StatefulWidget {
 class _RecipeWidgetState extends State<RecipeWidget> {
   @override
   Widget build(BuildContext context) {
-    const List<String> dropDownNumbers = <String>[
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      '12',
-      '14',
-      '16',
-      '18',
-      '20',
-      '22',
-      '24'
-    ];
-
     return Scaffold(
       body: Center(
           child: Column(
@@ -116,16 +96,15 @@ class _RecipeWidgetState extends State<RecipeWidget> {
                     width: 120,
                   ),
                   Align(
-                      alignment: Alignment.centerLeft,
-                      child: DropdownButton(
-                          items: dropDownNumbers
-                              .map<DropdownMenuItem<String>>((number) {
-                            return DropdownMenuItem<String>(
-                              value: number,
-                              child: Text(number),
-                            );
-                          }).toList(),
-                          onChanged: _onServingChosen)),
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: TextField(
+                        onSubmitted: _onServingChosen,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 20, width: 20),
@@ -161,12 +140,14 @@ class _RecipeWidgetState extends State<RecipeWidget> {
   }
 
   void _onServingChosen(String? number) {
-    double servingNumber = double.parse(number!);
-    setState(() {
-      double scaleFactor = servingNumber / widget.currentRecipe.scale;
-      widget.currentRecipe.scaleIngredients(scaleFactor);
-      widget.currentRecipe.scale = servingNumber;
-    });
+    if (number != null) {
+      double servingNumber = double.parse(number);
+      setState(() {
+        double scaleFactor = servingNumber / widget.currentRecipe.scale;
+        widget.currentRecipe.scaleIngredients(scaleFactor);
+        widget.currentRecipe.scale = servingNumber;
+      });
+    }
   }
 
   void _goHome() {
@@ -230,14 +211,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onRecipeSelected(String? recipe) {
-    Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
-        .getRecipeFromName(recipe!);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => RecipeWidget(
-                  currentRecipe: currentRecipe,
-                )));
+    if (recipe != null) {
+      Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
+          .getRecipeFromName(recipe);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RecipeWidget(
+                    currentRecipe: currentRecipe,
+                  )));
+    }
   }
 
   void _onCreateRecipeSelected() {

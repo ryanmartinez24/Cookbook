@@ -21,16 +21,9 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
 
   List<Ingredient> ingredients = [];
 
-  _update(List<Ingredient> newIngredients) {
-    ingredients = newIngredients;
-  }
-
   @override
   Widget build(BuildContext context) {
-    AddIngredientWidget ingredientWidget = AddIngredientWidget(
-      ingredients: ingredients,
-      update: (ingredients) => _update(ingredients),
-    );
+    AddIngredientWidget ingredientWidget = const AddIngredientWidget();
 
     return Scaffold(
       body: Column(
