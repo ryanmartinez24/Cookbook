@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/add_ingredient_widget.dart';
 import "package:provider/provider.dart";
 import 'package:fp_recipe_book/recipes_model.dart';
+import 'package:localstorage/localstorage.dart';
 
 class AddRecipeWidget extends StatefulWidget {
   const AddRecipeWidget({super.key});
@@ -13,10 +15,10 @@ class AddRecipeWidget extends StatefulWidget {
 }
 
 class _AddRecipeWidgetState extends State<AddRecipeWidget> {
+  late final LocalStorage storage;
+
   String recipeName = "";
-
   String directions = "";
-
   String description = "";
 
   List<Ingredient> ingredients = [];
@@ -66,11 +68,20 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
   void _submitRecipe() {
     Recipe newRecipe =
         Recipe(recipeName, description, ingredients, directions, 1);
+    _storeRecipe(newRecipe);
     Provider.of<RecipesModel>(context, listen: false)
         .addRecipe(recipeName, newRecipe);
   }
 
   void _goHome() {
     Navigator.pop(context);
+  }
+
+  void _storeRecipe(Recipe recipe) {
+    String recipeJson = jsonEncode(recipe);
+
+    setState(() {
+      storage = LocalStorage(recipeJson);
+    });
   }
 }
