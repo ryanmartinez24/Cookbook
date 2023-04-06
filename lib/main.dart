@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/new_recipe_model.dart';
@@ -214,6 +216,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  List _checkLocalStorage() {
+    var storage = window.localStorage;
+    Map<String, Recipe> recipeMap = {};
+    List recipeList = [];
+    if (storage.isEmpty) {
+      recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
+    } else {
+      for (int i = 0; i < storage.length; i++) {
+        storage[i];
+      }
+    }
+    return recipeList;
+  }
+
   void _onRecipeSelected(String? recipe) {
     if (recipe != null) {
       Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
@@ -221,8 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  RecipeWidget(
+              builder: (context) => RecipeWidget(
                     currentRecipe: currentRecipe,
                   )));
     }
@@ -232,20 +247,15 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            ChangeNotifierProvider(
-                create: (context) => NewRecipeModel(),
-                child: const AddRecipeWidget()),
+        builder: (context) => ChangeNotifierProvider(
+            create: (context) => NewRecipeModel(),
+            child: const AddRecipeWidget()),
       ),
     );
   }
 
   void _onDeleteRecipeSelected() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const DeleteRecipeWidget()
-        )
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
   }
 }
