@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
 import "package:fp_recipe_book/recipes_model.dart";
+import "package:fp_recipe_book/delete_recipe_widget.dart";
 
 void main() {
   runApp(
@@ -133,7 +134,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               const SizedBox(height: 20, width: 20),
             ],
           )),
-          ElevatedButton(onPressed: _goHome, child: const Text("Go Back"))
+          ElevatedButton(onPressed: _goHome, child: const Text("Homepage"))
         ],
       )),
     );
@@ -204,6 +205,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: _onCreateRecipeSelected,
                 child: const Text("Create new recipe")),
+            ElevatedButton(
+                onPressed: _onDeleteRecipeSelected,
+                child: const Text("Delete an existing recipe")),
           ],
         ),
       ),
@@ -217,7 +221,8 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => RecipeWidget(
+              builder: (context) =>
+                  RecipeWidget(
                     currentRecipe: currentRecipe,
                   )));
     }
@@ -227,10 +232,20 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider(
-            create: (context) => NewRecipeModel(),
-            child: const AddRecipeWidget()),
+        builder: (context) =>
+            ChangeNotifierProvider(
+                create: (context) => NewRecipeModel(),
+                child: const AddRecipeWidget()),
       ),
+    );
+  }
+
+  void _onDeleteRecipeSelected() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const DeleteRecipeWidget()
+        )
     );
   }
 }
