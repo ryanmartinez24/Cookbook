@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:html';
-import 'dart:io' as File;
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
@@ -219,17 +218,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List _checkLocalStorage() {
-    var storage = window.localStorage;
     Map<String, Recipe> recipeMap = {};
     List recipeList = [];
-    if (storage.isEmpty) {
-      recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
-    } else {
-      for (int i = 0; i < storage.length; i++) {
-        storage[i];
-      }
-    }
-    return recipeList;
+
+    if (readContent() == ('Local Storage is empty' as Future<String>)) {}
   }
 
   void _onRecipeSelected(String? recipe) {
@@ -261,9 +253,21 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
   }
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+  Future<File> writeContent(Recipe recipe) async {
+    final file = await _localFile;
+
+    return file.writeAsString('${recipe.toJson()}');
+  }
+
+  Future<String> readContent() async {
+    try {
+      final file = await _localFile;
+
+      String contents = await file.readAsString();
+      return contents;
+    } catch (e) {
+      return 'Local Storage is empty';
+    }
   }
 
   Future<File> get _localFile async {
@@ -271,14 +275,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return File('$path/data.txt');
   }
 
-  Future<String?> readContent() async {
-    try {
-      final file = await _localFile;
-
-      String contents = await file.readAsString();
-      return contents;
-    } catch (e) {
-      return null;
-    }
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
   }
 }
