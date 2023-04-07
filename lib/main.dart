@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:html';
-
+import 'dart:io' as File;
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/new_recipe_model.dart';
@@ -257,5 +259,26 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onDeleteRecipeSelected() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/data.txt');
+  }
+
+  Future<String?> readContent() async {
+    try {
+      final file = await _localFile;
+
+      String contents = await file.readAsString();
+      return contents;
+    } catch (e) {
+      return null;
+    }
   }
 }
