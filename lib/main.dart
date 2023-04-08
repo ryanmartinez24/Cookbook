@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/new_recipe_model.dart';
 import 'package:fp_recipe_book/recipe.dart';
+import 'package:fp_recipe_book/recipe_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
@@ -180,6 +181,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    RecipeStorage(context).checkLocalStorage();
     List recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
 
     return Scaffold(

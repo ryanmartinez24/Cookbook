@@ -7,7 +7,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class RecipeStorage {
-  void checkLocalStorage(BuildContext context) async {
+  BuildContext context;
+
+  RecipeStorage(this.context);
+
+  void checkLocalStorage() async {
     Map<String, Recipe> newRecipeMap = {};
     String storedRecipes = await readContent();
 
@@ -17,12 +21,11 @@ class RecipeStorage {
     }
   }
 
-  void writeToLocalStorage(Map<String, Recipe> recipeMap) {}
-
-  Future<File> writeContent() async {
+  Future<void> writeToLocalStorage() async {
+    Map<String, dynamic> recipeStorage =
+        Provider.of<RecipesModel>(context).toJson();
     final file = await _localFile;
-
-    return file.writeAsString('${recipe.toJson()}');
+    file.writeAsString('$recipeStorage');
   }
 
   Future<String> readContent() async {
