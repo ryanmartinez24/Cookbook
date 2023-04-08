@@ -1,15 +1,15 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/new_recipe_model.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
 import "package:fp_recipe_book/recipes_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
+import 'dart:convert';
+import 'dart:io';
 
 void main() {
   runApp(
@@ -217,11 +217,43 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  List _checkLocalStorage() {
-    Map<String, Recipe> recipeMap = {};
-    List recipeList = [];
+  void checkLocalStorage() async {
+    Map<String, Recipe> newRecipeMap = {};
+    String storedRecipes = await readContent();
 
-    if (readContent() == ('Local Storage is empty' as Future<String>)) {}
+    if (storedRecipes.isNotEmpty) {
+      newRecipeMap = jsonDecode(storedRecipes).fromJson();
+      Provider.of<RecipesModel>(context).updateRecipeMap(newRecipeMap);
+    }
+  }
+
+  void writeToLocalStorage(Map<String, Recipe> recipeMap) {}
+
+  Future<File> writeContent() async {
+    final file = await _localFile;
+
+    return file.writeAsString('${recipe.toJson()}');
+  }
+
+  Future<String> readContent() async {
+    try {
+      final file = await _localFile;
+
+      String contents = await file.readAsString();
+      return contents;
+    } catch (e) {
+      return 'Local Storage is empty';
+    }
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/data.txt');
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
   }
 
   void _onRecipeSelected(String? recipe) {
@@ -251,32 +283,5 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onDeleteRecipeSelected() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
-  }
-
-  Future<File> writeContent(Recipe recipe) async {
-    final file = await _localFile;
-
-    return file.writeAsString('${recipe.toJson()}');
-  }
-
-  Future<String> readContent() async {
-    try {
-      final file = await _localFile;
-
-      String contents = await file.readAsString();
-      return contents;
-    } catch (e) {
-      return 'Local Storage is empty';
-    }
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/data.txt');
-  }
-
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
   }
 }
