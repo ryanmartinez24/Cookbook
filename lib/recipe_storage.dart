@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipes_model.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 class RecipeStorage {
   void checkLocalStorage(BuildContext context) async {
@@ -12,7 +13,7 @@ class RecipeStorage {
 
     if (storedRecipes.isNotEmpty) {
       newRecipeMap = jsonDecode(storedRecipes).fromJson();
-      RecipesModel().updateRecipeMap(newRecipeMap);
+      Provider.of<RecipesModel>(context).updateRecipeMap(newRecipeMap);
     }
   }
 
