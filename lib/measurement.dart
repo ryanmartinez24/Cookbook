@@ -24,6 +24,8 @@ class Measurement {
     } else {
       _simplifyDown();
     }
+
+    amount = (amount * 1000).round().toDouble() / 1000;
   }
 
   void _simplifyUp() {
@@ -31,8 +33,7 @@ class Measurement {
       if (unit == unitTable[i][0]) {
         while (amount >= unitTable[i][1]) {
           unit = unitTable[i + 1][0];
-          amount =
-              ((amount / unitTable[i][1]) * 1000).round().toDouble() / 1000;
+          amount = amount / unitTable[i][1];
         }
       }
     }
@@ -43,8 +44,7 @@ class Measurement {
       if (unit == unitTable[i][0]) {
         while (amount < unitTable[i][2]) {
           unit = unitTable[i - 1][0];
-          amount =
-              ((amount * unitTable[i - 1][1]) * 1000).round().toDouble() / 1000;
+          amount = amount * unitTable[i - 1][1];
         }
       }
     }
