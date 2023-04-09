@@ -134,7 +134,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               const SizedBox(height: 20, width: 20),
             ],
           )),
-          ElevatedButton(onPressed: _goHome, child: const Text("Homepage"))
+          ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
         ],
       )),
     );

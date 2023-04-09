@@ -14,19 +14,37 @@ void main() {
   Recipe testRecipe =
       Recipe("Chef's Special", "Da best", ingredientList, "Cook it", 1);
 
-  Map<String, Recipe> recipeMap = RecipesModel().recipeMap;
+  List<String> recipeNames = [
+    "Meat Sauce",
+    "Mashed Potatoes",
+    "Chicken Noodle Soup",
+    "Chocolate Chip Cookies",
+    "Chef's Special"
+  ];
 
   RecipesModel model = RecipesModel();
 
+  String testRecipeName = testRecipe.recipeName;
+
   test('I can add a recipe to the recipe model', () {
-    model.addRecipe(testRecipe.recipeName, testRecipe);
+    model.addRecipe(testRecipeName, testRecipe);
 
-    recipeMap[testRecipe.recipeName] = testRecipe;
-
-    for (int i = 0; i < recipeMap.length; i++) {
-      expect(recipeMap[i], model.recipeMap[i]);
-    }
+    expect(model.recipeMap[testRecipeName], testRecipe);
   });
 
-  test('I can remove a recipe from the recipe model', () {});
+  test('I can remove a recipe from the recipe model', () {
+    model.deleteRecipe(testRecipeName);
+
+    expect(model.recipeMap.containsValue(testRecipeName), false);
+  });
+
+  test('I can get a recipe from the model by name', () {
+    model.addRecipe(testRecipeName, testRecipe);
+
+    expect(model.getRecipeFromName(testRecipeName), testRecipe);
+  });
+
+  test("I can get the correct list of recipes from the model", () {
+    expect(model.getRecipeNames(), recipeNames);
+  });
 }

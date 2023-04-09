@@ -59,7 +59,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
   }
 
   void _submitRecipe() {
-    recipeName =
+    String recipeName =
         Provider.of<NewRecipeModel>(context, listen: false).getRecipeName();
     Recipe newRecipe =
         Provider.of<NewRecipeModel>(context, listen: false).getNewRecipe();

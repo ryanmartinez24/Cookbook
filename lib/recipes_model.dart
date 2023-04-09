@@ -91,11 +91,6 @@ class RecipesModel extends ChangeNotifier {
     };
   }
 
-  RecipesModel.fromJson(Map<String, dynamic> json)
-      : recipeMap = json['recipeMap'];
-
-  Map<String, dynamic> toJson() => {'recipeMap': recipeMap};
-
   void addRecipe(String recipeName, Recipe recipe) {
     recipeMap[recipeName] = recipe;
     notifyListeners();
