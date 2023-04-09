@@ -113,12 +113,4 @@ class RecipesModel extends ChangeNotifier {
   Recipe getRecipeFromName(String recipeName) {
     return recipeMap[recipeName]!;
   }
-
-  void updateRecipeMap(Map<String, Recipe> newRecipeMap) {
-    recipeMap.clear();
-    for (String recipeName in newRecipeMap.keys) {
-      recipeMap[recipeName] = newRecipeMap[recipeName]!;
-    }
-    notifyListeners();
-  }
 }
