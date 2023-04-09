@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
       ),
       home: const MyHomePage(
-        title: 'Flutter Demo Home Page',
+        title: 'Recipe Book Home Page',
       ),
     );
   }
