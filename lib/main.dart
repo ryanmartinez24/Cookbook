@@ -151,10 +151,6 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     }
   }
 
-  void _goHome() {
-    Navigator.pop(context);
-  }
-
   String _displayIngredients(List<Ingredient> ingredients) {
     String ingredientDisplay = '';
 
@@ -166,6 +162,10 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     }
 
     return ingredientDisplay;
+  }
+
+  void _goHome() {
+    Navigator.pop(context);
   }
 }
 
