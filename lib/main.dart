@@ -5,7 +5,7 @@ import 'package:fp_recipe_book/recipe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
-import "package:fp_recipe_book/recipes_model.dart";
+import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
 
 void main() {

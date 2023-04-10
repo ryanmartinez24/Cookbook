@@ -4,7 +4,7 @@ import 'package:fp_recipe_book/new_recipe_model.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/add_ingredient_widget.dart';
 import "package:provider/provider.dart";
-import 'package:fp_recipe_book/recipes_model.dart';
+import 'package:fp_recipe_book/recipebook_model.dart';
 
 class AddRecipeWidget extends StatefulWidget {
   const AddRecipeWidget({super.key});

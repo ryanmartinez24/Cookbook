@@ -97,8 +97,10 @@ class RecipesModel extends ChangeNotifier {
   }
 
   void deleteRecipe(String recipeName) {
-    if (recipeName == "Meat Sauce" || recipeName == "Mashed Potatoes" || recipeName== "Chicken Noodle Soup"|| recipeName == "Chocolate Chip Cookies") {}
-    else {
+    if (recipeName != "Meat Sauce" &&
+        recipeName != "Mashed Potatoes" &&
+        recipeName != "Chicken Noodle Soup" &&
+        recipeName != "Chocolate Chip Cookies") {
       recipeMap.remove(recipeName);
       notifyListeners();
     }
