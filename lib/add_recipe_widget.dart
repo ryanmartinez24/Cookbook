@@ -63,7 +63,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
         Provider.of<NewRecipeModel>(context, listen: false).getRecipeName();
     Recipe newRecipe =
         Provider.of<NewRecipeModel>(context, listen: false).getNewRecipe();
-    Provider.of<RecipesModel>(context, listen: false)
+    Provider.of<RecipeBookModel>(context, listen: false)
         .addRecipe(recipeName, newRecipe);
   }
 

@@ -11,7 +11,7 @@ import "package:fp_recipe_book/delete_recipe_widget.dart";
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => RecipesModel(),
+      create: (context) => RecipeBookModel(),
       child: const MyApp(),
     ),
   );
@@ -180,7 +180,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    List recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
+    List recipeList = Provider.of<RecipeBookModel>(context).getRecipeNames();
 
     return Scaffold(
       body: Center(
@@ -216,8 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onRecipeSelected(String? recipe) {
     if (recipe != null) {
-      Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
-          .getRecipeFromName(recipe);
+      Recipe currentRecipe =
+          Provider.of<RecipeBookModel>(context, listen: false)
+              .getRecipeFromName(recipe);
       Navigator.push(
           context,
           MaterialPageRoute(

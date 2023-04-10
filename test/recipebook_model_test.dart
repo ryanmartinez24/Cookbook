@@ -22,7 +22,7 @@ void main() {
     "Chef's Special"
   ];
 
-  RecipesModel model = RecipesModel();
+  RecipeBookModel model = RecipeBookModel();
 
   String testRecipeName = testRecipe.recipeName;
 

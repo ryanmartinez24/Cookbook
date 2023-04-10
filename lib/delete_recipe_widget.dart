@@ -12,7 +12,7 @@ class DeleteRecipeWidget extends StatefulWidget {
 class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
   @override
   Widget build(BuildContext context) {
-    List recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
+    List recipeList = Provider.of<RecipeBookModel>(context).getRecipeNames();
 
     return Scaffold(
         body: Center(
@@ -27,7 +27,7 @@ class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
           );
         }).toList(),
         onChanged: (recipeName) =>
-            Provider.of<RecipesModel>(context, listen: false)
+            Provider.of<RecipeBookModel>(context, listen: false)
                 .deleteRecipe(recipeName!),
       ),
       ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
