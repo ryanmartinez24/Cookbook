@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import "package:fp_recipe_book/ingredient.dart";
 
 class IngredientChangeNotifier extends ChangeNotifier {
-  final List<Ingredient> ingredients = [];
+  final List<Ingredient> _ingredients = [];
 
-  setIngredients(List<Ingredient> ingredients) {
-    this.ingredients.clear();
-    for (Ingredient ingredient in ingredients) {
-      this.ingredients.add(ingredient);
+  setIngredients(List<Ingredient> newIngredients) {
+    _ingredients.clear();
+    for (Ingredient ingredient in newIngredients) {
+      _ingredients.add(ingredient);
     }
     notifyListeners();
   }
 
   List<Ingredient> getIngredients() {
-    return [...ingredients];
+    return [..._ingredients];
   }
 }
