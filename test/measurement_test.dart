@@ -32,7 +32,6 @@ void main() {
 
   test('I can convert the measurement to a smaller unit', () {
     i4.measurement.scale(1 / 8);
-    print('unit: ${i4.measurement.unit}; amount: ${i4.measurement.amount}');
     expect(i4.measurement.unit, 'quarts');
     expect(i4.measurement.amount, 2.0);
   });
