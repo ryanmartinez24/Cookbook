@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
-import 'package:fp_recipe_book/new_recipe_model.dart';
+import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -233,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
       context,
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider(
-            create: (context) => NewRecipeModel(),
+            create: (context) => IngredientChangeNotifier(),
             child: const AddRecipeWidget()),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
-import 'package:fp_recipe_book/new_recipe_model.dart';
+import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/add_ingredient_widget.dart';
 import "package:provider/provider.dart";
@@ -14,11 +14,11 @@ class AddRecipeWidget extends StatefulWidget {
 }
 
 class _AddRecipeWidgetState extends State<AddRecipeWidget> {
-  String recipeName = "";
-  String directions = "";
-  String description = "";
+  String _recipeName = "";
+  String _directions = "";
+  String _description = "";
 
-  List<Ingredient> ingredients = [];
+  List<Ingredient> _ingredients = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +31,17 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
           const Spacer(),
           const Text("Enter recipe name"),
           TextField(onChanged: (text) {
-            Provider.of<NewRecipeModel>(context, listen: false)
-                .setRecipeName(text);
+            _recipeName = text;
           }),
           const Spacer(),
           const Text("Enter the description"),
           TextField(onChanged: (text) {
-            Provider.of<NewRecipeModel>(context, listen: false)
-                .setDescription(text);
+            _description = text;
           }),
           const Spacer(),
           const Text("Enter the directions"),
           TextField(onChanged: (text) {
-            Provider.of<NewRecipeModel>(context, listen: false)
-                .setDirections(text);
+            _directions = text;
           }),
           const Spacer(),
           const Text("Enter the ingredients"),
@@ -59,12 +56,12 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
   }
 
   void _submitRecipe() {
-    String recipeName =
-        Provider.of<NewRecipeModel>(context, listen: false).getRecipeName();
+    _ingredients = Provider.of<IngredientChangeNotifier>(context, listen: false)
+        .getIngredients();
     Recipe newRecipe =
-        Provider.of<NewRecipeModel>(context, listen: false).getNewRecipe();
+        Recipe(_recipeName, _description, _ingredients, _directions, 1);
     Provider.of<RecipeBookModel>(context, listen: false)
-        .addRecipe(recipeName, newRecipe);
+        .addRecipe(_recipeName, newRecipe);
   }
 
   void _goHome() {

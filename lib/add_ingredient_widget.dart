@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
-import 'package:fp_recipe_book/new_recipe_model.dart';
+import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import "package:provider/provider.dart";
 
 class AddIngredientWidget extends StatefulWidget {
@@ -81,7 +81,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
           Measurement(currWidget.unitController.text,
               double.parse(currWidget.amountController.text))));
     }
-    Provider.of<NewRecipeModel>(context, listen: false)
+    Provider.of<IngredientChangeNotifier>(context, listen: false)
         .setIngredients(ingredients);
   }
 }
