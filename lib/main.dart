@@ -5,13 +5,13 @@ import 'package:fp_recipe_book/recipe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
-import "package:fp_recipe_book/recipes_model.dart";
+import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (context) => RecipesModel(),
+      create: (context) => RecipeBookModel(),
       child: const MyApp(),
     ),
   );
@@ -151,10 +151,6 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     }
   }
 
-  void _goHome() {
-    Navigator.pop(context);
-  }
-
   String _displayIngredients(List<Ingredient> ingredients) {
     String ingredientDisplay = '';
 
@@ -166,6 +162,10 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     }
 
     return ingredientDisplay;
+  }
+
+  void _goHome() {
+    Navigator.pop(context);
   }
 }
 
@@ -180,7 +180,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    List recipeList = Provider.of<RecipesModel>(context).getRecipeNames();
+    List recipeList = Provider.of<RecipeBookModel>(context).getRecipeNames();
 
     return Scaffold(
       body: Center(
@@ -216,8 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onRecipeSelected(String? recipe) {
     if (recipe != null) {
-      Recipe currentRecipe = Provider.of<RecipesModel>(context, listen: false)
-          .getRecipeFromName(recipe);
+      Recipe currentRecipe =
+          Provider.of<RecipeBookModel>(context, listen: false)
+              .getRecipeFromName(recipe);
       Navigator.push(
           context,
           MaterialPageRoute(

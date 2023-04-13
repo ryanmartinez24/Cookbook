@@ -55,18 +55,6 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
     );
   }
 
-  void submitIngredients() {
-    ingredients = [];
-    for (FieldEntryWidget currWidget in fieldWidgetList) {
-      ingredients.add(Ingredient(
-          currWidget.nameController.text,
-          Measurement(currWidget.unitController.text,
-              double.parse(currWidget.amountController.text))));
-    }
-    Provider.of<NewRecipeModel>(context, listen: false)
-        .setIngredients(ingredients);
-  }
-
   void addFieldEntryWidget() {
     if (enteredUnits.isNotEmpty) {
       enteredUnits = [];
@@ -83,6 +71,18 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
       fieldWidgetList.removeLast();
     }
     setState(() {});
+  }
+
+  void submitIngredients() {
+    ingredients = [];
+    for (FieldEntryWidget currWidget in fieldWidgetList) {
+      ingredients.add(Ingredient(
+          currWidget.nameController.text,
+          Measurement(currWidget.unitController.text,
+              double.parse(currWidget.amountController.text))));
+    }
+    Provider.of<NewRecipeModel>(context, listen: false)
+        .setIngredients(ingredients);
   }
 }
 

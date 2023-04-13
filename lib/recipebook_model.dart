@@ -3,10 +3,10 @@ import "package:fp_recipe_book/recipe.dart";
 import "package:fp_recipe_book/ingredient.dart";
 import "package:fp_recipe_book/measurement.dart";
 
-class RecipesModel extends ChangeNotifier {
+class RecipeBookModel extends ChangeNotifier {
   Map<String, Recipe> recipeMap = {};
 
-  RecipesModel() {
+  RecipeBookModel() {
     recipeMap = {
       "Meat Sauce": Recipe(
           "Meat Sauce",
@@ -97,8 +97,13 @@ class RecipesModel extends ChangeNotifier {
   }
 
   void deleteRecipe(String recipeName) {
-    recipeMap.remove(recipeName);
-    notifyListeners();
+    if (recipeName != "Meat Sauce" &&
+        recipeName != "Mashed Potatoes" &&
+        recipeName != "Chicken Noodle Soup" &&
+        recipeName != "Chocolate Chip Cookies") {
+      recipeMap.remove(recipeName);
+      notifyListeners();
+    }
   }
 
   List<String> getRecipeNames() {

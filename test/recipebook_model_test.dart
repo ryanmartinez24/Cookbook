@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/recipe.dart';
-import 'package:fp_recipe_book/recipes_model.dart';
+import 'package:fp_recipe_book/recipebook_model.dart';
 
 void main() {
   Ingredient i1 = Ingredient("Pepper", Measurement("whole", 3.0));
@@ -22,7 +22,7 @@ void main() {
     "Chef's Special"
   ];
 
-  RecipesModel model = RecipesModel();
+  RecipeBookModel model = RecipeBookModel();
 
   String testRecipeName = testRecipe.recipeName;
 

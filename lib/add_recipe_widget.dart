@@ -4,7 +4,7 @@ import 'package:fp_recipe_book/new_recipe_model.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/add_ingredient_widget.dart';
 import "package:provider/provider.dart";
-import 'package:fp_recipe_book/recipes_model.dart';
+import 'package:fp_recipe_book/recipebook_model.dart';
 
 class AddRecipeWidget extends StatefulWidget {
   const AddRecipeWidget({super.key});
@@ -63,7 +63,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
         Provider.of<NewRecipeModel>(context, listen: false).getRecipeName();
     Recipe newRecipe =
         Provider.of<NewRecipeModel>(context, listen: false).getNewRecipe();
-    Provider.of<RecipesModel>(context, listen: false)
+    Provider.of<RecipeBookModel>(context, listen: false)
         .addRecipe(recipeName, newRecipe);
   }
 
