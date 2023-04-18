@@ -17,6 +17,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
   String _recipeName = "";
   String _directions = "";
   String _description = "";
+  double _servings = -1;
 
   List<Ingredient> _ingredients = [];
 
@@ -30,19 +31,32 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
           const Text("Add a new Recipe!"),
           const Spacer(),
           const Text("Enter recipe name"),
-          TextField(onChanged: (text) {
-            _recipeName = text;
-          }),
+          TextField(
+            onChanged: (text) {
+              _recipeName = text;
+            },
+          ),
           const Spacer(),
           const Text("Enter the description"),
-          TextField(onChanged: (text) {
-            _description = text;
-          }),
+          TextField(
+            onChanged: (text) {
+              _description = text;
+            },
+          ),
           const Spacer(),
           const Text("Enter the directions"),
-          TextField(onChanged: (text) {
-            _directions = text;
-          }),
+          TextField(
+            onChanged: (text) {
+              _directions = text;
+            },
+          ),
+          const Spacer(),
+          const Text("Enter the amount of servings the recipe makes"),
+          TextField(
+            onChanged: (text) {
+              _servings = double.parse(text);
+            },
+          ),
           const Spacer(),
           const Text("Enter the ingredients"),
           ingredientWidget,
@@ -59,7 +73,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
     _ingredients = Provider.of<IngredientChangeNotifier>(context, listen: false)
         .getIngredients();
     Recipe newRecipe =
-        Recipe(_recipeName, _description, _ingredients, _directions, 1);
+        Recipe(_recipeName, _description, _ingredients, _directions, _servings);
     Provider.of<RecipeBookModel>(context, listen: false)
         .addRecipe(_recipeName, newRecipe);
   }

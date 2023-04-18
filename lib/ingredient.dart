@@ -5,4 +5,9 @@ class Ingredient {
   Measurement measurement;
 
   Ingredient(this.name, this.measurement);
+
+  // Returns Deepcopy of Ingredient
+  Ingredient getCopy() {
+    return Ingredient(name, measurement);
+  }
 }
