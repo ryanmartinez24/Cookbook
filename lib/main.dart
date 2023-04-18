@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
 import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
+import "package:fraction/fraction.dart";
+import "dart:math" as math;
 
 void main() {
   runApp(
@@ -151,17 +153,31 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     }
   }
 
+  //Stringifies ingredients to be displayed.
+  // takes into account whether it is a whole number or fraction.
   String _displayIngredients(List<Ingredient> ingredients) {
     String ingredientDisplay = '';
 
     for (int i = 0; i < ingredients.length; i++) {
-      double amount = ingredients[i].measurement.amount;
+      double doubleAmount = roundDouble(ingredients[i].measurement.amount, 4);
       String measurementUnit = ingredients[i].measurement.unit;
       String name = ingredients[i].name;
-      ingredientDisplay = '$ingredientDisplay \n$amount $measurementUnit $name';
+      MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
+      if (fractionAmount.isWhole || fractionAmount.numerator == 0) {
+        ingredientDisplay =
+            '$ingredientDisplay \n$doubleAmount $measurementUnit $name';
+      } else {
+        ingredientDisplay =
+            '$ingredientDisplay \n$fractionAmount $measurementUnit $name';
+      }
     }
 
     return ingredientDisplay;
+  }
+
+  double roundDouble(double val, int n) {
+    num modNDegree = math.pow(10.0, n);
+    return ((val * modNDegree).round().toDouble() / modNDegree);
   }
 
   void _goHome() {
