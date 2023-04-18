@@ -10,6 +10,9 @@ class DeleteRecipeWidget extends StatefulWidget {
 }
 
 class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
+  bool _hasSelectRecipe = false;
+  String selectedValue = '';
+
   @override
   Widget build(BuildContext context) {
     List recipeList = Provider.of<RecipeBookModel>(context).getRecipeNames();
@@ -26,12 +29,32 @@ class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
             child: Text(recipeName),
           );
         }).toList(),
-        onChanged: (recipeName) =>
-            Provider.of<RecipeBookModel>(context, listen: false)
-                .deleteRecipe(recipeName!),
+        onChanged: (recipeName) => _dropdownCallback(recipeName!),
+      ),
+      ElevatedButton(
+        onPressed: _hasSelectRecipe
+            ? () {
+                _onButtonPressed();
+              }
+            : null,
+        child: const Text('Submit'),
       ),
       ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
     ])));
+  }
+
+  void _dropdownCallback(String? selectedValue) {
+    if (selectedValue is String) {
+      setState(() {
+        selectedValue = selectedValue;
+        _hasSelectRecipe = true;
+      });
+    }
+  }
+
+  void _onButtonPressed() {
+    Provider.of<RecipeBookModel>(context, listen: false)
+        .deleteRecipe(selectedValue);
   }
 
   void _goHome() {
