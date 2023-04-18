@@ -194,6 +194,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _hasSelectedRecipe = false;
+  String? recipeName = '';
+
   @override
   Widget build(BuildContext context) {
     List recipeList = Provider.of<RecipeBookModel>(context).getRecipeNames();
@@ -211,30 +214,51 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             DropdownButton(
-                items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
-                  return DropdownMenuItem<String>(
-                    value: recipeName,
-                    child: Text(recipeName),
-                  );
-                }).toList(),
-                onChanged: _onRecipeSelected),
+              items: recipeList.map<DropdownMenuItem<String>>((recipeName) {
+                return DropdownMenuItem<String>(
+                  value: recipeName,
+                  child: Text(recipeName),
+                );
+              }).toList(),
+              onChanged: _onRecipeSelected,
+            ),
             ElevatedButton(
-                onPressed: _onCreateRecipeSelected,
-                child: const Text("Create new recipe")),
+              onPressed: _hasSelectedRecipe
+                  ? () {
+                      _onGoToRecipeButtonPressed(recipeName);
+                    }
+                  : null,
+              child: const Text('Go To Selected Recipe'),
+            ),
+            const Divider(),
             ElevatedButton(
-                onPressed: _onDeleteRecipeSelected,
-                child: const Text("Delete an existing recipe")),
+              onPressed: _onCreateRecipeSelected,
+              child: const Text("Create new recipe"),
+            ),
+            ElevatedButton(
+              onPressed: _onDeleteRecipeSelected,
+              child: const Text("Delete an existing recipe"),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void _onRecipeSelected(String? recipe) {
-    if (recipe != null) {
+  void _onRecipeSelected(String? recipeName) {
+    if (recipeName != null) {
+      setState(() {
+        _hasSelectedRecipe = true;
+        recipeName = recipeName;
+      });
+    }
+  }
+
+  void _onGoToRecipeButtonPressed(String? recipeName) {
+    if (recipeName != null) {
       Recipe currentRecipe =
           Provider.of<RecipeBookModel>(context, listen: false)
-              .getRecipeFromName(recipe);
+              .getRecipeFromName(recipeName);
       Navigator.push(
           context,
           MaterialPageRoute(
