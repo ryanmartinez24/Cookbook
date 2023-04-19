@@ -11,7 +11,7 @@ class DeleteRecipeWidget extends StatefulWidget {
 
 class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
   bool _hasSelectRecipe = false;
-  String selectedValue = '';
+  String? selectedRecipe = '';
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +35,45 @@ class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
         onPressed: _hasSelectRecipe
             ? () {
                 _onButtonPressed();
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Deleting Recipe...'),
+                    content: const Text('The chosen recipe has been deleted'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
               }
             : null,
         child: const Text('Submit'),
       ),
+      const Divider(),
       ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
     ])));
   }
 
-  void _dropdownCallback(String? selectedValue) {
-    if (selectedValue is String) {
-      setState(() {
-        selectedValue = selectedValue;
-        _hasSelectRecipe = true;
-      });
-    }
+  void _dropdownCallback(String selectedValue) {
+    setState(() {
+      selectedValue = selectedValue;
+      _hasSelectRecipe = true;
+    });
   }
 
   void _onButtonPressed() {
-    Provider.of<RecipeBookModel>(context, listen: false)
-        .deleteRecipe(selectedValue);
+    if (selectedRecipe is String) {
+      Provider.of<RecipeBookModel>(context, listen: false)
+          .deleteRecipe(selectedRecipe!);
+      print('Action completed!');
+    }
+
+    setState(() {
+      _hasSelectRecipe = false;
+    });
   }
 
   void _goHome() {

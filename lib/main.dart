@@ -220,7 +220,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(recipeName),
                 );
               }).toList(),
-              onChanged: _onRecipeSelected,
+              onChanged: (String? recipeName) {
+                setState(() {
+                  _hasSelectedRecipe = true;
+                  recipeName = recipeName;
+                });
+                _onRecipeSelected(recipeName);
+              },
             ),
             ElevatedButton(
               onPressed: _hasSelectedRecipe
@@ -255,16 +261,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onGoToRecipeButtonPressed(String? recipeName) {
-    if (recipeName != null) {
+    if (recipeName != '') {
+      print('Action Called');
       Recipe currentRecipe =
           Provider.of<RecipeBookModel>(context, listen: false)
-              .getRecipeFromName(recipeName);
+              .getRecipeFromName(recipeName!);
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RecipeWidget(
-                    currentRecipe: currentRecipe,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) => RecipeWidget(
+            currentRecipe: currentRecipe,
+          ),
+        ),
+      );
     }
   }
 
