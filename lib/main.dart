@@ -9,6 +9,7 @@ import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
 import "package:fraction/fraction.dart";
 import "dart:math" as math;
+import "package:fp_recipe_book/storage.dart";
 
 void main() {
   runApp(
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         textTheme:
             GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
       ),
-      home: const MyHomePage(
+      home: MyHomePage(
         title: 'Recipe Book Home Page',
+        storage: Storage(),
       ),
     );
   }
@@ -62,7 +64,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               Align(
                 alignment: Alignment.topCenter,
                 child: Text(
-                  widget.currentRecipe.recipeName,
+                  widget.currentRecipe.getRecipeName(),
                   style: const TextStyle(
                       fontWeight: FontWeight.w700, fontSize: 30),
                 ),
@@ -80,17 +82,18 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("\n ${widget.currentRecipe.description}"),
+                child: Text("\n ${widget.currentRecipe.getDescription()}"),
               ),
               const SizedBox(
                 height: 20,
                 width: 20,
               ),
-              const Align(
+              Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Desired Servings:\n",
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                    "Currently Serves ${widget.currentRecipe.scale} \n\n Desired Servings:\n",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 20),
                   )),
               Row(
                 children: [
@@ -121,7 +124,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                    "\n${_displayIngredients(widget.currentRecipe.ingredients)}"),
+                    "\n${_displayIngredients(widget.currentRecipe.getIngredientsCopy())}"),
               ),
               const Align(
                 alignment: Alignment.topLeft,
@@ -132,7 +135,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ),
               Align(
                   alignment: Alignment.topLeft,
-                  child: Text("\n ${widget.currentRecipe.directions}")),
+                  child: Text("\n ${widget.currentRecipe.getDirections()}")),
               const SizedBox(height: 20, width: 20),
             ],
           )),
@@ -146,9 +149,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     if (number != null) {
       double servingNumber = double.parse(number);
       setState(() {
-        double scaleFactor = servingNumber / widget.currentRecipe.scale;
+        double scaleFactor = servingNumber / widget.currentRecipe.getScale();
         widget.currentRecipe.scaleIngredients(scaleFactor);
-        widget.currentRecipe.scale = servingNumber;
       });
     }
   }
@@ -159,9 +161,10 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     String ingredientDisplay = '';
 
     for (int i = 0; i < ingredients.length; i++) {
-      double doubleAmount = roundDouble(ingredients[i].measurement.amount, 4);
-      String measurementUnit = ingredients[i].measurement.unit;
-      String name = ingredients[i].name;
+      double doubleAmount =
+          roundDouble(ingredients[i].getMeasurement().getAmount(), 2);
+      String measurementUnit = ingredients[i].getMeasurement().getUnit();
+      String name = ingredients[i].getIngredientName();
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
       if (fractionAmount.isWhole || fractionAmount.numerator == 0) {
         ingredientDisplay =
@@ -186,8 +189,9 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.storage});
   final String title;
+  final Storage storage;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -196,6 +200,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasSelectedRecipe = false;
   String? recipeName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    widget.storage.readRecipes().then((value) {
+      setState(() {
+        //TODO
+        // need to convert data read in to recipebook here.
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +277,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onGoToRecipeButtonPressed(String? recipeName) {
     if (recipeName != '') {
-      print('Action Called');
       Recipe currentRecipe =
           Provider.of<RecipeBookModel>(context, listen: false)
               .getRecipeFromName(recipeName!);

@@ -1,6 +1,6 @@
 class Measurement {
-  String unit;
-  double amount;
+  String _unit;
+  double _amount;
 
   List<List> unitTable = [
     ['pinch', 2],
@@ -11,13 +11,13 @@ class Measurement {
     ['gallons', 1, 1]
   ];
 
-  Measurement(this.unit, this.amount) {
+  Measurement(this._unit, this._amount) {
     _simplifyUp();
     _simplifyDown();
   }
 
   void scale(double scale) {
-    amount = amount * scale;
+    _amount = _amount * scale;
 
     if (scale > 1) {
       _simplifyUp();
@@ -25,15 +25,15 @@ class Measurement {
       _simplifyDown();
     }
 
-    amount = (amount * 1000).round().toDouble() / 1000;
+    _amount = (_amount * 1000).round().toDouble() / 1000;
   }
 
   void _simplifyUp() {
     for (int i = 0; i < unitTable.length - 1; i++) {
-      if (unit == unitTable[i][0]) {
-        while (amount >= unitTable[i][1]) {
-          unit = unitTable[i + 1][0];
-          amount = amount / unitTable[i][1];
+      if (_unit == unitTable[i][0]) {
+        while (_amount >= unitTable[i][1]) {
+          _unit = unitTable[i + 1][0];
+          _amount = _amount / unitTable[i][1];
         }
       }
     }
@@ -41,12 +41,25 @@ class Measurement {
 
   void _simplifyDown() {
     for (int i = unitTable.length - 1; i > 0; i--) {
-      if (unit == unitTable[i][0]) {
-        while (amount < unitTable[i][2]) {
-          unit = unitTable[i - 1][0];
-          amount = amount * unitTable[i - 1][1];
+      if (_unit == unitTable[i][0]) {
+        while (_amount < unitTable[i][2]) {
+          _unit = unitTable[i - 1][0];
+          _amount = _amount * unitTable[i - 1][1];
         }
       }
     }
+  }
+
+  String getUnit() {
+    return _unit;
+  }
+
+  double getAmount() {
+    return _amount;
+  }
+
+  // returns deep copy of measurement
+  Measurement getCopy() {
+    return Measurement(_unit, _amount);
   }
 }

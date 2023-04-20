@@ -24,7 +24,7 @@ void main() {
 
   RecipeBookModel model = RecipeBookModel();
 
-  String testRecipeName = testRecipe.recipeName;
+  String testRecipeName = testRecipe.getRecipeName();
 
   test('I can add a recipe to the recipe model', () {
     model.addRecipe(testRecipeName, testRecipe);

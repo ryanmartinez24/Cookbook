@@ -12,18 +12,18 @@ class AddIngredientWidget extends StatefulWidget {
 }
 
 class AddIngredientWidgetState extends State<AddIngredientWidget> {
-  List<FieldEntryWidget> fieldWidgetList = [];
-  List<String> enteredUnits = [];
-  List<String> enteredIngredientNames = [];
-  List<int> enteredAmount = [];
-  List<Ingredient> ingredients = [];
+  List<FieldEntryWidget> _fieldWidgetList = [];
+  List<String> _enteredUnits = [];
+  List<String> _enteredIngredientNames = [];
+  List<int> _enteredAmount = [];
+  List<Ingredient> _ingredients = [];
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
       flex: 2,
       child: ListView.builder(
-        itemCount: fieldWidgetList.length,
-        itemBuilder: (_, index) => fieldWidgetList[index],
+        itemCount: _fieldWidgetList.length,
+        itemBuilder: (_, index) => _fieldWidgetList[index],
       ),
     );
 
@@ -56,33 +56,33 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   }
 
   void addFieldEntryWidget() {
-    if (enteredUnits.isNotEmpty) {
-      enteredUnits = [];
-      enteredIngredientNames = [];
-      enteredAmount = [];
-      fieldWidgetList = [];
+    if (_enteredUnits.isNotEmpty) {
+      _enteredUnits = [];
+      _enteredIngredientNames = [];
+      _enteredAmount = [];
+      _fieldWidgetList = [];
     }
     setState(() {});
-    fieldWidgetList.add(FieldEntryWidget());
+    _fieldWidgetList.add(FieldEntryWidget());
   }
 
   void removeFieldEntryWidget() {
-    if (fieldWidgetList.isNotEmpty) {
-      fieldWidgetList.removeLast();
+    if (_fieldWidgetList.isNotEmpty) {
+      _fieldWidgetList.removeLast();
     }
     setState(() {});
   }
 
   void submitIngredients() {
-    ingredients = [];
-    for (FieldEntryWidget currWidget in fieldWidgetList) {
-      ingredients.add(Ingredient(
+    _ingredients = [];
+    for (FieldEntryWidget currWidget in _fieldWidgetList) {
+      _ingredients.add(Ingredient(
           currWidget.nameController.text,
           Measurement(currWidget.unitController.text,
               double.parse(currWidget.amountController.text))));
     }
     Provider.of<IngredientChangeNotifier>(context, listen: false)
-        .setIngredients(ingredients);
+        .setIngredients(_ingredients);
   }
 }
 

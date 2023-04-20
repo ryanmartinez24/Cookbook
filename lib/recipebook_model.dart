@@ -56,7 +56,7 @@ class RecipeBookModel extends ChangeNotifier {
           1),
       "Chicken Noodle Soup": Recipe(
           "Chicken Noodle Soup",
-          "Quick and easy chicken noodle soup (recipe designed for 6 servings)\nOriginal Serving size before chosen servings size: 1",
+          "Quick and easy chicken noodle soup (recipe designed for 6 servings)\n",
           [
             Ingredient("Butter", Measurement("tbsp", 0.1667)),
             Ingredient("Chopped Onion", Measurement("tsp", 4)),
@@ -74,7 +74,7 @@ class RecipeBookModel extends ChangeNotifier {
           1),
       "Chocolate Chip Cookies": Recipe(
           "Nestle Chocolate Chip Cookies",
-          "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)\nOriginal Serving size before chosen servings size: 1",
+          "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)\n ",
           [
             Ingredient("All Purpose Flour", Measurement("cups", 2.25)),
             Ingredient("Baking soda", Measurement("tsp", 1)),
