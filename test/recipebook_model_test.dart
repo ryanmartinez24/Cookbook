@@ -47,4 +47,6 @@ void main() {
   test("I can get the correct list of recipes from the model", () {
     expect(model.getRecipeNames(), recipeNames);
   });
+
+  test("json encode/decode works with model", () {});
 }

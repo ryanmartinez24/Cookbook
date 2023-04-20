@@ -62,4 +62,11 @@ class Measurement {
   Measurement getCopy() {
     return Measurement(_unit, _amount);
   }
+
+  Map toJson() {
+    return {
+      "Unit": _unit,
+      "amount": _amount,
+    };
+  }
 }

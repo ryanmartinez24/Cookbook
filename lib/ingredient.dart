@@ -18,4 +18,12 @@ class Ingredient {
   Measurement getMeasurement() {
     return _measurement;
   }
+
+  Map toJson() {
+    Map measurement = _measurement.toJson();
+    return {
+      "measurementName": _name,
+      "measurement": measurement,
+    };
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import "package:fp_recipe_book/recipe.dart";
 import "package:fp_recipe_book/ingredient.dart";
@@ -112,5 +114,10 @@ class RecipeBookModel extends ChangeNotifier {
 
   Recipe getRecipeFromName(String recipeName) {
     return recipeMap[recipeName]!;
+  }
+
+  Map toJson() {
+    List<Recipe> recipeList = recipeMap.values.toList();
+    return {"recipeBook": jsonEncode(recipeList)};
   }
 }

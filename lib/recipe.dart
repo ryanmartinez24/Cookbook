@@ -44,4 +44,15 @@ class Recipe {
   double getScale() {
     return _scale;
   }
+
+  toJson() {
+    List<Map> ingredients = _ingredients.map((i) => i.toJson()).toList();
+    return {
+      "recipeName": _recipeName,
+      "description": _description,
+      "ingredients": ingredients,
+      "directions": _directions,
+      "scale": _scale,
+    };
+  }
 }

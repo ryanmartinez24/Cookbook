@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
@@ -305,5 +307,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onDeleteRecipeSelected() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
+  }
+
+  void _onSaveRecipeSelected() {
+    String recipeJson = jsonEncode(RecipeBookModel());
+    widget.storage.writeRecipes(recipeJson);
   }
 }
