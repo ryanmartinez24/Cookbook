@@ -159,7 +159,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     String ingredientDisplay = '';
 
     for (int i = 0; i < ingredients.length; i++) {
-      double doubleAmount = roundDouble(ingredients[i].measurement.amount, 4);
+      double doubleAmount = _roundDouble(ingredients[i].measurement.amount, 4);
       String measurementUnit = ingredients[i].measurement.unit;
       String name = ingredients[i].name;
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
@@ -175,7 +175,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     return ingredientDisplay;
   }
 
-  double roundDouble(double val, int n) {
+  double _roundDouble(double val, int n) {
     num modNDegree = math.pow(10.0, n);
     return ((val * modNDegree).round().toDouble() / modNDegree);
   }
@@ -195,7 +195,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasSelectedRecipe = false;
-  String? recipeName = '';
+  String? chosenRecipeName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (String? recipeName) {
                 setState(() {
                   _hasSelectedRecipe = true;
-                  recipeName = recipeName;
+                  chosenRecipeName = recipeName;
                 });
                 _onRecipeSelected(recipeName);
               },
@@ -231,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: _hasSelectedRecipe
                   ? () {
-                      _onGoToRecipeButtonPressed(recipeName);
+                      _onGoToRecipeButtonPressed(chosenRecipeName);
                     }
                   : null,
               child: const Text('Go To Selected Recipe'),
@@ -255,14 +255,13 @@ class _MyHomePageState extends State<MyHomePage> {
     if (recipeName != null) {
       setState(() {
         _hasSelectedRecipe = true;
-        recipeName = recipeName;
+        chosenRecipeName = recipeName;
       });
     }
   }
 
   void _onGoToRecipeButtonPressed(String? recipeName) {
     if (recipeName != '') {
-      print('Action Called');
       Recipe currentRecipe =
           Provider.of<RecipeBookModel>(context, listen: false)
               .getRecipeFromName(recipeName!);
@@ -274,6 +273,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       );
+      setState(() {
+        _hasSelectedRecipe = false;
+      });
     }
   }
 

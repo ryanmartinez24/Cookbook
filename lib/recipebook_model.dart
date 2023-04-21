@@ -12,18 +12,50 @@ class RecipeBookModel extends ChangeNotifier {
           "Meat Sauce",
           "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)\nOriginal Serving size before chosen servings size: 1",
           [
-            Ingredient("Ground Beef", Measurement("lbs", 0.125)),
-            Ingredient("Medium Onion, chopped", Measurement("", 0.125)),
-            Ingredient("Clove Garlic, minced", Measurement("", 0.5)),
             Ingredient(
-                "Small Green Bell Pepper, diced", Measurement("", 0.125)),
-            Ingredient("Canned Diced Tomatoes", Measurement("oz", 3.5)),
-            Ingredient("Tomato Sauce", Measurement("oz", 2)),
-            Ingredient("Tomato Paste", Measurement("oz", 0.75)),
-            Ingredient("Dried Oregano", Measurement("tsp", 0.25)),
-            Ingredient("Dried Basil", Measurement("tsp", 0.25)),
-            Ingredient("Salt", Measurement("tsp", 0.125)),
-            Ingredient("Pepper", Measurement("pinch", 1))
+              "Ground Beef",
+              Measurement("lbs", 0.125),
+            ),
+            Ingredient(
+              "Medium Onion, chopped",
+              Measurement("", 0.125),
+            ),
+            Ingredient(
+              "Clove Garlic, minced",
+              Measurement("", 0.5),
+            ),
+            Ingredient(
+              "Small Green Bell Pepper, diced",
+              Measurement("", 0.125),
+            ),
+            Ingredient(
+              "Canned Diced Tomatoes",
+              Measurement("oz", 3.5),
+            ),
+            Ingredient(
+              "Tomato Sauce",
+              Measurement("oz", 2),
+            ),
+            Ingredient(
+              "Tomato Paste",
+              Measurement("oz", 0.75),
+            ),
+            Ingredient(
+              "Dried Oregano",
+              Measurement("tsp", 0.25),
+            ),
+            Ingredient(
+              "Dried Basil",
+              Measurement("tsp", 0.25),
+            ),
+            Ingredient(
+              "Salt",
+              Measurement("tsp", 0.125),
+            ),
+            Ingredient(
+              "Pepper",
+              Measurement("pinch", 1),
+            ),
           ],
           "\n\t1: Combine ground beef, onion, garlic, and green pepper in a large saucepan over medium-high heat. Cook and stir until meat is browned and crumbly and vegetables are tender, 5 to 7 minutes. Drain grease.\n2: Stir diced tomatoes, tomato sauce, and tomato paste into the pan. Season with oregano, basil, salt, and pepper. Simmer spaghetti sauce for 1 hour, stirring occasionally.",
           1),
@@ -58,17 +90,46 @@ class RecipeBookModel extends ChangeNotifier {
           "Chicken Noodle Soup",
           "Quick and easy chicken noodle soup (recipe designed for 6 servings)\nOriginal Serving size before chosen servings size: 1",
           [
-            Ingredient("Butter", Measurement("tbsp", 0.1667)),
-            Ingredient("Chopped Onion", Measurement("tsp", 4)),
-            Ingredient("Chopped Celery", Measurement("tsp", 4)),
-            Ingredient("Chicken Broth", Measurement("oz", 9.67)),
-            Ingredient("Vegetable Broth", Measurement("oz", 2.42)),
             Ingredient(
-                "Chopped, cooked Chicken Breast", Measurement("lbs", 0.833)),
-            Ingredient("Egg Noodles", Measurement("cups", 0.25)),
-            Ingredient("Sliced Carrots", Measurement("tsp", 8)),
-            Ingredient("Dried Basil", Measurement("tsp", 0.0833)),
-            Ingredient("Dried Oregano", Measurement("tsp", 0.0833))
+              "Butter",
+              Measurement("tbsp", 0.1667),
+            ),
+            Ingredient(
+              "Chopped Onion",
+              Measurement("tsp", 4),
+            ),
+            Ingredient(
+              "Chopped Celery",
+              Measurement("tsp", 4),
+            ),
+            Ingredient(
+              "Chicken Broth",
+              Measurement("oz", 9.67),
+            ),
+            Ingredient(
+              "Vegetable Broth",
+              Measurement("oz", 2.42),
+            ),
+            Ingredient(
+              "Chopped, cooked Chicken Breast",
+              Measurement("lbs", 0.833),
+            ),
+            Ingredient(
+              "Egg Noodles",
+              Measurement("cups", 0.25),
+            ),
+            Ingredient(
+              "Sliced Carrots",
+              Measurement("tsp", 8),
+            ),
+            Ingredient(
+              "Dried Basil",
+              Measurement("tsp", 0.0833),
+            ),
+            Ingredient(
+              "Dried Oregano",
+              Measurement("tsp", 0.0833),
+            ),
           ],
           "\n\t1: Melt butter in a large pot over medium heat. Add onion and celery and cook until just tender, about 5 minutes. \n2: Add chicken broth, vegetable broth, chicken, egg noodles, carrots, basil, oregano, and salt/pepper (to your taste). Stir to combine and bring to a boil. \n3: Reduce heat and simmer for 20 minutes",
           1),
@@ -76,18 +137,45 @@ class RecipeBookModel extends ChangeNotifier {
           "Nestle Chocolate Chip Cookies",
           "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)\nOriginal Serving size before chosen servings size: 1",
           [
-            Ingredient("All Purpose Flour", Measurement("cups", 2.25)),
-            Ingredient("Baking soda", Measurement("tsp", 1)),
-            Ingredient("Salt", Measurement("tsp", 1)),
-            Ingredient("Butter, softened", Measurement("cups", 1)),
-            Ingredient("Granulated Sugar", Measurement("cups", 0.75)),
-            Ingredient("Packed Brown Sugar", Measurement("cups", 0.75)),
-            Ingredient("Vanilla Extract", Measurement("tsp", 1)),
-            Ingredient("Eggs", Measurement("", 2)),
-            Ingredient("Chocolate Chips", Measurement("cups", 2)),
+            Ingredient(
+              "All Purpose Flour",
+              Measurement("cups", 2.25),
+            ),
+            Ingredient(
+              "Baking soda",
+              Measurement("tsp", 1),
+            ),
+            Ingredient(
+              "Salt",
+              Measurement("tsp", 1),
+            ),
+            Ingredient(
+              "Butter, softened",
+              Measurement("cups", 1),
+            ),
+            Ingredient(
+              "Granulated Sugar",
+              Measurement("cups", 0.75),
+            ),
+            Ingredient(
+              "Packed Brown Sugar",
+              Measurement("cups", 0.75),
+            ),
+            Ingredient(
+              "Vanilla Extract",
+              Measurement("tsp", 1),
+            ),
+            Ingredient(
+              "Eggs",
+              Measurement("", 2),
+            ),
+            Ingredient(
+              "Chocolate Chips",
+              Measurement("cups", 2),
+            ),
           ],
           "1: Preheat oven to 375 degrees F. \n2: Combine flour, baking soda, and salt in small bowl. Beat butter, granulated sugar, brown sugar, and vanilla extract in large mixer bowl until creamy. Add eggs, one at a time, beating well after each addition. Gradually beat in flour mixture. Stir in morsels and nuts (if desired). Drop by rounded tablespoons onto ungreased baking sheets. \n3: Bake for 9 to 11 minutes or until golden brown. Cool on baking sheets for 2 minutes; remove to wire racks to cool completely",
-          1)
+          1),
     };
   }
 
