@@ -58,5 +58,6 @@ void main() {
     String reEncodedModel = await storage.readRecipes();
     var decodedJson = jsonDecode(reEncodedModel);
     RecipeBookModel model2 = RecipeBookModel.fromJson(decodedJson);
+    expect(model.getRecipeNames(), model2.getRecipeNames());
   });
 }

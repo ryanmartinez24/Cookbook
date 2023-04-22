@@ -77,7 +77,7 @@ class RecipeBookModel extends ChangeNotifier {
           "\n\t1: Melt butter in a large pot over medium heat. Add onion and celery and cook until just tender, about 5 minutes. \n2: Add chicken broth, vegetable broth, chicken, egg noodles, carrots, basil, oregano, and salt/pepper (to your taste). Stir to combine and bring to a boil. \n3: Reduce heat and simmer for 20 minutes",
           1),
       "Chocolate Chip Cookies": Recipe(
-          "Nestle Chocolate Chip Cookies",
+          "Chocolate Chip Cookies",
           "Classic Nestle chocolate chip cookies (makes about 2 dozen cookies)\n ",
           [
             Ingredient("All Purpose Flour", Measurement("cups", 2.25)),
