@@ -295,6 +295,9 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _onDeleteRecipeSelected,
               child: const Text("Delete an existing recipe"),
             ),
+            ElevatedButton(
+                onPressed: _onSaveRecipeSelected,
+                child: const Text("Save Recipes for Later"))
           ],
         ),
       ),
@@ -343,7 +346,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onSaveRecipeSelected() {
-    String recipeJson = jsonEncode(RecipeBookModel());
+    String recipeJson =
+        jsonEncode(Provider.of<RecipeBookModel>(context, listen: false));
     widget.storage.writeRecipes(recipeJson);
   }
 }
