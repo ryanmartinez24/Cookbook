@@ -118,6 +118,14 @@ class RecipeBookModel extends ChangeNotifier {
     return recipeMap[recipeName]!;
   }
 
+  Map<String, Recipe> getMap() {
+    return recipeMap;
+  }
+
+  void updateMap(Map<String, Recipe> updatedMap) {
+    recipeMap = updatedMap;
+  }
+
   Map toJson() {
     List<Recipe> recipeList = recipeMap.values.toList();
     return {"recipeBook": jsonEncode(recipeList)};

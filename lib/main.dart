@@ -14,7 +14,12 @@ import "package:fraction/fraction.dart";
 import "dart:math" as math;
 
 void main() {
-  runApp(MyApp(storage: Storage()));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => RecipeBookModel(),
+      child: MyApp(storage: Storage()),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -35,12 +40,12 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             List<Widget> children = [];
             if (snapshot.hasData) {
-              ChangeNotifierProvider(
-                  create: (context) =>
-                      RecipeBookModel.fromJson(jsonDecode(snapshot.data!)),
-                  builder: (context, child) {
-                    return MyHomePage(storage: storage, title: 'Recipe Book');
-                  });
+              RecipeBookModel updatedModel =
+                  RecipeBookModel.fromJson(jsonDecode(snapshot.data!));
+              Map<String, Recipe> updatedMap = updatedModel.getMap();
+              Provider.of<RecipeBookModel>(context, listen: false)
+                  .updateMap(updatedMap);
+              return MyHomePage(storage: storage, title: 'Recipe Book');
             } else if (snapshot.hasError) {
               children = <Widget>[
                 const Icon(
