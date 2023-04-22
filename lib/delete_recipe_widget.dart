@@ -11,7 +11,7 @@ class DeleteRecipeWidget extends StatefulWidget {
 
 class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
   bool _hasSelectRecipe = false;
-  String? selectedRecipe = '';
+  String? selectedRecipeName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +59,15 @@ class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
 
   void _dropdownCallback(String selectedValue) {
     setState(() {
-      selectedValue = selectedValue;
+      selectedRecipeName = selectedValue;
       _hasSelectRecipe = true;
     });
   }
 
   void _onButtonPressed() {
-    if (selectedRecipe is String) {
+    if (selectedRecipeName is String) {
       Provider.of<RecipeBookModel>(context, listen: false)
-          .deleteRecipe(selectedRecipe!);
-      print('Action completed!');
+          .deleteRecipe(selectedRecipeName!);
     }
 
     setState(() {

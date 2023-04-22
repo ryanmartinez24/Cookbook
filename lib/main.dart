@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
@@ -203,7 +202,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
     for (int i = 0; i < ingredients.length; i++) {
       double doubleAmount =
-          roundDouble(ingredients[i].getMeasurement().getAmount(), 2);
+          _roundDouble(ingredients[i].getMeasurement().getAmount(), 2);
       String measurementUnit = ingredients[i].getMeasurement().getUnit();
       String name = ingredients[i].getIngredientName();
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
@@ -219,7 +218,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     return ingredientDisplay;
   }
 
-  double roundDouble(double val, int n) {
+  double _roundDouble(double val, int n) {
     num modNDegree = math.pow(10.0, n);
     return ((val * modNDegree).round().toDouble() / modNDegree);
   }
@@ -245,7 +244,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasSelectedRecipe = false;
-  String? recipeName = '';
+  String? chosenRecipeName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (String? recipeName) {
                 setState(() {
                   _hasSelectedRecipe = true;
-                  recipeName = recipeName;
+                  chosenRecipeName = recipeName;
                 });
                 _onRecipeSelected(recipeName);
               },
@@ -281,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: _hasSelectedRecipe
                   ? () {
-                      _onGoToRecipeButtonPressed(recipeName);
+                      _onGoToRecipeButtonPressed(chosenRecipeName);
                     }
                   : null,
               child: const Text('Go To Selected Recipe'),
@@ -308,7 +307,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (recipeName != null) {
       setState(() {
         _hasSelectedRecipe = true;
-        recipeName = recipeName;
+        chosenRecipeName = recipeName;
       });
     }
   }
@@ -326,6 +325,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       );
+      setState(() {
+        _hasSelectedRecipe = false;
+      });
     }
   }
 
