@@ -38,13 +38,15 @@ class MyApp extends StatelessWidget {
           future: storage.readRecipes(),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             List<Widget> children = [];
-            if (snapshot.hasData) {
+            if (snapshot.hasData && snapshot.data != "") {
               RecipeBookModel updatedModel =
                   RecipeBookModel.fromJson(jsonDecode(snapshot.data!));
               Map<String, Recipe> updatedMap = updatedModel.getMap();
               Provider.of<RecipeBookModel>(context, listen: false)
                   .updateMap(updatedMap);
               return MyHomePage(storage: storage, title: 'Recipe Book');
+            } else if (snapshot.hasData) {
+              return MyHomePage(title: "Recipe", storage: storage);
             } else if (snapshot.hasError) {
               children = <Widget>[
                 const Icon(
