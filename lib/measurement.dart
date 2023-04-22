@@ -65,8 +65,12 @@ class Measurement {
 
   Map toJson() {
     return {
-      "Unit": _unit,
+      "unit": _unit,
       "amount": _amount,
     };
+  }
+
+  factory Measurement.fromJson(dynamic json) {
+    return Measurement(json['unit'] as String, json['amount'] as double);
   }
 }

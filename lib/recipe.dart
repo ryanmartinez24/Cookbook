@@ -55,4 +55,15 @@ class Recipe {
       "scale": _scale,
     };
   }
+
+  factory Recipe.fromJson(dynamic json) {
+    var ingredientsJson = json['ingredients'] as List;
+
+    List<Ingredient> _ingredients = [];
+    for (dynamic ingredientString in ingredientsJson) {
+      _ingredients.add(Ingredient.fromJson(ingredientString));
+    }
+    return Recipe(json["recipeName"] as String, json["description"] as String,
+        _ingredients, json["directions"] as String, json["scale"] as double);
+  }
 }

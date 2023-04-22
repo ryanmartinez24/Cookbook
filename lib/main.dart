@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import 'package:fp_recipe_book/recipe.dart';
+import 'package:fp_recipe_book/storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/add_recipe_widget.dart';
@@ -11,19 +12,14 @@ import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
 import "package:fraction/fraction.dart";
 import "dart:math" as math;
-import "package:fp_recipe_book/storage.dart";
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => RecipeBookModel(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(MyApp(storage: Storage()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.storage});
+  final Storage storage;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +30,47 @@ class MyApp extends StatelessWidget {
         textTheme:
             GoogleFonts.merriweatherTextTheme(Theme.of(context).textTheme),
       ),
-      home: MyHomePage(
-        title: 'Recipe Book Home Page',
-        storage: Storage(),
-      ),
+      home: FutureBuilder<String>(
+          future: storage.readRecipes(),
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            List<Widget> children;
+            if (snapshot.hasData) {
+              return ChangeNotifierProvider(
+                create: (context) =>
+                    RecipeBookModel.fromJson(jsonDecode(snapshot.data!)),
+                child: MyHomePage(storage: storage, title: 'Recipe Book'),
+              );
+            } else if (snapshot.hasError) {
+              children = <Widget>[
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 60,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Text('Error: ${snapshot.error}'),
+                ),
+              ];
+            } else {
+              children = const <Widget>[
+                SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CircularProgressIndicator(),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text('Awaiting result...'),
+                ),
+              ];
+            }
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ));
+          }),
     );
   }
 }
@@ -191,7 +224,12 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.storage});
+  const MyHomePage({
+    super.key,
+    required this.title,
+    required this.storage,
+  });
+
   final String title;
   final Storage storage;
 
@@ -202,17 +240,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _hasSelectedRecipe = false;
   String? recipeName = '';
-
-  @override
-  void initState() {
-    super.initState();
-    widget.storage.readRecipes().then((value) {
-      setState(() {
-        //TODO
-        // need to convert data read in to recipebook here.
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,8 @@ import "package:fp_recipe_book/measurement.dart";
 class RecipeBookModel extends ChangeNotifier {
   Map<String, Recipe> recipeMap = {};
 
+  RecipeBookModel.fromMap(this.recipeMap);
+
   RecipeBookModel() {
     recipeMap = {
       "Meat Sauce": Recipe(
@@ -119,5 +121,18 @@ class RecipeBookModel extends ChangeNotifier {
   Map toJson() {
     List<Recipe> recipeList = recipeMap.values.toList();
     return {"recipeBook": jsonEncode(recipeList)};
+  }
+
+  factory RecipeBookModel.fromJson(dynamic json) {
+    Map<String, Recipe> recipeMap = {};
+    var recipeBookJson = jsonDecode(json["recipeBook"]);
+    List<dynamic> _recipes = recipeBookJson
+        .map((recipeJson) => Recipe.fromJson(recipeJson))
+        .toList();
+
+    for (Recipe recipe in _recipes) {
+      recipeMap[recipe.getRecipeName()] = recipe;
+    }
+    return RecipeBookModel.fromMap(recipeMap);
   }
 }

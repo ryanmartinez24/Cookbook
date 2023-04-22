@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipebook_model.dart';
+import 'package:fp_recipe_book/storage.dart';
 
 void main() {
   Ingredient i1 = Ingredient("Pepper", Measurement("whole", 3.0));
@@ -48,5 +51,12 @@ void main() {
     expect(model.getRecipeNames(), recipeNames);
   });
 
-  test("json encode/decode works with model", () {});
+  test("json encode/decode works with model", () async {
+    Storage storage = Storage();
+    String encodedModel = jsonEncode(model);
+    storage.writeRecipes(encodedModel);
+    String reEncodedModel = await storage.readRecipes();
+    var decodedJson = jsonDecode(reEncodedModel);
+    RecipeBookModel model2 = RecipeBookModel.fromJson(decodedJson);
+  });
 }

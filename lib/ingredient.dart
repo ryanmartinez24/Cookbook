@@ -26,4 +26,9 @@ class Ingredient {
       "measurement": measurement,
     };
   }
+
+  factory Ingredient.fromJson(dynamic json) {
+    return Ingredient(
+        json['measurementName'], Measurement.fromJson(json['measurement']));
+  }
 }
