@@ -131,7 +131,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Currently Serves ${widget.currentRecipe.scale} \n\n Desired Servings:\n",
+                    "Currently Serves ${widget.currentRecipe.getScale()} \n\n Desired Servings:\n",
                     style: const TextStyle(
                         fontWeight: FontWeight.w700, fontSize: 20),
                   )),
@@ -294,9 +294,6 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _onDeleteRecipeSelected,
               child: const Text("Delete an existing recipe"),
             ),
-            ElevatedButton(
-                onPressed: _onSaveRecipeSelected,
-                child: const Text("Save Recipes for Later"))
           ],
         ),
       ),
@@ -345,11 +342,5 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onDeleteRecipeSelected() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const DeleteRecipeWidget()));
-  }
-
-  void _onSaveRecipeSelected() {
-    String recipeJson =
-        jsonEncode(Provider.of<RecipeBookModel>(context, listen: false));
-    widget.storage.writeRecipes(recipeJson);
   }
 }

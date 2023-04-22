@@ -32,13 +32,13 @@ void main() {
   test('I can add a recipe to the recipe model', () {
     model.addRecipe(testRecipeName, testRecipe);
 
-    expect(model.recipeMap[testRecipeName], testRecipe);
+    expect(model.getRecipeMap()[testRecipeName], testRecipe);
   });
 
   test('I can remove a recipe from the recipe model', () {
     model.deleteRecipe(testRecipeName);
 
-    expect(model.recipeMap.containsValue(testRecipeName), false);
+    expect(model.getRecipeMap().containsValue(testRecipeName), false);
   });
 
   test('I can get a recipe from the model by name', () {

@@ -1,17 +1,18 @@
 import 'dart:convert';
-
+import "package:fp_recipe_book/storage.dart";
 import 'package:flutter/cupertino.dart';
 import "package:fp_recipe_book/recipe.dart";
 import "package:fp_recipe_book/ingredient.dart";
 import "package:fp_recipe_book/measurement.dart";
 
 class RecipeBookModel extends ChangeNotifier {
-  Map<String, Recipe> recipeMap = {};
+  Map<String, Recipe> _recipeMap = {};
+  Storage storage = Storage();
 
-  RecipeBookModel.fromMap(this.recipeMap);
+  RecipeBookModel.fromMap(this._recipeMap);
 
   RecipeBookModel() {
-    recipeMap = {
+    _recipeMap = {
       "Meat Sauce": Recipe(
           "Meat Sauce",
           "Delicious homemade meat sauce made with ground beef (recipe designed for 8 servings)\nOriginal Serving size before chosen servings size: 1",
@@ -184,7 +185,8 @@ class RecipeBookModel extends ChangeNotifier {
   }
 
   void addRecipe(String recipeName, Recipe recipe) {
-    recipeMap[recipeName] = recipe;
+    _recipeMap[recipeName] = recipe;
+    storage.writeRecipes(jsonEncode(toJson()));
     notifyListeners();
   }
 
@@ -193,40 +195,45 @@ class RecipeBookModel extends ChangeNotifier {
         recipeName != "Mashed Potatoes" &&
         recipeName != "Chicken Noodle Soup" &&
         recipeName != "Chocolate Chip Cookies") {
-      recipeMap.remove(recipeName);
+      _recipeMap.remove(recipeName);
+      storage.writeRecipes(jsonEncode(toJson()));
       notifyListeners();
     }
   }
 
   List<String> getRecipeNames() {
-    return recipeMap.keys.toList();
+    return _recipeMap.keys.toList();
   }
 
   Recipe getRecipeFromName(String recipeName) {
-    return recipeMap[recipeName]!;
+    return _recipeMap[recipeName]!;
   }
 
   Map<String, Recipe> getMap() {
-    return recipeMap;
+    return _recipeMap;
   }
 
   void updateMap(Map<String, Recipe> updatedMap) {
-    recipeMap = updatedMap;
+    _recipeMap = updatedMap;
+  }
+
+  Map<String, Recipe> getRecipeMap() {
+    return _recipeMap;
   }
 
   Map toJson() {
-    List<Recipe> recipeList = recipeMap.values.toList();
+    List<Recipe> recipeList = _recipeMap.values.toList();
     return {"recipeBook": jsonEncode(recipeList)};
   }
 
   factory RecipeBookModel.fromJson(dynamic json) {
     Map<String, Recipe> recipeMap = {};
     var recipeBookJson = jsonDecode(json["recipeBook"]);
-    List<dynamic> _recipes = recipeBookJson
+    List<dynamic> recipes = recipeBookJson
         .map((recipeJson) => Recipe.fromJson(recipeJson))
         .toList();
 
-    for (Recipe recipe in _recipes) {
+    for (Recipe recipe in recipes) {
       recipeMap[recipe.getRecipeName()] = recipe;
     }
     return RecipeBookModel.fromMap(recipeMap);

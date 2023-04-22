@@ -7,7 +7,7 @@ class IngredientChangeNotifier extends ChangeNotifier {
   setIngredients(List<Ingredient> newIngredients) {
     _ingredients.clear();
     for (Ingredient ingredient in newIngredients) {
-      _ingredients.add(ingredient);
+      _ingredients.add(ingredient.getCopy());
     }
     notifyListeners();
   }
