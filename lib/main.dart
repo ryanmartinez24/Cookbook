@@ -106,7 +106,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               Align(
                 alignment: Alignment.topCenter,
                 child: Text(
-                  widget.currentRecipe.getRecipeName(),
+                  widget.currentRecipe.recipeName,
                   style: const TextStyle(
                       fontWeight: FontWeight.w700, fontSize: 30),
                 ),
@@ -124,7 +124,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("\n ${widget.currentRecipe.getDescription()}"),
+                child: Text("\n ${widget.currentRecipe.description}"),
               ),
               const SizedBox(
                 height: 20,
@@ -133,7 +133,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Currently Serves ${widget.currentRecipe.getScale()} \n\n Desired Servings:\n",
+                    "Currently Serves ${widget.currentRecipe.scale} \n\n Desired Servings:\n",
                     style: const TextStyle(
                         fontWeight: FontWeight.w700, fontSize: 20),
                   )),
@@ -177,7 +177,7 @@ class _RecipeWidgetState extends State<RecipeWidget> {
               ),
               Align(
                   alignment: Alignment.topLeft,
-                  child: Text("\n ${widget.currentRecipe.getDirections()}")),
+                  child: Text("\n ${widget.currentRecipe.directions}")),
               const SizedBox(height: 20, width: 20),
             ],
           )),
@@ -191,8 +191,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     if (number != null) {
       double servingNumber = double.parse(number);
       setState(() {
-        double scaleFactor = servingNumber / widget.currentRecipe.getScale();
-        widget.currentRecipe.scaleIngredients(scaleFactor);
+        double oldServingNumber = widget.currentRecipe.scale;
+        widget.currentRecipe.scaleIngredients(servingNumber, oldServingNumber);
       });
     }
   }
@@ -203,10 +203,9 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     String ingredientDisplay = '';
 
     for (int i = 0; i < ingredients.length; i++) {
-      double doubleAmount =
-          _roundDouble(ingredients[i].getMeasurement().getAmount(), 2);
-      String measurementUnit = ingredients[i].getMeasurement().getUnit();
-      String name = ingredients[i].getIngredientName();
+      double doubleAmount = _roundDouble(ingredients[i].measurement.amount, 2);
+      String measurementUnit = ingredients[i].measurement.unit;
+      String name = ingredients[i].ingredientName;
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
       if (fractionAmount.isWhole || fractionAmount.numerator == 0) {
         ingredientDisplay =

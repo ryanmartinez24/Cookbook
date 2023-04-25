@@ -50,11 +50,11 @@ class Measurement {
     }
   }
 
-  String getUnit() {
+  get unit {
     return _unit;
   }
 
-  double getAmount() {
+  get amount {
     return _amount;
   }
 

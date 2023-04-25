@@ -234,7 +234,7 @@ class RecipeBookModel extends ChangeNotifier {
         .toList();
 
     for (Recipe recipe in recipes) {
-      recipeMap[recipe.getRecipeName()] = recipe;
+      recipeMap[recipe.recipeName] = recipe;
     }
     return RecipeBookModel.fromMap(recipeMap);
   }

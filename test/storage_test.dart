@@ -8,7 +8,7 @@ void main() {
   // IMPORTANT, test message must be changed each time test is run for it to be
   // valid test
   test("test that storage can read and write to local storage", () async {
-    testStorage.writeRecipes("testing read writes");
-    expect("testing read writes", await testStorage.readRecipes());
+    testStorage.writeRecipes("test");
+    expect("test", await testStorage.readRecipes());
   });
 }

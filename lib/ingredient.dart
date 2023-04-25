@@ -11,13 +11,9 @@ class Ingredient {
     return Ingredient(_name, _measurement.getCopy());
   }
 
-  String getIngredientName() {
-    return _name;
-  }
+  get ingredientName => _name;
 
-  Measurement getMeasurement() {
-    return _measurement;
-  }
+  get measurement => _measurement;
 
   Map toJson() {
     Map measurement = _measurement.toJson();

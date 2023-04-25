@@ -10,11 +10,12 @@ class Recipe {
   Recipe(this._recipeName, this._description, this._ingredients,
       this._directions, this._scale);
 
-  void scaleIngredients(double servings) {
+  void scaleIngredients(double newServing, double oldServing) {
+    double servings = newServing / oldServing;
     for (Ingredient ingredient in _ingredients) {
-      ingredient.getMeasurement().scale(servings);
+      ingredient.measurement.scale(servings);
     }
-    _scale = servings;
+    _scale = newServing;
   }
 
   List<Ingredient> getIngredientsCopy() {
@@ -25,23 +26,23 @@ class Recipe {
     return ingredientsCopy;
   }
 
-  String getRecipeName() {
+  get recipeName {
     return _recipeName;
   }
 
-  String getDescription() {
+  get description {
     return _description;
   }
 
-  String getDirections() {
+  get directions {
     return _directions;
   }
 
-  void scale(double newScale) {
+  set setScale(double newScale) {
     _scale = newScale;
   }
 
-  double getScale() {
+  get scale {
     return _scale;
   }
 
@@ -59,11 +60,11 @@ class Recipe {
   factory Recipe.fromJson(dynamic json) {
     var ingredientsJson = json['ingredients'] as List;
 
-    List<Ingredient> _ingredients = [];
+    List<Ingredient> ingredients = [];
     for (dynamic ingredientString in ingredientsJson) {
-      _ingredients.add(Ingredient.fromJson(ingredientString));
+      ingredients.add(Ingredient.fromJson(ingredientString));
     }
     return Recipe(json["recipeName"] as String, json["description"] as String,
-        _ingredients, json["directions"] as String, json["scale"] as double);
+        ingredients, json["directions"] as String, json["scale"] as double);
   }
 }

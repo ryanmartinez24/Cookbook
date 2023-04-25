@@ -7,7 +7,7 @@ void main() {
 
   test("test that getCopy returns deep copy as expected", () {
     Ingredient pepperCopy = originalPepper.getCopy();
-    originalPepper.getMeasurement().scale(2);
-    expect(pepperCopy.getMeasurement().getAmount(), 3.0);
+    originalPepper.measurement.scale(2.0);
+    expect(pepperCopy.measurement.amount, 3.0);
   });
 }

@@ -14,10 +14,10 @@ void main() {
       Recipe("Chef's Special", "Da best", originalIngredients, "Cook it", 1);
 
   test('testing that recipe scale ingredient function works', () {
-    testRecipe.scaleIngredients(5);
+    testRecipe.scaleIngredients(5, 1);
     List<Ingredient> newIngredients = testRecipe.getIngredientsCopy();
-    double i1ScaledAmount = newIngredients[0].getMeasurement().getAmount();
-    String i3Unit = newIngredients[2].getMeasurement().getUnit();
+    double i1ScaledAmount = newIngredients[0].measurement.amount;
+    String i3Unit = newIngredients[2].measurement.unit;
     expect(i1ScaledAmount, 15);
     expect(i3Unit, "cups");
   });

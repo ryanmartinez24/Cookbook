@@ -10,30 +10,30 @@ void main() {
       Ingredient('Butter', Measurement('gallons', 4.0));
 
   test('testing that measurement simplifies on creation', () {
-    expect(oliveOil.getMeasurement().getUnit(), "tbsp");
-    expect(oliveOil.getMeasurement().getAmount(), 1.0);
+    expect(oliveOil.measurement.unit, "tbsp");
+    expect(oliveOil.measurement.amount, 1.0);
   });
 
   test('testing that scale function works', () {
-    pepper.getMeasurement().scale(5);
-    expect(pepper.getMeasurement().getAmount(), 15);
+    pepper.measurement.scale(5.0);
+    expect(pepper.measurement.amount, 15);
   });
 
   test('testing that scale function simplifies after', () {
-    oliveOil.getMeasurement().scale(3);
-    expect(oliveOil.getMeasurement().getUnit(), 'cups');
-    expect(oliveOil.getMeasurement().getAmount(), 1.0);
+    oliveOil.measurement.scale(3.0);
+    expect(oliveOil.measurement.unit, 'cups');
+    expect(oliveOil.measurement.amount, 1.0);
   });
 
   test('I can convert the unit to gallons', () {
-    butterInQuarts.getMeasurement().scale(6);
-    expect(butterInQuarts.getMeasurement().getUnit(), 'gallons');
-    expect(butterInQuarts.getMeasurement().getAmount(), 3.0);
+    butterInQuarts.measurement.scale(6.0);
+    expect(butterInQuarts.measurement.unit, 'gallons');
+    expect(butterInQuarts.measurement.amount, 3.0);
   });
 
   test('I can convert the measurement to a smaller unit', () {
-    butterInGallons.getMeasurement().scale(1 / 8);
-    expect(butterInGallons.getMeasurement().getUnit(), 'quarts');
-    expect(butterInGallons.getMeasurement().getAmount(), 2.0);
+    butterInGallons.measurement.scale(1 / 8);
+    expect(butterInGallons.measurement.unit, 'quarts');
+    expect(butterInGallons.measurement.amount, 2.0);
   });
 }
