@@ -12,18 +12,18 @@ class AddIngredientWidget extends StatefulWidget {
 }
 
 class AddIngredientWidgetState extends State<AddIngredientWidget> {
-  List<FieldEntryWidget> _fieldWidgetList = [];
-  List<String> _enteredUnits = [];
-  List<String> _enteredIngredientNames = [];
-  List<int> _enteredAmount = [];
-  List<Ingredient> _ingredients = [];
+  List<FieldEntryWidget> fieldWidgetList = [];
+  List<String> enteredUnits = [];
+  List<String> enteredIngredientNames = [];
+  List<int> enteredAmount = [];
+  List<Ingredient> ingredients = [];
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
       flex: 2,
       child: ListView.builder(
-        itemCount: _fieldWidgetList.length,
-        itemBuilder: (_, index) => _fieldWidgetList[index],
+        itemCount: fieldWidgetList.length,
+        itemBuilder: (_, index) => fieldWidgetList[index],
       ),
     );
 
@@ -56,42 +56,60 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   }
 
   void addFieldEntryWidget() {
-    if (_enteredUnits.isNotEmpty) {
-      _enteredUnits = [];
-      _enteredIngredientNames = [];
-      _enteredAmount = [];
-      _fieldWidgetList = [];
+    if (enteredUnits.isNotEmpty) {
+      enteredUnits = [];
+      enteredIngredientNames = [];
+      enteredAmount = [];
+      fieldWidgetList = [];
     }
     setState(() {});
-    _fieldWidgetList.add(FieldEntryWidget());
+    fieldWidgetList.add(const FieldEntryWidget());
   }
 
   void removeFieldEntryWidget() {
-    if (_fieldWidgetList.isNotEmpty) {
-      _fieldWidgetList.removeLast();
+    if (fieldWidgetList.isNotEmpty) {
+      fieldWidgetList.removeLast();
     }
     setState(() {});
   }
 
   void submitIngredients() {
-    _ingredients = [];
-    for (FieldEntryWidget currWidget in _fieldWidgetList) {
-      _ingredients.add(Ingredient(
-          currWidget.nameController.text,
-          Measurement(currWidget.unitController.text,
-              double.parse(currWidget.amountController.text))));
+    ingredients = [];
+    for (FieldEntryWidget currWidget in fieldWidgetList) {
+      ingredients.add(currWidget.createIngredient);
     }
     Provider.of<IngredientChangeNotifier>(context, listen: false)
-        .setIngredients(_ingredients);
+        .setIngredients(ingredients);
   }
 }
 
-class FieldEntryWidget extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController unitController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
+class FieldEntryWidget extends StatefulWidget {
+  const FieldEntryWidget({
+    super.key,
+  });
 
-  FieldEntryWidget({super.key});
+  get createIngredient => _FieldEntryWidgetState().createIngredient();
+
+  @override
+  State<FieldEntryWidget> createState() => _FieldEntryWidgetState();
+}
+
+class _FieldEntryWidgetState extends State<FieldEntryWidget> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  String _givenName = '';
+  String _chosenUnit = '';
+  String _givenAmount = '';
+
+  final List<DropdownMenuItem<String>> _possibleUnits = [
+    const DropdownMenuItem(value: 'pinch', child: Text('pinch')),
+    const DropdownMenuItem(value: 'tsp', child: Text('tsp')),
+    const DropdownMenuItem(value: 'tbsp', child: Text('tbsp')),
+    const DropdownMenuItem(value: 'cups', child: Text('cups')),
+    const DropdownMenuItem(value: 'pints', child: Text('pints')),
+    const DropdownMenuItem(value: 'quarts', child: Text('quarts')),
+    const DropdownMenuItem(value: 'gallons', child: Text('gallons')),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +121,8 @@ class FieldEntryWidget extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: TextFormField(
-                  controller: nameController,
+                  onChanged: (value) => _onNameChanged(value),
+                  controller: _nameController,
                   decoration: const InputDecoration(
                     labelText: "Ingredient Name",
                     border: OutlineInputBorder(),
@@ -112,18 +131,22 @@ class FieldEntryWidget extends StatelessWidget {
               ),
               SizedBox(
                 width: 200,
-                child: TextFormField(
-                  controller: unitController,
-                  decoration: const InputDecoration(
-                    labelText: "Unit Name",
-                    border: OutlineInputBorder(),
-                  ),
+                child: DropdownButton(
+                  items: _possibleUnits,
+                  onChanged: (value) {
+                    setState(() {
+                      _chosenUnit = value!;
+                    });
+                  },
                 ),
               ),
               SizedBox(
                 width: 200,
                 child: TextFormField(
-                  controller: amountController,
+                  onChanged: (value) {
+                    _onAmountChanged(value);
+                  },
+                  controller: _amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: "Amount of Ingredient",
@@ -136,5 +159,26 @@ class FieldEntryWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Ingredient createIngredient() {
+    String name = _givenName;
+    String unit = _chosenUnit;
+    double amount = double.parse(_givenAmount);
+    Ingredient currentIngredient = Ingredient(name, Measurement(unit, amount));
+
+    return currentIngredient;
+  }
+
+  _onAmountChanged(value) {
+    setState(() {
+      _givenAmount = value;
+    });
+  }
+
+  _onNameChanged(value) {
+    setState(() {
+      _givenName = value;
+    });
   }
 }
