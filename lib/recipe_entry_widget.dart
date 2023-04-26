@@ -17,7 +17,7 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   String _recipeName = "";
   String _directions = "";
   String _description = "";
-  double _servings = -1;
+  double _servings = 1;
 
   List<Ingredient> _ingredients = [];
 
