@@ -34,9 +34,9 @@ Recap of Iteration 2:
 
 Summary of Iteration 3:
 
-    When a user inputs a recipe of their choice, our app will save the information. So it can be retreived
-    and used, even after the app has been rebooted. Our app will also show all ingredient measurments in 
-    imperial volumetric fraction form.
+    When a user inputs a recipe of their choice, our app will automatically save the information. So it can 
+    be retreived, used, added or deleted. Even after the app has been rebooted. Our app will also show all ingredient measurments in 
+    imperial volumetric fraction form. The measurments will be rounded to the most logical unit of measurement.
 
 
 # Specific Rules

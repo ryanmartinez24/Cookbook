@@ -16,7 +16,7 @@ class IngredientChangeNotifier extends ChangeNotifier {
     _ingredients.add(newIngredient);
   }
 
-  //Return a deep copy of the private ingredients list
+  //Return a deep copy of the private ingredients list.
   List<Ingredient> getIngredients() {
     List<Ingredient> returnIngredients = [];
     for (Ingredient ingredient in _ingredients) {

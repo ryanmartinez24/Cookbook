@@ -12,7 +12,7 @@ import "package:fp_recipe_book/delete_recipe_widget.dart";
 import "package:fraction/fraction.dart";
 import "dart:math" as math;
 
-void main() {
+void main() { //comment here
   runApp(
     ChangeNotifierProvider(
       create: (context) => RecipeBookModel(),
@@ -21,7 +21,7 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { //comment here
   const MyApp({super.key, required this.storage});
   final Storage storage;
 
