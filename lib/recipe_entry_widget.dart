@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import 'package:fp_recipe_book/recipe.dart';
-import 'package:fp_recipe_book/add_ingredient_widget.dart';
+import 'package:fp_recipe_book/ingredient_entry_widget.dart';
 import "package:provider/provider.dart";
 import 'package:fp_recipe_book/recipebook_model.dart';
 
-class AddRecipeWidget extends StatefulWidget {
-  const AddRecipeWidget({super.key});
+class RecipeEntryWidget extends StatefulWidget {
+  const RecipeEntryWidget({super.key});
 
   @override
-  State<AddRecipeWidget> createState() => _AddRecipeWidgetState();
+  State<RecipeEntryWidget> createState() => _RecipeEntryWidgetState();
 }
 
-class _AddRecipeWidgetState extends State<AddRecipeWidget> {
+class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   String _recipeName = "";
   String _directions = "";
   String _description = "";
@@ -23,7 +23,7 @@ class _AddRecipeWidgetState extends State<AddRecipeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AddIngredientWidget ingredientWidget = const AddIngredientWidget();
+    IngredientEntryWidget ingredientWidget = const IngredientEntryWidget();
 
     return Scaffold(
       body: Column(

@@ -6,7 +6,7 @@ import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:fp_recipe_book/add_recipe_widget.dart';
+import 'package:fp_recipe_book/recipe_entry_widget.dart';
 import "package:fp_recipe_book/recipebook_model.dart";
 import "package:fp_recipe_book/delete_recipe_widget.dart";
 import "package:fraction/fraction.dart";
@@ -335,7 +335,7 @@ class _MyHomePageState extends State<MyHomePage> {
       MaterialPageRoute(
         builder: (context) => ChangeNotifierProvider(
             create: (context) => IngredientChangeNotifier(),
-            child: const AddRecipeWidget()),
+            child: const RecipeEntryWidget()),
       ),
     );
   }

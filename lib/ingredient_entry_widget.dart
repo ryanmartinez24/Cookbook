@@ -4,15 +4,15 @@ import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import "package:provider/provider.dart";
 
-class AddIngredientWidget extends StatefulWidget {
-  const AddIngredientWidget({super.key});
+class IngredientEntryWidget extends StatefulWidget {
+  const IngredientEntryWidget({super.key});
 
   @override
-  State<AddIngredientWidget> createState() => AddIngredientWidgetState();
+  State<IngredientEntryWidget> createState() => IngredientEntryWidgetState();
 }
 
-class AddIngredientWidgetState extends State<AddIngredientWidget> {
-  final List<FieldEntryWidget> fieldWidgetList = [];
+class IngredientEntryWidgetState extends State<IngredientEntryWidget> {
+  final List<IngredientWidget> fieldWidgetList = [];
   final List<String> enteredUnits = [];
   final List<String> enteredIngredientNames = [];
   final List<int> enteredAmount = [];
@@ -61,7 +61,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
       fieldWidgetList.clear();
     }
     setState(() {});
-    fieldWidgetList.add(const FieldEntryWidget());
+    fieldWidgetList.add(const IngredientWidget());
   }
 
   void removeFieldEntryWidget() {
@@ -72,7 +72,7 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   }
 
   void submitIngredients() {
-    for (FieldEntryWidget currWidget in fieldWidgetList) {
+    for (IngredientWidget currWidget in fieldWidgetList) {
       ingredients.add(currWidget.createIngredient);
     }
     Provider.of<IngredientChangeNotifier>(context, listen: false)
@@ -80,18 +80,18 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   }
 }
 
-class FieldEntryWidget extends StatefulWidget {
-  const FieldEntryWidget({
+class IngredientWidget extends StatefulWidget {
+  const IngredientWidget({
     super.key,
   });
 
-  get createIngredient => _FieldEntryWidgetState().createIngredient();
+  get createIngredient => _IngredientWidgetState().createIngredient();
 
   @override
-  State<FieldEntryWidget> createState() => _FieldEntryWidgetState();
+  State<IngredientWidget> createState() => _IngredientWidgetState();
 }
 
-class _FieldEntryWidgetState extends State<FieldEntryWidget> {
+class _IngredientWidgetState extends State<IngredientWidget> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   String _givenName = '';
