@@ -12,11 +12,11 @@ class AddIngredientWidget extends StatefulWidget {
 }
 
 class AddIngredientWidgetState extends State<AddIngredientWidget> {
-  List<FieldEntryWidget> fieldWidgetList = [];
-  List<String> enteredUnits = [];
-  List<String> enteredIngredientNames = [];
-  List<int> enteredAmount = [];
-  List<Ingredient> ingredients = [];
+  final List<FieldEntryWidget> fieldWidgetList = [];
+  final List<String> enteredUnits = [];
+  final List<String> enteredIngredientNames = [];
+  final List<int> enteredAmount = [];
+  final List<Ingredient> ingredients = [];
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
@@ -38,15 +38,13 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
                 onPressed: addFieldEntryWidget,
                 child: const Text("Add another ingredient"),
               ),
-              const Spacer(),
+              const SizedBox(
+                width: 220,
+              ),
               ElevatedButton(
                 onPressed: removeFieldEntryWidget,
                 child: const Text("Remove an ingredient"),
               ),
-              const Spacer(),
-              ElevatedButton(
-                  onPressed: submitIngredients,
-                  child: const Text("Submit Ingredients")),
             ],
           ),
           dynamicTextField
@@ -57,10 +55,10 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
 
   void addFieldEntryWidget() {
     if (enteredUnits.isNotEmpty) {
-      enteredUnits = [];
-      enteredIngredientNames = [];
-      enteredAmount = [];
-      fieldWidgetList = [];
+      enteredUnits.clear();
+      enteredIngredientNames.clear();
+      enteredAmount.clear();
+      fieldWidgetList.clear();
     }
     setState(() {});
     fieldWidgetList.add(const FieldEntryWidget());
@@ -74,7 +72,6 @@ class AddIngredientWidgetState extends State<AddIngredientWidget> {
   }
 
   void submitIngredients() {
-    ingredients = [];
     for (FieldEntryWidget currWidget in fieldWidgetList) {
       ingredients.add(currWidget.createIngredient);
     }
@@ -154,6 +151,12 @@ class _FieldEntryWidgetState extends State<FieldEntryWidget> {
                   ),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () => Provider.of<IngredientChangeNotifier>(
+                          context,
+                          listen: false)
+                      .addIngredient(createIngredient()),
+                  child: const Text("Submit Ingredient")),
             ],
           ),
         ],
