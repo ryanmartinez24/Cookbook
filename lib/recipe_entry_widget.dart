@@ -19,6 +19,11 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   String _description = "";
   double _servings = 1;
 
+  bool _hasChosenName = false;
+  bool _hasChosenDirections = false;
+  bool _hasChosenDescription = false;
+  bool _hasChosenServings = false;
+
   List<Ingredient> _ingredients = [];
 
   @override
@@ -32,41 +37,69 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
           const Spacer(),
           const Text("Enter recipe name"),
           TextField(
-            onChanged: (text) {
-              _recipeName = text;
-            },
+            onChanged: (text) => _onRecipeNameChanged(text),
           ),
           const Spacer(),
           const Text("Enter the description"),
           TextField(
-            onChanged: (text) {
-              _description = text;
-            },
+            onChanged: (text) => _onDescriptionChanged(text),
           ),
           const Spacer(),
           const Text("Enter the directions"),
           TextField(
-            onChanged: (text) {
-              _directions = text;
-            },
+            onChanged: (text) => _onDirectionsChanged(text),
           ),
           const Spacer(),
           const Text("Enter the amount of servings the recipe makes"),
           TextField(
-            onChanged: (text) {
-              _servings = double.parse(text);
-            },
+            onChanged: (text) => _onServingsChanged(text),
           ),
           const Spacer(),
           const Text("Enter the ingredients"),
           ingredientWidget,
           ElevatedButton(
-              onPressed: _submitRecipe, child: const Text("Submit Recipe")),
+              onPressed: _isValidRecipe() ? _submitRecipe : null,
+              child: const Text("Submit Recipe")),
           const Spacer(),
           ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),
         ],
       ),
     );
+  }
+
+  bool _isValidRecipe() {
+    return _hasChosenName &&
+        _hasChosenDescription &&
+        _hasChosenDirections &&
+        _hasChosenServings;
+  }
+
+  void _onRecipeNameChanged(text) {
+    setState(() {
+      _recipeName = text;
+      _hasChosenName = true;
+    });
+  }
+
+  void _onDescriptionChanged(text) {
+    setState(() {
+      _description = text;
+      _hasChosenDescription = true;
+    });
+  }
+
+  void _onServingsChanged(text) {
+    setState(() {
+      _servings = double.parse(text);
+      _hasChosenServings = true;
+    });
+  }
+
+  void _onDirectionsChanged(text) {
+    setState(() {
+      _directions = text;
+      _hasChosenDirections = true;
+    });
   }
 
   void _submitRecipe() {
