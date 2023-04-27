@@ -17,6 +17,7 @@ class IngredientEntryWidgetState extends State<IngredientEntryWidget> {
   final List<String> enteredIngredientNames = [];
   final List<int> enteredAmount = [];
   final List<Ingredient> ingredients = [];
+
   @override
   Widget build(BuildContext context) {
     Widget dynamicTextField = Flexible(
@@ -97,6 +98,10 @@ class _IngredientWidgetState extends State<IngredientWidget> {
   String _givenName = '';
   String _chosenUnit = '';
   String _givenAmount = '';
+  bool _hasEnteredUnit = false;
+  bool _hasEnteredName = false;
+  bool _hasEnteredAmount = false;
+  bool _hasSubmitted = false;
 
   final List<DropdownMenuItem<String>> _possibleUnits = [
     const DropdownMenuItem(value: 'pinch', child: Text('pinch')),
@@ -130,19 +135,13 @@ class _IngredientWidgetState extends State<IngredientWidget> {
                 width: 200,
                 child: DropdownButton(
                   items: _possibleUnits,
-                  onChanged: (value) {
-                    setState(() {
-                      _chosenUnit = value!;
-                    });
-                  },
+                  onChanged: (value) => _onUnitChanged(value),
                 ),
               ),
               SizedBox(
                 width: 200,
                 child: TextFormField(
-                  onChanged: (value) {
-                    _onAmountChanged(value);
-                  },
+                  onChanged: (value) => _onAmountChanged(value),
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -152,10 +151,19 @@ class _IngredientWidgetState extends State<IngredientWidget> {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () => Provider.of<IngredientChangeNotifier>(
-                          context,
-                          listen: false)
-                      .addIngredient(createIngredient()),
+                  onPressed: _hasEnteredAmount &&
+                          _hasEnteredName &&
+                          _hasEnteredUnit &&
+                          !_hasSubmitted
+                      ? () {
+                          setState(() {
+                            _hasSubmitted = true;
+                          });
+                          Provider.of<IngredientChangeNotifier>(context,
+                                  listen: false)
+                              .addIngredient(createIngredient());
+                        }
+                      : null,
                   child: const Text("Submit Ingredient")),
             ],
           ),
@@ -173,15 +181,24 @@ class _IngredientWidgetState extends State<IngredientWidget> {
     return currentIngredient;
   }
 
+  _onUnitChanged(value) {
+    setState(() {
+      _chosenUnit = value;
+      _hasEnteredUnit = true;
+    });
+  }
+
   _onAmountChanged(value) {
     setState(() {
       _givenAmount = value;
+      _hasEnteredAmount = true;
     });
   }
 
   _onNameChanged(value) {
     setState(() {
       _givenName = value;
+      _hasEnteredName = true;
     });
   }
 }
