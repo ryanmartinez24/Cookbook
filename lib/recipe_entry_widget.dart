@@ -26,6 +26,7 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   bool _hasChosenDescription = false;
   bool _hasChosenServings = false;
   bool _hasIngredients = false;
+  bool _hasSubmitted = false;
 
   List<Ingredient> _ingredients = [];
 
@@ -83,7 +84,8 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
         _hasChosenDescription &&
         _hasChosenDirections &&
         _hasChosenServings &&
-        _hasIngredients;
+        _hasIngredients &&
+        !_hasSubmitted;
   }
 
   void _onRecipeNameChanged(text) {
@@ -115,6 +117,9 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   }
 
   void _submitRecipe() {
+    setState(() {
+      _hasSubmitted = true;
+    });
     _ingredients = Provider.of<IngredientChangeNotifier>(context, listen: false)
         .getIngredients();
     Recipe newRecipe =
