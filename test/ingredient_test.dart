@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
+import 'package:fp_recipe_book/units_of_volume.dart';
 
 void main() {
-  Ingredient originalPepper = Ingredient("Pepper", Measurement("whole", 3.0));
+  Ingredient originalPepper =
+      Ingredient("Pepper", Measurement(3.0, UnitsOfVolume.whole));
 
   test("test that getCopy returns deep copy as expected", () {
     Ingredient pepperCopy = originalPepper.getCopy();

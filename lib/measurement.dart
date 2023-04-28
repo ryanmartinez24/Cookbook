@@ -1,76 +1,49 @@
+import 'package:fp_recipe_book/units_of_volume.dart';
+
 class Measurement {
-  String _unit;
   double _amount;
+  UnitsOfVolume _unitOfVolume;
 
-  List<List> unitTable = [
-    ['pinch', 2],
-    ['tsp', 3, 0.125],
-    ['tbsp', 3, 0.5],
-    ['cups', 4, 0.25],
-    ['quarts', 4, 1],
-    ['gallons', 1, 1]
-  ];
+  Measurement(this._amount, this._unitOfVolume);
 
-  Measurement(this._unit, this._amount) {
-    _simplifyUp();
-    _simplifyDown();
+  double convert(UnitsOfVolume to) {
+    _amount = _unitOfVolume.convert(_amount, to, _unitOfVolume);
+    _unitOfVolume = to;
+    return _amount;
   }
 
   void scale(double scale) {
     _amount = _amount * scale;
 
-    if (scale > 1) {
-      _simplifyUp();
-    } else {
-      _simplifyDown();
-    }
-
-    _amount = (_amount * 1000).round().toDouble() / 1000;
-  }
-
-  void _simplifyUp() {
-    for (int i = 0; i < unitTable.length - 1; i++) {
-      if (_unit == unitTable[i][0]) {
-        while (_amount >= unitTable[i][1]) {
-          _unit = unitTable[i + 1][0];
-          _amount = _amount / unitTable[i][1];
-        }
+    for (int i = 0; i < 7; i++) {
+      UnitsOfVolume newUnit = UnitsOfVolume.values[i];
+      if (newUnit.inPinches < _amount * _unitOfVolume.inPinches) {
+        convert(newUnit);
       }
     }
   }
 
-  void _simplifyDown() {
-    for (int i = unitTable.length - 1; i > 0; i--) {
-      if (_unit == unitTable[i][0]) {
-        while (_amount < unitTable[i][2]) {
-          _unit = unitTable[i - 1][0];
-          _amount = _amount * unitTable[i - 1][1];
-        }
-      }
-    }
-  }
-
-  get unit {
-    return _unit;
-  }
-
-  get amount {
-    return _amount;
-  }
+  get amount => _amount;
+  get unitOfVolume => _unitOfVolume;
 
   // returns deep copy of measurement
   Measurement getCopy() {
-    return Measurement(_unit, _amount);
+    return Measurement(_amount, _unitOfVolume);
   }
 
   Map toJson() {
+    String unitName = _unitOfVolume.name;
+
     return {
-      "unit": _unit,
       "amount": _amount,
+      "unitOfVolume": unitName,
     };
   }
 
   factory Measurement.fromJson(dynamic json) {
-    return Measurement(json['unit'] as String, json['amount'] as double);
+    return Measurement(
+      json['amount'] as double,
+      UnitsOfVolume.values.byName(json['unitOfVolume']),
+    );
   }
 }

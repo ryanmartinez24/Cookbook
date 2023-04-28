@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
+import 'package:fp_recipe_book/units_of_volume.dart';
 import "package:provider/provider.dart";
 
 class IngredientEntryWidget extends StatefulWidget {
@@ -183,9 +184,9 @@ class _IngredientWidgetState extends State<IngredientWidget> {
 
   Ingredient createIngredient() {
     String name = _givenName;
-    String unit = _chosenUnit;
+    UnitsOfVolume unit = _findUnit();
     double amount = double.parse(_givenAmount);
-    Ingredient currentIngredient = Ingredient(name, Measurement(unit, amount));
+    Ingredient currentIngredient = Ingredient(name, Measurement(amount, unit));
 
     return currentIngredient;
   }
@@ -197,14 +198,35 @@ class _IngredientWidgetState extends State<IngredientWidget> {
     });
   }
 
-  _onAmountChanged(value) {
+  UnitsOfVolume _findUnit() {
+    List<String> units = [
+      'pinch',
+      'tsp',
+      'tbsp',
+      'cups',
+      'pints',
+      'quarts',
+      'gallons',
+    ];
+
+    UnitsOfVolume unit = UnitsOfVolume.pinches;
+    for (int i = 1; i < 7; i++) {
+      if (_chosenUnit == units[i]) {
+        unit = UnitsOfVolume.values[i];
+      }
+    }
+
+    return unit;
+  }
+
+  void _onAmountChanged(value) {
     setState(() {
       _givenAmount = value;
       _hasEnteredAmount = true;
     });
   }
 
-  _onNameChanged(value) {
+  void _onNameChanged(value) {
     setState(() {
       _givenName = value;
       _hasEnteredName = true;

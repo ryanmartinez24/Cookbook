@@ -4,6 +4,7 @@ import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/storage.dart';
+import 'package:fp_recipe_book/units_of_volume.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:fp_recipe_book/recipe_entry_widget.dart';
@@ -12,7 +13,8 @@ import "package:fp_recipe_book/delete_recipe_widget.dart";
 import "package:fraction/fraction.dart";
 import "dart:math" as math;
 
-void main() { //comment here
+void main() {
+  //comment here
   runApp(
     ChangeNotifierProvider(
       create: (context) => RecipeBookModel(),
@@ -21,7 +23,8 @@ void main() { //comment here
   );
 }
 
-class MyApp extends StatelessWidget { //comment here
+class MyApp extends StatelessWidget {
+  //comment here
   const MyApp({super.key, required this.storage});
   final Storage storage;
 
@@ -204,7 +207,8 @@ class _RecipeWidgetState extends State<RecipeWidget> {
 
     for (int i = 0; i < ingredients.length; i++) {
       double doubleAmount = _roundDouble(ingredients[i].measurement.amount, 2);
-      String measurementUnit = ingredients[i].measurement.unit;
+      UnitsOfVolume unitOfVolume = ingredients[i].measurement.unitOfVolume;
+      String measurementUnit = unitOfVolume.name;
       String name = ingredients[i].ingredientName;
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
       if (fractionAmount.isWhole || fractionAmount.numerator == 0) {

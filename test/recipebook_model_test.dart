@@ -6,13 +6,14 @@ import 'package:fp_recipe_book/measurement.dart';
 import 'package:fp_recipe_book/recipe.dart';
 import 'package:fp_recipe_book/recipebook_model.dart';
 import 'package:fp_recipe_book/storage.dart';
+import 'package:fp_recipe_book/units_of_volume.dart';
 
 void main() {
-  Ingredient i1 = Ingredient("Pepper", Measurement("whole", 3.0));
-  Ingredient i2 = Ingredient("Ground Beef", Measurement("lbs", .5));
-  Ingredient i3 = Ingredient("Olive Oil", Measurement("tsp", 3.0));
-
-  List<Ingredient> ingredientList = [i1, i2, i3];
+  List<Ingredient> ingredientList = [
+    Ingredient("Pepper", Measurement(3.0, UnitsOfVolume.whole)),
+    Ingredient("Ground Beef", Measurement(0.5, UnitsOfVolume.pounds)),
+    Ingredient("Olive Oil", Measurement(3.0, UnitsOfVolume.tsp)),
+  ];
 
   Recipe testRecipe =
       Recipe("Chef's Special", "Da best", ingredientList, "Cook it", 1);
