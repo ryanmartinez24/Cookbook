@@ -7,7 +7,9 @@ import "package:provider/provider.dart";
 import 'package:fp_recipe_book/recipebook_model.dart';
 
 class RecipeEntryWidget extends StatefulWidget {
-  const RecipeEntryWidget({super.key});
+  const RecipeEntryWidget({
+    super.key,
+  });
 
   @override
   State<RecipeEntryWidget> createState() => _RecipeEntryWidgetState();
@@ -23,12 +25,15 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
   bool _hasChosenDirections = false;
   bool _hasChosenDescription = false;
   bool _hasChosenServings = false;
+  bool _hasIngredients = false;
 
   List<Ingredient> _ingredients = [];
 
   @override
   Widget build(BuildContext context) {
-    IngredientEntryWidget ingredientWidget = const IngredientEntryWidget();
+    IngredientEntryWidget ingredientWidget = IngredientEntryWidget(
+      onIngredientCreated: onIngredientCreated,
+    );
 
     return Scaffold(
       body: Column(
@@ -67,11 +72,18 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
     );
   }
 
+  void onIngredientCreated() {
+    setState(() {
+      _hasIngredients = true;
+    });
+  }
+
   bool _isValidRecipe() {
     return _hasChosenName &&
         _hasChosenDescription &&
         _hasChosenDirections &&
-        _hasChosenServings;
+        _hasChosenServings &&
+        _hasIngredients;
   }
 
   void _onRecipeNameChanged(text) {

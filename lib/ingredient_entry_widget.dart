@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
@@ -5,7 +6,12 @@ import 'package:fp_recipe_book/ingredient_change_notifier.dart';
 import "package:provider/provider.dart";
 
 class IngredientEntryWidget extends StatefulWidget {
-  const IngredientEntryWidget({super.key});
+  const IngredientEntryWidget({
+    super.key,
+    required this.onIngredientCreated,
+  });
+
+  final void Function() onIngredientCreated;
 
   @override
   State<IngredientEntryWidget> createState() => IngredientEntryWidgetState();
@@ -62,7 +68,9 @@ class IngredientEntryWidgetState extends State<IngredientEntryWidget> {
       fieldWidgetList.clear();
     }
     setState(() {});
-    fieldWidgetList.add(const IngredientWidget());
+    fieldWidgetList.add(IngredientWidget(
+      onIngredientCreated: widget.onIngredientCreated,
+    ));
   }
 
   void removeFieldEntryWidget() {
@@ -82,9 +90,9 @@ class IngredientEntryWidgetState extends State<IngredientEntryWidget> {
 }
 
 class IngredientWidget extends StatefulWidget {
-  const IngredientWidget({
-    super.key,
-  });
+  const IngredientWidget({super.key, required this.onIngredientCreated});
+
+  final void Function() onIngredientCreated;
 
   get createIngredient => _IngredientWidgetState().createIngredient();
 
@@ -159,6 +167,7 @@ class _IngredientWidgetState extends State<IngredientWidget> {
                           setState(() {
                             _hasSubmitted = true;
                           });
+                          widget.onIngredientCreated();
                           Provider.of<IngredientChangeNotifier>(context,
                                   listen: false)
                               .addIngredient(createIngredient());
