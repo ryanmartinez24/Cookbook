@@ -24,15 +24,15 @@ class RecipeBookModel extends ChangeNotifier {
             ),
             Ingredient(
               "Medium Onion, chopped",
-              Measurement(0.125, UnitsOfVolume.nothing),
+              Measurement(0.125, UnitsOfVolume.unit),
             ),
             Ingredient(
               "Clove Garlic, minced",
-              Measurement(0.5, UnitsOfVolume.nothing),
+              Measurement(0.5, UnitsOfVolume.unit),
             ),
             Ingredient(
               "Small Green Bell Pepper, diced",
-              Measurement(0.125, UnitsOfVolume.nothing),
+              Measurement(0.125, UnitsOfVolume.unit),
             ),
             Ingredient(
               "Canned Diced Tomatoes",
@@ -71,7 +71,7 @@ class RecipeBookModel extends ChangeNotifier {
           [
             Ingredient(
               "Russet Potatoes, peeled, cut into quarters",
-              Measurement(1, UnitsOfVolume.nothing),
+              Measurement(1, UnitsOfVolume.unit),
             ),
             Ingredient(
               "Butter (optional)",
@@ -173,7 +173,7 @@ class RecipeBookModel extends ChangeNotifier {
             ),
             Ingredient(
               "Eggs",
-              Measurement(2, UnitsOfVolume.nothing),
+              Measurement(2, UnitsOfVolume.unit),
             ),
             Ingredient(
               "Chocolate Chips",

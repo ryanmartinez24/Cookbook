@@ -64,7 +64,25 @@ class _RecipeEntryWidgetState extends State<RecipeEntryWidget> {
           const Text("Enter the ingredients"),
           ingredientWidget,
           ElevatedButton(
-              onPressed: _isValidRecipe() ? _submitRecipe : null,
+              onPressed: _isValidRecipe()
+                  ? () {
+                      _submitRecipe();
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Submitting Recipe...'),
+                          content:
+                              const Text('Your recipe has been submitted!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  : null,
               child: const Text("Submit Recipe")),
           const Spacer(),
           ElevatedButton(onPressed: _goHome, child: const Text("Homepage")),

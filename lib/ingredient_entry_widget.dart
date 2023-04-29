@@ -120,6 +120,10 @@ class _IngredientWidgetState extends State<IngredientWidget> {
     const DropdownMenuItem(value: 'pints', child: Text('pints')),
     const DropdownMenuItem(value: 'quarts', child: Text('quarts')),
     const DropdownMenuItem(value: 'gallons', child: Text('gallons')),
+    const DropdownMenuItem(value: 'ounces', child: Text('ounces')),
+    const DropdownMenuItem(value: 'whole', child: Text('whole')),
+    const DropdownMenuItem(value: 'pounds', child: Text('pounds')),
+    const DropdownMenuItem(value: '', child: Text('')),
   ];
 
   @override
@@ -207,12 +211,20 @@ class _IngredientWidgetState extends State<IngredientWidget> {
       'pints',
       'quarts',
       'gallons',
+      'ounces',
+      'whole',
+      'pounds',
+      '',
     ];
 
     UnitsOfVolume unit = UnitsOfVolume.pinches;
-    for (int i = 1; i < 7; i++) {
-      if (_chosenUnit == units[i]) {
-        unit = UnitsOfVolume.values[i];
+    if (_chosenUnit == '') {
+      unit = UnitsOfVolume.unit;
+    } else {
+      for (int i = 1; i < units.length; i++) {
+        if (_chosenUnit == units[i]) {
+          unit = UnitsOfVolume.values[i];
+        }
       }
     }
 

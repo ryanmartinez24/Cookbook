@@ -208,7 +208,10 @@ class _RecipeWidgetState extends State<RecipeWidget> {
     for (int i = 0; i < ingredients.length; i++) {
       double doubleAmount = _roundDouble(ingredients[i].measurement.amount, 2);
       UnitsOfVolume unitOfVolume = ingredients[i].measurement.unitOfVolume;
-      String measurementUnit = unitOfVolume.name;
+      String measurementUnit = '';
+      if (unitOfVolume != UnitsOfVolume.unit) {
+        measurementUnit = unitOfVolume.name;
+      }
       String name = ingredients[i].ingredientName;
       MixedFraction fractionAmount = MixedFraction.fromDouble(doubleAmount);
       if (fractionAmount.isWhole || fractionAmount.numerator == 0) {

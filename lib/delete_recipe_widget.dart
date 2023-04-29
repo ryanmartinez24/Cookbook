@@ -39,7 +39,7 @@ class _DeleteRecipeWidgetState extends State<DeleteRecipeWidget> {
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     title: const Text('Deleting Recipe...'),
-                    content: const Text('The chosen recipe has been deleted'),
+                    content: const Text('The chosen recipe has been deleted.'),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () => Navigator.pop(context),

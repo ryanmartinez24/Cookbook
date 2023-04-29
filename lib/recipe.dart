@@ -26,25 +26,17 @@ class Recipe {
     return ingredientsCopy;
   }
 
-  get recipeName {
-    return _recipeName;
-  }
+  get recipeName => _recipeName;
 
-  get description {
-    return _description;
-  }
+  get description => _description;
 
-  get directions {
-    return _directions;
-  }
+  get directions => _directions;
 
   set setScale(double newScale) {
     _scale = newScale;
   }
 
-  get scale {
-    return _scale;
-  }
+  get scale => _scale;
 
   toJson() {
     List<Map> ingredients = _ingredients.map((i) => i.toJson()).toList();

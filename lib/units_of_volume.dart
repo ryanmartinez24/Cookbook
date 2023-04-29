@@ -9,7 +9,7 @@ enum UnitsOfVolume {
   ounces(0),
   whole(0),
   pounds(0),
-  nothing(0);
+  unit(0);
 
   const UnitsOfVolume(this.inPinches);
   final double inPinches;
