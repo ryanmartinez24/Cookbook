@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
@@ -11,5 +12,16 @@ void main() {
     Ingredient pepperCopy = originalPepper.getCopy();
     originalPepper.measurement.scale(2.0);
     expect(pepperCopy.measurement.amount, 3.0);
+  });
+
+  test("I can create an ingredient from an encoded ingredient", () {
+    String encodedJsonString = jsonEncode(originalPepper);
+    var decodedJson = jsonDecode(encodedJsonString);
+    Ingredient pepperFromJson = Ingredient.fromJson(decodedJson);
+    expect(originalPepper.ingredientName, pepperFromJson.ingredientName);
+    expect(
+        originalPepper.measurement.amount, pepperFromJson.measurement.amount);
+    expect(originalPepper.measurement.unitOfVolume,
+        pepperFromJson.measurement.unitOfVolume);
   });
 }

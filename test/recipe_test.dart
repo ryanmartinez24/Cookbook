@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fp_recipe_book/ingredient.dart';
 import 'package:fp_recipe_book/measurement.dart';
@@ -31,5 +33,15 @@ void main() {
     copiedList.remove(pepper);
     expect(copiedList.contains(pepper), false);
     expect(originalIngredients.contains(pepper), true);
+  });
+
+  test("I can create a recipe from an encoded recipe", () {
+    String encodedJsonString = jsonEncode(testRecipe);
+    var decodedJson = jsonDecode(encodedJsonString);
+    Recipe recipeFromJson = Recipe.fromJson(decodedJson);
+    expect(testRecipe.recipeName, recipeFromJson.recipeName);
+    expect(testRecipe.description, recipeFromJson.description);
+    expect(testRecipe.directions, recipeFromJson.directions);
+    expect(testRecipe.scale, recipeFromJson.scale);
   });
 }
