@@ -14,10 +14,15 @@ void main() {
     expect(pepperCopy.measurement.amount, 3.0);
   });
 
+  String encodedJsonString = jsonEncode(originalPepper);
+  var decodedJson = jsonDecode(encodedJsonString);
+  Ingredient pepperFromJson = Ingredient.fromJson(decodedJson);
+
+  test("I can encode/decode an ingredient to json", () {
+    expect(decodedJson["measurementName"], "Pepper");
+  });
+
   test("I can create an ingredient from an encoded ingredient", () {
-    String encodedJsonString = jsonEncode(originalPepper);
-    var decodedJson = jsonDecode(encodedJsonString);
-    Ingredient pepperFromJson = Ingredient.fromJson(decodedJson);
     expect(originalPepper.ingredientName, pepperFromJson.ingredientName);
     expect(
         originalPepper.measurement.amount, pepperFromJson.measurement.amount);

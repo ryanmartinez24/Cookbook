@@ -35,10 +35,15 @@ void main() {
     expect(originalIngredients.contains(pepper), true);
   });
 
+  String encodedJsonString = jsonEncode(testRecipe);
+  var decodedJson = jsonDecode(encodedJsonString);
+  Recipe recipeFromJson = Recipe.fromJson(decodedJson);
+
+  test("I can encode/decode a recipe", () {
+    expect(decodedJson["recipeName"], "Chef's Special");
+  });
+
   test("I can create a recipe from an encoded recipe", () {
-    String encodedJsonString = jsonEncode(testRecipe);
-    var decodedJson = jsonDecode(encodedJsonString);
-    Recipe recipeFromJson = Recipe.fromJson(decodedJson);
     expect(testRecipe.recipeName, recipeFromJson.recipeName);
     expect(testRecipe.description, recipeFromJson.description);
     expect(testRecipe.directions, recipeFromJson.directions);
