@@ -27,7 +27,7 @@ class Storage {
       final contents = await file.readAsString();
 
       return contents;
-    } catch (e) {
+    } catch (exception) {
       return "";
     }
   }
