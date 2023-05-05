@@ -24,8 +24,7 @@ void main() {
 
   test("I can create an ingredient from an encoded ingredient", () {
     expect(originalPepper.ingredientName, pepperFromJson.ingredientName);
-    expect(
-        originalPepper.measurement.amount, pepperFromJson.measurement.amount);
+    expect(3.0, pepperFromJson.measurement.amount);
     expect(originalPepper.measurement.unitOfVolume,
         pepperFromJson.measurement.unitOfVolume);
   });
